@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PreguntaMultipleComponent} from "../pregunta/pregunta-multiple/pregunta-multiple.component";
 import {MatDialog} from "@angular/material/dialog";
+import {PreguntaAbiertaComponent} from "../pregunta/pregunta-abierta/pregunta-abierta.component";
 
 @Component({
   selector: 'app-admin-pregunta',
@@ -18,7 +19,10 @@ export class AdminPreguntaComponent implements OnInit {
 
   openPregunta(tipoPregunta): void{
     if (tipoPregunta == 4){
-       this.openPreguntaVofModal();
+       this.openPreguntaMultipleModal();
+    }
+      if (tipoPregunta == 1){
+       this.openPreguntaAbiertaModal();
     }
 
 
@@ -26,9 +30,20 @@ export class AdminPreguntaComponent implements OnInit {
   }
 
 
-  openPreguntaVofModal(): void {
+  openPreguntaMultipleModal(): void {
     const selected = 1;
     this.dialog.open(PreguntaMultipleComponent, {
+      width: '70%',
+      data: {
+        selected
+      }
+    });
+  }
+
+
+  openPreguntaAbiertaModal(): void {
+    const selected = 1;
+    this.dialog.open(PreguntaAbiertaComponent, {
       width: '70%',
       data: {
         selected

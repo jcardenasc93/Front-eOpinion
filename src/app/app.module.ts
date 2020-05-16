@@ -21,6 +21,9 @@ import {MatButtonModule} from "@angular/material/button";
 import { PreguntaAbiertaComponent } from './pregunta/pregunta-abierta/pregunta-abierta.component';
 import { PreguntaSimpleComponent } from './pregunta/pregunta-simple/pregunta-simple.component';
 import { PreguntaAbiertaNumeroComponent } from './pregunta/pregunta-abierta-numero/pregunta-abierta-numero.component';
+import { LoginComponent } from './login/login.component';
+import { RegistroComponent } from './registro/registro.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { PreguntaAbiertaNumeroComponent } from './pregunta/pregunta-abierta-nume
     PreguntaMultipleComponent,
     PreguntaAbiertaComponent,
     PreguntaSimpleComponent,
-    PreguntaAbiertaNumeroComponent
+    PreguntaAbiertaNumeroComponent,
+    LoginComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,8 @@ import { PreguntaAbiertaNumeroComponent } from './pregunta/pregunta-abierta-nume
     BrowserAnimationsModule,
     MatCardModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule
   ],
   entryComponents: [PreguntaMultipleComponent],
   providers: [
