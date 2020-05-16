@@ -1,0 +1,57 @@
+<app-banner></app-banner>
+<div class="row justify-content-center row-container">
+  <div class="col-12">
+    <div class="row row-title">
+      <div class="col-8 col-md-10">Evento: Asamblea las rositas</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm" style="padding-top: 15px">
+        <mat-form-field>
+          <mat-label>Tipo de pregunta</mat-label>
+          <mat-select [(value)]="selected">
+            <mat-option value="1">Pregunta abierta</mat-option>
+            <mat-option value="2">Pregunta abierta numero</mat-option>
+            <mat-option value="3">Pregunta simple</mat-option>
+            <mat-option value="4">Pregunta Multiple</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button class="btn-create" mat-button (click)="openPregunta(selected)" style="margin-left: 10px">Crear
+          Pregunta
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <mat-card class="col-11 style-card">
+    <mat-card-header class="header-card">
+      <mat-card-title>Pregunta numero: 1</mat-card-title>
+    </mat-card-header>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <mat-card-content>
+          <br>
+          <p class="title">Enunciado</p>
+          <br>
+
+          <p class="detail-text">Descripcion del enunciado</p>
+        </mat-card-content>
+      </div>
+      <div class="col-12 col-md-6">
+        <mat-card-actions class="text-center">
+
+          <button class="btn-generic btn-water" mat-button>Ir</button>
+          <button class="btn-generic btn-blue" mat-button>Editar</button>
+          <button class="btn-generic btn-green" mat-button>activar</button>
+          <button class="btn-generic btn-blue" mat-button>resultados</button>
+          <button class="btn-generic btn-red" mat-button>restablecer</button>
+          <button class="btn-generic btn-red" mat-button>Borrar</button>
+
+        </mat-card-actions>
+      </div>
+    </div>
+  </mat-card>
+
+</div>
