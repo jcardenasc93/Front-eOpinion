@@ -29,6 +29,7 @@ export class EditarEventoComponent implements OnInit {
       nombre: new FormControl('', [Validators.required]),
       fecha: new FormControl('', [Validators.required]),
       bodyCorreo: new FormControl('', [Validators.required]),
+      link: new FormControl('', [Validators.required]),
     });
 
     this.eventoService.getEventoXId(this.data.idEvento).subscribe(data => {
@@ -36,6 +37,7 @@ export class EditarEventoComponent implements OnInit {
       this.registerForm.get('nombre').setValue(data.evento.nombre);
       this.registerForm.get('fecha').setValue(data.evento.fecha);
       this.registerForm.get('bodyCorreo').setValue(data.evento.bodyCorreo);
+      this.registerForm.get('link').setValue(data.evento.linkEvento);
 
     }, error => {
       console.log('Error trayendo evento', error);
@@ -45,7 +47,7 @@ export class EditarEventoComponent implements OnInit {
   editEvent() {
     this.eventoService.updateEvento(this.data.idEvento, this.registerForm).subscribe(data => {
       console.log("exitoso edit ", data)
-      Swal.fire('Success!', 'Evento creado satisfactiriamente', 'success');
+      Swal.fire('Success!', 'Evento editado satisfactiriamente', 'success');
       this.dialogRef.close();
       window.location.reload();
     }, error => {

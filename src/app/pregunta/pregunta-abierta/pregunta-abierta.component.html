@@ -2,11 +2,7 @@
 <div mat-dialog-content style="margin-bottom: 1em;">
   <form [formGroup]="questionForm" (ngSubmit)="crearPregunta()">
     <div class="row-container">
-      <div class="row">
-        <div class="col">
-          <mat-checkbox color="primary" formControlName="esNominal">Votacion Nominal?</mat-checkbox>
-        </div>
-      </div>
+
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Ingrese aquí la pregunta</mat-label>
         <input type="text" matInput placeholder="Enunciado" formControlName="enunciado"/>

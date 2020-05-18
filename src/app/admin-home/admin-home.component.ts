@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import {CrearEventoComponent} from "../crear-evento/crear-evento.component";
 import {MatDialog} from "@angular/material/dialog";
 import {EditarEventoComponent} from "../editar-evento/editar-evento.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-home',
@@ -17,7 +18,7 @@ export class AdminHomeComponent implements OnInit {
   public eventosSize;
 
 
-  constructor(private eventoService: EventoService, public dialog: MatDialog) {
+  constructor(private route: Router, private eventoService: EventoService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -72,6 +73,10 @@ export class AdminHomeComponent implements OnInit {
         idEvento: idEvento,
       }
     });
+  }
+
+  gotoEvento(idEvento) {
+    this.route.navigate(['pregunta-admin/' + idEvento]);
   }
 
 }

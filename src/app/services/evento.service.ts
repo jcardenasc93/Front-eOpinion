@@ -18,7 +18,7 @@ export class EventoService {
     formData.append('id', idEvento);
     formData.append('fecha', form.get('fecha').value);
     formData.append('bodyCorreo', form.get('bodyCorreo').value);
-    formData.append('linkEvento', "123456");
+    formData.append('linkEvento', form.get('link').value);
     formData.append('nombre', form.get('nombre').value);
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
     return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/actualizar/' + idEvento, formData,{'headers': headers});
@@ -41,7 +41,7 @@ export class EventoService {
     formData.append('fecha', form.get('fecha').value);
     formData.append('bodyCorreo', form.get('excel').value);
     formData.append('bodyCorreo', form.get('correo').value);
-    formData.append('linkEvento', "hueheuboyys");
+    formData.append('linkEvento', form.get('link').value)
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
     return this.http.post(this.URL_HOST + 'eventos/api/v1/eventos/nuevo', formData, {
       'headers': headers, reportProgress: true,

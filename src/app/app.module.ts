@@ -29,6 +29,7 @@ import {JwPaginationComponent} from "jw-angular-pagination";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { CrearEventoComponent } from './crear-evento/crear-evento.component';
 import { EditarEventoComponent } from './editar-evento/editar-evento.component';
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { EditarEventoComponent } from './editar-evento/editar-evento.component';
     MatDialogModule,
     MatButtonModule,
     HttpClientModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDividerModule
   ],
   entryComponents: [PreguntaMultipleComponent, CrearEventoComponent, EditarEventoComponent],
   providers: [

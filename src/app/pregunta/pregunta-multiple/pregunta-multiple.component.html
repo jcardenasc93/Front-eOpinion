@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Crear pregunta selección múltiple</h1>
 <div mat-dialog-content style="margin-bottom: 1em;">
-  <form [formGroup]="questionForm" (ngSubmit)="agregarMarca()">
+  <form [formGroup]="questionForm" >
     <div class="row-container">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Ingrese aquí la pregunta</mat-label>
@@ -50,7 +50,7 @@
       <button id="cancel-button" class="mat-stroked-button" type="button">
         Cancelar
       </button>
-      <button class="mat-flat-button mat-primary" type="submit">Guardar</button>
+      <button class="mat-flat-button mat-primary" type="submit" (click)="crearPregunta()">Guardar</button>
     </div>
   </form>
 </div>

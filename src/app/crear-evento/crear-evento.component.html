@@ -18,6 +18,9 @@
       <input type="text" id="login" class="fadeIn second" name="login" placeholder="Nombre de la asamblea" formControlName="nombre">
       <small *ngIf="registerForm.get('nombre').errors?.required && registerForm.get('nombre').touched" class="text-danger"><br>Nombre es requerido</small>
 
+       <input type="text" id="link" class="fadeIn second" name="login" placeholder="Link con documentos de drive" formControlName="link">
+      <small *ngIf="registerForm.get('link').errors?.required && registerForm.get('link').touched" class="text-danger"><br>link es requerido</small>
+
       <input type="date"  class="fadeIn second" name="login" placeholder="fecha" formControlName="fecha">
       <small *ngIf="registerForm.get('fecha').errors?.required && registerForm.get('fecha').touched" class="text-danger"><br>fecha es requerida</small>
 

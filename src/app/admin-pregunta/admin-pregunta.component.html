@@ -25,9 +25,9 @@
     </div>
   </div>
 
-  <mat-card class="col-11 style-card">
+  <mat-card class="col-11 style-card" *ngFor="let contenidoInt of pAbiertaDec">
     <mat-card-header class="header-card">
-      <mat-card-title>Pregunta numero: 1</mat-card-title>
+      <mat-card-title>Pregunta abierta decimal</mat-card-title>
     </mat-card-header>
     <div class="row">
       <div class="col-12 col-md-6">
@@ -36,7 +36,65 @@
           <p class="title">Enunciado</p>
           <br>
 
-          <p class="detail-text">Descripcion del enunciado</p>
+          <p class="detail-text">{{contenidoInt.enunciado}}</p>
+        </mat-card-content>
+      </div>
+      <div class="col-12 col-md-6">
+        <mat-card-actions class="text-center">
+
+          <button class="btn-generic btn-water" mat-button>Ir</button>
+          <button class="btn-generic btn-blue" mat-button>Editar</button>
+          <button class="btn-generic btn-green" mat-button>activar</button>
+          <button class="btn-generic btn-blue" mat-button>resultados</button>
+          <button class="btn-generic btn-red" mat-button>restablecer</button>
+          <button class="btn-generic btn-red" mat-button>Borrar</button>
+
+        </mat-card-actions>
+      </div>
+    </div>
+  </mat-card>
+   <mat-divider></mat-divider>
+
+    <mat-card class="col-11 style-card" *ngFor="let contenidoInt of pAbierta">
+    <mat-card-header class="header-card">
+      <mat-card-title>Pregunta abierta</mat-card-title>
+    </mat-card-header>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <mat-card-content>
+          <br>
+          <p class="title">Enunciado</p>
+          <br>
+
+          <p class="detail-text">{{contenidoInt.enunciado}}</p>
+        </mat-card-content>
+      </div>
+      <div class="col-12 col-md-6">
+        <mat-card-actions class="text-center">
+
+          <button class="btn-generic btn-water" mat-button>Ir</button>
+          <button class="btn-generic btn-blue" mat-button>Editar</button>
+          <button class="btn-generic btn-green" mat-button>activar</button>
+          <button class="btn-generic btn-blue" mat-button>resultados</button>
+          <button class="btn-generic btn-red" mat-button>restablecer</button>
+          <button class="btn-generic btn-red" mat-button>Borrar</button>
+
+        </mat-card-actions>
+      </div>
+    </div>
+  </mat-card>
+    <mat-card class="col-11 style-card" *ngFor="let contenidoInt of pMultiple">
+    <mat-card-header class="header-card">
+      <mat-card-title>Pregunta seleccion multiple</mat-card-title>
+    </mat-card-header>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <mat-card-content>
+          <br>
+          <p class="title">Enunciado</p>
+          <br>
+
+          <p class="detail-text">{{contenidoInt.enunciado}}</p>
         </mat-card-content>
       </div>
       <div class="col-12 col-md-6">

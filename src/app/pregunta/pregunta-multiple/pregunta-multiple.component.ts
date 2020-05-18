@@ -1,6 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {PreguntaService} from "../../services/pregunta.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-pregunta-multiple',
@@ -14,6 +16,7 @@ export class PreguntaMultipleComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               public dialogRef: MatDialogRef<PreguntaMultipleComponent>,
+              private preguntaService: PreguntaService,
               @Inject(MAT_DIALOG_DATA) public data: { idEvento }) {
     this.initializeForm();
   }
@@ -26,16 +29,20 @@ export class PreguntaMultipleComponent implements OnInit {
       enunciado: ['', [Validators.required]],
       esMultipleResp: [false, [Validators.required]],
       esNominal: [false, [Validators.required]],
-      nombre: ['', [Validators.required]],
-      tieneRetroalimentacion: [false, [Validators.required]],
+      activa: [false],
       numeroDeIntentos: [1, [Validators.required,  Validators.min(1)]],
-      opciones: this.formBuilder.array([])
+      opciones: this.formBuilder.array([]),
+      evento: [this.data.idEvento]
     });
   }
 
-  agregarMarca(){
-
-
+  crearPregunta(){
+     this.preguntaService.createPreguntaMultiple(this.questionForm.value).subscribe(data => {
+       Swal.fire('Success!', 'Pregunta multiple creada exitosamente', 'success');
+  }, error => {
+      Swal.fire('Error!', 'Error creando pregunta', 'error');
+      console.log('error', error);
+    });
   }
 
   quitarOpcion(i) {
@@ -46,8 +53,7 @@ export class PreguntaMultipleComponent implements OnInit {
   agregarOpcion() {
     const opciones = this.questionForm.controls.opciones as FormArray;
     opciones.push(this.formBuilder.group({
-      opcion: ['', [Validators.required]],
-      esCorrecta: false,
+      opcion: ['', [Validators.required]]
     }));
   }
 

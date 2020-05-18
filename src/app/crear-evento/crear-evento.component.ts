@@ -29,6 +29,7 @@ export class CrearEventoComponent implements OnInit {
       fecha: new FormControl('', [Validators.required]),
       excel: new FormControl(''),
       correo: new FormControl('', [Validators.required]),
+      link: new FormControl('', [Validators.required]),
     });
   }
 
@@ -74,6 +75,7 @@ export class CrearEventoComponent implements OnInit {
             console.log('Video subido satisfactoriamente!', event.body);
             Swal.fire('Success!', 'Evento creado satisfactiriamente', 'success');
             this.dialogRef.close();
+            window.location.reload();
         }
       }, error => {
         console.log('Error registrandose-> ', error);

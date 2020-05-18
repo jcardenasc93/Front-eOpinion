@@ -9,7 +9,7 @@ import {AuthGuardService} from './app/auth-guard.service';
 
 const routes: Routes = [
   {path: 'home', component: AdminHomeComponent, canActivate: [AuthGuardService]},
-  {path: 'evento', component: AdminPreguntaComponent},
+  {path: 'pregunta-admin/:idEvento', component: AdminPreguntaComponent},
   {path: 'preguntaMultiple', component: PreguntaMultipleComponent},
   {path: '', component: LoginComponent},
 
