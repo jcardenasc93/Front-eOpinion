@@ -23,7 +23,12 @@ import { PreguntaSimpleComponent } from './pregunta/pregunta-simple/pregunta-sim
 import { PreguntaAbiertaNumeroComponent } from './pregunta/pregunta-abierta-numero/pregunta-abierta-numero.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from '@angular/common/http';
+import {AuthGuardService} from './auth-guard.service';
+import {JwPaginationComponent} from "jw-angular-pagination";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { CrearEventoComponent } from './crear-evento/crear-evento.component';
+import { EditarEventoComponent } from './editar-evento/editar-evento.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +41,9 @@ import {HttpClientModule} from "@angular/common/http";
     PreguntaSimpleComponent,
     PreguntaAbiertaNumeroComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    CrearEventoComponent,
+    EditarEventoComponent
   ],
   imports: [
     BrowserModule,
@@ -57,12 +64,14 @@ import {HttpClientModule} from "@angular/common/http";
     MatCardModule,
     MatDialogModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule
   ],
-  entryComponents: [PreguntaMultipleComponent],
+  entryComponents: [PreguntaMultipleComponent, CrearEventoComponent, EditarEventoComponent],
   providers: [
     {provide: MatDialogRef, useValue: {}},
-    {provide: MAT_DIALOG_DATA, useValue: {}}
+    {provide: MAT_DIALOG_DATA, useValue: {}},
+    AuthGuardService,
   ],
   bootstrap: [AppComponent]
 })

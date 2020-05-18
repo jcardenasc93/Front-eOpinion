@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { UsuariosService} from '../services/usuarios.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {UsuariosService} from '../services/usuarios.service';
 import 'rxjs/add/operator/switchMap';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,7 +13,8 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
   public registerForm: FormGroup;
 
-  constructor(private authService: UsuariosService, private router: Router) { }
+  constructor(private authService: UsuariosService, private router: Router) {
+  }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -25,26 +26,36 @@ export class LoginComponent implements OnInit {
   login() {
     const user = this.registerForm.get('username').value;
     const pass = this.registerForm.get('password').value;
-    console.log('ipass ', user);
     this.authService.loginUser(user, pass).subscribe(data => {
-      console.log('ingreso exisoso ', data);
-      sessionStorage.setItem('id_token', data.key);
-      //this.getUserPk();
+      sessionStorage.setItem('token', data.auth_token);
+      this.authService.getUserByToken().subscribe(datas => {
+        sessionStorage.setItem('is_staff', datas[0].is_staff);
+        if (datas[0].is_staff == true) {
+          this.router.navigate(['/home']);
+        } else {
+          this.router.navigate(['/evento/' + datas[0].evento]);
+        }
+
+      }, error => {
+        Swal.fire('Oops...', 'credenciales incorrectas');
+        console.log('Error login-> ', error.error);
+      });
     }, error => {
       Swal.fire('Oops...', 'credenciales incorrectas');
       console.log('Error login-> ', error.error);
     });
   }
-/*
-  getUserPk() {
-    this.authService.getUserId().subscribe(
-      response => {
-        sessionStorage.setItem('pkUser', response.body.pk);
-        this.router.navigate(['/list-competition']);
-      }, error => {
-        console.log('error getUser', error);
-      }
-    );
-  }*/
+
+  /*
+    getUserPk() {
+      this.authService.getUserId().subscribe(
+        response => {
+          sessionStorage.setItem('pkUser', response.body.pk);
+          this.router.navigate(['/list-competition']);
+        }, error => {
+          console.log('error getUser', error);
+        }
+      );
+    }*/
 
 }

@@ -1,39 +1,36 @@
 <app-banner></app-banner>
-<div class="row justify-content-center row-container">
-    <div class="col-12">
-        <div class="row row-title">
-            <div class="col-8 col-md-10">Total eventos existentes 5</div>
-            <div class="col-4 col-md-2">
-                <button mat-button class="btn-create">Crear concurso</button>
-            </div>
-
-        </div>
+<div class="card text-center m-3">
+  <div class="card-body">
+      <button mat-raised-button color="primary" (click)="openCrearEvento()">Crear evento</button>
     </div>
 
-  <mat-card class="col-11 style-card">
-   <mat-card-header class="header-card">
-            <mat-card-title>Nombre evento</mat-card-title>
-        </mat-card-header>
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <mat-card-content>
-                  <br>
-                    <p class="title">Fecha Inicio</p>
-                    <br>
+    </div>
+<div class="card text-center m-3">
+  <div class="card-body" *ngFor="let evento of currentItemsToShow, let i=index;">
+    <div class="flex-grid">
+      <div class="col">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title> Asamblea: {{evento.nombre}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Fecha participacion: {{evento.fecha}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button style="background-color: #1a731a; color: white  ">Ir</button>
+            <button mat-raised-button color="accent"(click)="editarEvento(evento.id)">Editar </button>
+            <button mat-raised-button color="warn" (click)="borrarEvento(evento.id)">Eliminar</button>
+            <button mat-raised-button color="primary">Ver asambleistas</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
 
-                    <p class="detail-text">12/02/02</p>
-                </mat-card-content>
-            </div>
-            <div class="col-12 col-md-6">
-                <mat-card-actions class="text-center">
-                  <button mat-button class="btn-generic btn-green">Asambleistas</button>
-                  <button mat-button class="btn-generic btn-water">Ir</button>
-                  <button mat-button class="btn-generic btn-blue">Editar</button>
-                  <button mat-button class="btn-generic btn-red">Borrar</button>
-
-                </mat-card-actions>
-            </div>
-        </div>
-  </mat-card>
-
+  </div>
+  <mat-paginator (page)="onPageChange($event)" [length]="eventosSize"
+                 [pageSize]="5"
+                 [pageSizeOptions]="[5, 10, 25, 100]"> [pageSizeOptions]="[5, 10, 20]" >
+  </mat-paginator>
 </div>
+
+

@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {EventoService} from "../services/evento.service";
+import Swal from "sweetalert2";
+import {CrearEventoComponent} from "../crear-evento/crear-evento.component";
+import {MatDialog} from "@angular/material/dialog";
+import {EditarEventoComponent} from "../editar-evento/editar-evento.component";
 
 @Component({
   selector: 'app-admin-home',
@@ -6,11 +11,67 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-home.component.css']
 })
 export class AdminHomeComponent implements OnInit {
+  pageOfItems: Array<any>;
+  public eventos;
+  public currentItemsToShow;
+  public eventosSize;
 
-  constructor() { }
 
-  ngOnInit(): void {
+  constructor(private eventoService: EventoService, public dialog: MatDialog) {
   }
 
+  ngOnInit(): void {
+    this.getEventos();
+
+
+  }
+
+  onPageChange($event) {
+    this.currentItemsToShow = this.eventos.slice($event.pageIndex * $event.pageSize, $event.pageIndex * $event.pageSize + $event.pageSize);
+  }
+
+  getEventos(): void {
+    this.eventoService.getEventos().subscribe(data => {
+      console.log('eventos', data)
+      this.eventos = data;
+      this.eventos = this.eventos.reverse();
+      this.eventosSize = data.length;
+      this.currentItemsToShow = this.eventos.slice(0, 5);
+
+
+    }, error => {
+      console.log('Error login-> ', error.error);
+    });
+
+
+  }
+
+
+  openCrearEvento(): void {
+    const dialogRef = this.dialog.open(CrearEventoComponent, {
+      width: '50%',
+      height: '80%',
+    });
+  }
+
+  borrarEvento(idEvento): void {
+    if (confirm('Esta seguro de eliminar este evento?')) {
+      this.eventoService.borrarEvento(idEvento).subscribe(data => {
+        window.location.reload();
+      }, error => {
+        console.log('Error borrando', error);
+      });
+    }
+  }
+
+  editarEvento(idEvento): void {
+    const dialogRef = this.dialog.open(EditarEventoComponent, {
+      width: '50%',
+      height: '80%',
+       data: {
+        idEvento: idEvento,
+      }
+    });
+  }
 
 }
