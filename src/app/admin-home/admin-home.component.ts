@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {EventoService} from "../services/evento.service";
 import Swal from "sweetalert2";
-import {CrearEventoComponent} from "../crear-evento/crear-evento.component";
+import {CrearEventoComponent} from "../evento/crear-evento/crear-evento.component";
 import {MatDialog} from "@angular/material/dialog";
-import {EditarEventoComponent} from "../editar-evento/editar-evento.component";
+import {EditarEventoComponent} from "../evento/editar-evento/editar-evento.component";
 import {Router} from "@angular/router";
 
 @Component({
@@ -79,4 +79,7 @@ export class AdminHomeComponent implements OnInit {
     this.route.navigate(['pregunta-admin/' + idEvento]);
   }
 
+  gotoAsambleistas(idEvento) {
+    this.route.navigate(['asambleistas-admin/' + idEvento]);
+  }
 }

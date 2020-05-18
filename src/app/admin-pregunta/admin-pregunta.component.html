@@ -14,7 +14,6 @@
           <mat-select [(value)]="selected">
             <mat-option value="1">Pregunta abierta</mat-option>
             <mat-option value="2">Pregunta abierta numero</mat-option>
-            <mat-option value="3">Pregunta simple</mat-option>
             <mat-option value="4">Pregunta Multiple</mat-option>
           </mat-select>
         </mat-form-field>
@@ -43,11 +42,11 @@
         <mat-card-actions class="text-center">
 
           <button class="btn-generic btn-water" mat-button>Ir</button>
-          <button class="btn-generic btn-blue" mat-button>Editar</button>
+          <button class="btn-generic btn-blue" (click)="editarPreguntaAbiertaDecimal(contenidoInt.id,contenidoInt.enunciado)" mat-button>Editar</button>
           <button class="btn-generic btn-green" mat-button>activar</button>
           <button class="btn-generic btn-blue" mat-button>resultados</button>
           <button class="btn-generic btn-red" mat-button>restablecer</button>
-          <button class="btn-generic btn-red" mat-button>Borrar</button>
+          <button class="btn-generic btn-red" mat-button (click)="borrarPreguntaDecimal(contenidoInt.id)">Borrar</button>
 
         </mat-card-actions>
       </div>
@@ -73,11 +72,11 @@
         <mat-card-actions class="text-center">
 
           <button class="btn-generic btn-water" mat-button>Ir</button>
-          <button class="btn-generic btn-blue" mat-button>Editar</button>
+          <button class="btn-generic btn-blue" (click)="editarPreguntaAbierta(contenidoInt.id,contenidoInt.enunciado)" mat-button>Editar</button>
           <button class="btn-generic btn-green" mat-button>activar</button>
           <button class="btn-generic btn-blue" mat-button>resultados</button>
           <button class="btn-generic btn-red" mat-button>restablecer</button>
-          <button class="btn-generic btn-red" mat-button>Borrar</button>
+          <button class="btn-generic btn-red" mat-button  (click)="borrarPreguntaAbierta(contenidoInt.id)">Borrar</button>
 
         </mat-card-actions>
       </div>
@@ -105,7 +104,7 @@
           <button class="btn-generic btn-green" mat-button>activar</button>
           <button class="btn-generic btn-blue" mat-button>resultados</button>
           <button class="btn-generic btn-red" mat-button>restablecer</button>
-          <button class="btn-generic btn-red" mat-button>Borrar</button>
+          <button class="btn-generic btn-red" mat-button  (click)="borrarPreguntaMultiple(contenidoInt.id)">Borrar</button>
 
         </mat-card-actions>
       </div>

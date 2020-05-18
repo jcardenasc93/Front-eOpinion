@@ -27,9 +27,18 @@ import {HttpClientModule} from '@angular/common/http';
 import {AuthGuardService} from './auth-guard.service';
 import {JwPaginationComponent} from "jw-angular-pagination";
 import {MatPaginatorModule} from "@angular/material/paginator";
-import { CrearEventoComponent } from './crear-evento/crear-evento.component';
-import { EditarEventoComponent } from './editar-evento/editar-evento.component';
+import { CrearEventoComponent } from './evento/crear-evento/crear-evento.component';
+import { EditarEventoComponent } from './evento/editar-evento/editar-evento.component';
 import {MatDividerModule} from "@angular/material/divider";
+import { AdminAsambleistasComponent } from './admin-asambleistas/admin-asambleistas.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import { AddDialogComponent } from './add-dialog/add-dialog.component';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { EditPreguntaAbiertaComponent } from './edit-pregunta-abierta/edit-pregunta-abierta.component';
+import { EditPreguntaAbiertaNumeroComponent } from './edit-pregunta-abierta-numero/edit-pregunta-abierta-numero.component';
+import { EditPreguntaMultipleComponent } from './edit-pregunta-multiple/edit-pregunta-multiple.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +53,14 @@ import {MatDividerModule} from "@angular/material/divider";
     LoginComponent,
     RegistroComponent,
     CrearEventoComponent,
-    EditarEventoComponent
+    EditarEventoComponent,
+    AdminAsambleistasComponent,
+    AddDialogComponent,
+    EditDialogComponent,
+    DeleteDialogComponent,
+    EditPreguntaAbiertaComponent,
+    EditPreguntaAbiertaNumeroComponent,
+    EditPreguntaMultipleComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +83,9 @@ import {MatDividerModule} from "@angular/material/divider";
     MatButtonModule,
     HttpClientModule,
     MatPaginatorModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTableModule,
+    MatToolbarModule
   ],
   entryComponents: [PreguntaMultipleComponent, CrearEventoComponent, EditarEventoComponent],
   providers: [

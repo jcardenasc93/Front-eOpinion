@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AdminHomeComponent} from "../admin-home/admin-home.component";
+import {AdminHomeComponent} from "../../admin-home/admin-home.component";
 import {MatDialogRef} from "@angular/material/dialog";
 import Swal from "sweetalert2";
 import {HttpEvent, HttpEventType} from "@angular/common/http";
-import {EventoService} from "../services/evento.service";
+import {EventoService} from "../../services/evento.service";
 
 @Component({
   selector: 'app-crear-evento',

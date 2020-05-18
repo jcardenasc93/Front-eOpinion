@@ -30,31 +30,52 @@ export class PreguntaService {
 
   createPreguntaAbierta(form: any, idEvento) {
     const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
-    console.log('idEvento',idEvento);
+    console.log('idEvento', idEvento);
     return this.http.post(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_abierta/nuevo',
       {enunciado: form.get('enunciado').value, evento: idEvento, activa: false}, {'headers': headers});
   }
 
-    createPreguntaMultiple(form: any) {
-    /*
-    const formData = new FormData();
-    console.log('opciones',form.get('opciones').value)
-      console.log('enunciado',form.get('enunciado').value)
-      console.log('esMultipleResp',form.get('esMultipleResp').value)
-      console.log('numeroDeIntentos',form.get('numeroDeIntentos').value)
-      console.log('esNominal',form.get('esNominal').value)
-
-    formData.append('enunciado', form.get('enunciado').value);
-    formData.append('opiciones', form.get('opciones').value);
-    formData.append('esMultipleResp', form.get('esMultipleResp').value);
-    formData.append('respuestasPermitidas', form.get('numeroDeIntentos').value);
-    formData.append('puntajeCoeficiente', form.get('esNominal').value);
-    formData.append('activa', form.get('activa').value);
-    formData.append('evento', form.get('evento').value);
-*/
-
+  createPreguntaMultiple(form: any) {
     const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
     return this.http.post(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_multiple/nuevo', form, {'headers': headers});
+  }
+
+  createPreguntaDecimal(form: any) {
+    const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.post(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_decimal/nuevo', form, {'headers': headers});
+  }
+
+  deletePreguntaAbierta(idPregunta) {
+    const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.post(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_abierta/eliminar/' + idPregunta, {}, {'headers': headers});
+
+  }
+
+  deletePreguntaMultiple(idPregunta) {
+    const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.post(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_multiple/eliminar/' + idPregunta, {}, {'headers': headers});
+
+
+  }
+
+  deletePreguntaDecimal(idPregunta) {
+    const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.post(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_decimal/eliminar/' + idPregunta, {}, {'headers': headers});
+  }
+
+  editPreguntaAbierta(form, idPregunta) {
+    const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_abierta/actualizar/' + idPregunta, form, {'headers': headers});
+  }
+
+  editPreguntaAbiertaNumero(form, idPregunta) {
+    const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_decimal/actualizar/' + idPregunta, form, {'headers': headers});
+  }
+
+  editPreguntaMultiple(form, idPregunta) {
+    const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_multiple/actualizar/' + idPregunta, form, {'headers': headers});
   }
 
 

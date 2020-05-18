@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
       }, error => {
         Swal.fire('Oops...', 'credenciales incorrectas');
         console.log('Error login-> ', error.error);
+        window.location.reload();
       });
     }, error => {
       Swal.fire('Oops...', 'credenciales incorrectas');

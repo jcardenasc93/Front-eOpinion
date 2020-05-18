@@ -22,4 +22,25 @@ export class UsuariosService {
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
     return this.http.get(this.URL_HOST + 'usuarios/api/v1/asambleistas/self', {'headers': headers});
   }
+
+  getAsableistasXEvento(idEvento): Observable<any> {
+    console.log("token en servicio ", this.token)
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.get(this.URL_HOST + 'usuarios/api/v1/asambleistas/' + idEvento, {'headers': headers});
+  }
+
+  crearAsambleistas(form,idEvento): Observable<any> {
+    const formData = new FormData();
+    formData.append('documento_excel', form.get('documento_excel').value);
+    console.log("token en servicio ", form.get('documento_excel').value)
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/actualizar/' + idEvento, formData,{'headers': headers});
+  }
+
+  persistirAsambleistas(idEvento): Observable<any> {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.get(this.URL_HOST + 'usuarios/api/v1/new_asam/'+idEvento, {'headers': headers});
+
+  }
+
 }
