@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PreguntaMultipleComponent} from "../../admin/pregunta/pregunta-multiple/pregunta-multiple.component";
 import {MatDialog} from "@angular/material/dialog";
 import {CargaPoderesComponent} from "../carga-poderes/carga-poderes.component";
@@ -10,12 +10,13 @@ import {CargaPoderesComponent} from "../carga-poderes/carga-poderes.component";
 })
 export class HomeAsambleistaComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
   }
 
-    openPoderesModal(): void {
+  openPoderesModal(): void {
     this.dialog.open(CargaPoderesComponent, {
       width: '70%',
     });

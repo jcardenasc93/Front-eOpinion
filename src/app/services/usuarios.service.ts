@@ -45,4 +45,10 @@ export class UsuariosService {
     return this.http.get(this.URL_HOST + 'usuarios/api/v1/new_asam/' + idEvento, {'headers': headers});
   }
 
+  crearPoder(file): Observable<any> {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.post(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderados/nuevo', file, {'headers': headers});
+  }
+
+
 }
