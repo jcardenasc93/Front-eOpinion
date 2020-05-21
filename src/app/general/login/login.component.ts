@@ -4,6 +4,7 @@ import {UsuariosService} from '../../services/usuarios.service';
 import 'rxjs/add/operator/switchMap';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
+import {log} from "util";
 
 @Component({
   selector: 'app-login',

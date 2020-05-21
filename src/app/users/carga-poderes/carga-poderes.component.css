@@ -38,3 +38,7 @@
 .files-list .delete-file img {
     width: 30px;
 }
+
+table {
+  width: 100%;
+}

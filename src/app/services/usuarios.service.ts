@@ -36,8 +36,10 @@ export class UsuariosService {
     const formData = new FormData();
     formData.append('documento_excel', form.get('documento_excel').value);
     console.log("token en servicio ", form.get('documento_excel').value)
+    console.log('exclel', form.get('documento_excel').value)
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
-    return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/actualizar/' + idEvento, formData, {'headers': headers});
+   return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/actualizar/' + idEvento, formData, {'headers': headers});
+
   }
 
   persistirAsambleistas(idEvento): Observable<any> {
@@ -46,8 +48,19 @@ export class UsuariosService {
   }
 
   crearPoder(file): Observable<any> {
+    const formData = new FormData();
+    console.log('poder maximo xdxd', file)
+    formData.append('documento_poder', file);
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
-    return this.http.post(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderados/nuevo', file, {'headers': headers});
+    return this.http.post(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderados/nuevo/', formData, {
+      'headers': headers, reportProgress: true,
+      observe: 'events'
+    });
+  }
+
+  getPoderXusuario(): Observable<any> {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.get(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderados/' , {'headers': headers});
   }
 
 

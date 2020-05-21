@@ -49,6 +49,7 @@ export class AdminAsambleistasComponent implements OnInit {
   onChange(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
+      console.log('asambleista file', event.target.files[0])
       this.registerForm.get('documento_excel').setValue(file);
     }
   }

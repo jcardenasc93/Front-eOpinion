@@ -38,6 +38,7 @@ import { EditPreguntaAbiertaNumeroComponent } from './admin/pregunta/edit-pregun
 import { EditPreguntaMultipleComponent } from './admin/pregunta/edit-pregunta-multiple/edit-pregunta-multiple.component';
 import { HomeAsambleistaComponent } from './users/home-asambleista/home-asambleista.component';
 import { CargaPoderesComponent } from './users/carga-poderes/carga-poderes.component';
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { CargaPoderesComponent } from './users/carga-poderes/carga-poderes.compo
     MatPaginatorModule,
     MatDividerModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatListModule
   ],
   entryComponents: [PreguntaMultipleComponent, CrearEventoComponent, EditarEventoComponent],
   providers: [

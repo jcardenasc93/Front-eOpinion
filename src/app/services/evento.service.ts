@@ -39,7 +39,6 @@ export class EventoService {
     const formData = new FormData();
     formData.append('nombre', form.get('nombre').value);
     formData.append('fecha', form.get('fecha').value);
-    formData.append('bodyCorreo', form.get('excel').value);
     formData.append('bodyCorreo', form.get('correo').value);
     formData.append('linkEvento', form.get('link').value)
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});

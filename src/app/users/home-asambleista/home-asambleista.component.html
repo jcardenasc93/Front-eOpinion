@@ -1,7 +1,25 @@
 <app-banner></app-banner>
 <div class="card text-center m-3">
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{usuario.first_name}}</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+<mat-list role="list">
+  <mat-list-item role="listitem"><b>Coeficiente acumulado:&nbsp;</b>  {{usuario.coeficiente}}</mat-list-item>
+  <mat-list-item role="listitem"><b>Inmueble:&nbsp;</b> {{usuario.inmueble}} </mat-list-item>
+  <mat-list-item role="listitem"><b>Estado de cuenta:&nbsp;</b> {{usuario.inmueble ? 'Al dia ': 'En mora'}} </mat-list-item>
+</mat-list>
+
+  </mat-card-content>
+</mat-card>
+  </div>
+<div class="card text-center m-3">
   <div class="card-body">
-    <button mat-raised-button color="primary" (click)="openPoderesModal()">Registrar porderes</button>
+    <button mat-raised-button color="primary" (click)="openPoderesModal()">Registro porderes</button>
   </div>
 </div>
 <div class="card text-center m-3">
