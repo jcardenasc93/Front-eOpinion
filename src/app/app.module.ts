@@ -39,6 +39,10 @@ import { EditPreguntaMultipleComponent } from './admin/pregunta/edit-pregunta-mu
 import { HomeAsambleistaComponent } from './users/home-asambleista/home-asambleista.component';
 import { CargaPoderesComponent } from './users/carga-poderes/carga-poderes.component';
 import {MatListModule} from "@angular/material/list";
+import { AdminPoderesComponent } from './admin-poderes/admin-poderes.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { AnalizarPoderComponent } from './analizar-poder/analizar-poder.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +63,9 @@ import {MatListModule} from "@angular/material/list";
     EditPreguntaAbiertaNumeroComponent,
     EditPreguntaMultipleComponent,
     HomeAsambleistaComponent,
-    CargaPoderesComponent
+    CargaPoderesComponent,
+    AdminPoderesComponent,
+    AnalizarPoderComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +91,9 @@ import {MatListModule} from "@angular/material/list";
     MatDividerModule,
     MatTableModule,
     MatToolbarModule,
-    MatListModule
+    MatListModule,
+    MatAutocompleteModule,
+    MatSlideToggleModule
   ],
   entryComponents: [PreguntaMultipleComponent, CrearEventoComponent, EditarEventoComponent],
   providers: [

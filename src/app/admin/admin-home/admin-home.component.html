@@ -21,11 +21,11 @@
             <button mat-raised-button color="accent"(click)="editarEvento(evento.id)">Editar </button>
             <button mat-raised-button color="warn" (click)="borrarEvento(evento.id)">Eliminar</button>
             <button mat-raised-button color="primary" (click)="gotoAsambleistas(evento.id)">Ver asambleistas</button>
+            <button mat-raised-button color="primary" (click)="gotoPoderes(evento.id)">Ver Poderes</button>
           </mat-card-actions>
         </mat-card>
       </div>
     </div>
-
   </div>
   <mat-paginator (page)="onPageChange($event)" [length]="eventosSize"
                  [pageSize]="5"

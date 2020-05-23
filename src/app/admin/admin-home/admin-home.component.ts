@@ -80,6 +80,10 @@ export class AdminHomeComponent implements OnInit {
     });
   }
 
+   gotoPoderes(idEvento) {
+    this.route.navigate(['poderes-admin/' + idEvento]);
+  }
+
   gotoEvento(idEvento) {
     this.route.navigate(['pregunta-admin/' + idEvento]);
   }

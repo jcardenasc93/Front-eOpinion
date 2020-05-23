@@ -1,0 +1,37 @@
+<app-banner></app-banner>
+<div class="card text-center m-3">
+  <div class="card-body" *ngFor="let poder of currentItemsToShow, let i=index;">
+    <div class="flex-grid">
+      <div class="col">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title> {{eventonombre}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-list role="list">
+              <mat-list-item role="listitem"><b>Apoderado:&nbsp;</b> {{poder.nomRepresentante}} -  {{poder.inRep}}
+              </mat-list-item>
+              <mat-list-item role="listitem"><b>Representa a: &nbsp;</b> {{poder.nomPropietario}} - {{poder.inPro}}
+              </mat-list-item>
+              <mat-list-item role="listitem"><a href="{{poder.documento_poder}}" target="_blank">Descargar Poder</a>
+
+              </mat-list-item>
+              <mat-list-item role="listitem">
+
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="gotoAnalize(poder.id, poder.representado_por)">Asociar</button>
+            <button mat-raised-button color="accent" (click)="desasociar(poder.representado_por,poder.id)">Desasociar</button>
+            <button mat-raised-button color="warn" (click)="rechazar(poder.representado_por,poder.id)">Rechazar</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <mat-paginator (page)="onPageChange($event)" [length]="eventosSize"
+                 [pageSize]="5"
+                 [pageSizeOptions]="[5, 10, 25, 100]"> [pageSizeOptions]="[5, 10, 20]" >
+  </mat-paginator>
+</div>

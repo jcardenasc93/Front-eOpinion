@@ -8,12 +8,14 @@ import {LoginComponent} from "./app/general/login/login.component";
 import {AuthGuardService} from './app/auth-guard.service';
 import {AdminAsambleistasComponent} from "./app/admin/admin-asambleistas/admin-asambleistas.component";
 import {HomeAsambleistaComponent} from "./app/users/home-asambleista/home-asambleista.component";
+import {AdminPoderesComponent} from "./app/admin-poderes/admin-poderes.component";
 
 const routes: Routes = [
   {path: 'home', component: AdminHomeComponent, canActivate: [AuthGuardService]},
   {path: 'pregunta-admin/:idEvento', component: AdminPreguntaComponent, canActivate: [AuthGuardService]},
   {path: 'preguntaMultiple', component: PreguntaMultipleComponent},
   {path: 'asambleistas-admin/:idEvento', component: AdminAsambleistasComponent, canActivate: [AuthGuardService]},
+  {path: 'poderes-admin/:idEvento', component: AdminPoderesComponent, canActivate: [AuthGuardService]},
   {path: 'home-asambleitsa/:idEvento', component: HomeAsambleistaComponent},
   {path: '', component: LoginComponent},
 

@@ -10,6 +10,7 @@ export class UsuariosService {
   token = sessionStorage.getItem('token');
   private URL_HOST = environment.urlBack;
 
+
   constructor(private http: HttpClient) {
   }
 
@@ -38,7 +39,7 @@ export class UsuariosService {
     console.log("token en servicio ", form.get('documento_excel').value)
     console.log('exclel', form.get('documento_excel').value)
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
-   return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/actualizar/' + idEvento, formData, {'headers': headers});
+    return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/actualizar/' + idEvento, formData, {'headers': headers});
 
   }
 
@@ -47,10 +48,12 @@ export class UsuariosService {
     return this.http.get(this.URL_HOST + 'usuarios/api/v1/new_asam/' + idEvento, {'headers': headers});
   }
 
-  crearPoder(file): Observable<any> {
+  crearPoder(file, evento): Observable<any> {
+    console.log("evento", evento)
     const formData = new FormData();
     console.log('poder maximo xdxd', file)
     formData.append('documento_poder', file);
+    formData.append('evento', evento);
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
     return this.http.post(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderados/nuevo/', formData, {
       'headers': headers, reportProgress: true,
@@ -60,8 +63,56 @@ export class UsuariosService {
 
   getPoderXusuario(): Observable<any> {
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
-    return this.http.get(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderados/' , {'headers': headers});
+    return this.http.get(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderados/', {'headers': headers});
   }
 
+  getPoderesXEvento(idEvento): Observable<any> {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.get(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderados/' + idEvento, {'headers': headers});
+  }
+
+  getUserById(idUser): Observable<any> {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.get(this.URL_HOST + 'usuarios/api/v1/asambleista/' + idUser, {'headers': headers});
+  }
+
+
+  aprobarPoder(representa,evento, idPoder) {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.patch(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderado/actualizar/' + idPoder, {
+      validado: true,
+      representa_a: representa,
+      evento:evento,
+    }, {'headers': headers});
+  }
+
+    adesasociarPoder(idPoder, evento) {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.patch(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderado/actualizar/' + idPoder, {
+      validado: false,
+      evento:evento,
+    }, {'headers': headers});
+  }
+
+  setPoderNull(idPoder, evento) {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.patch(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderado/actualizar/' + idPoder, {
+      validado: false,
+      representa_a:null,
+      evento:evento,
+    }, {'headers': headers});
+  }
+
+
+
+  calculoCoeficientes(idAsambleista){
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.patch(this.URL_HOST + 'usuarios/api/v1/asambleistas/caclulo_coeficientes/' + idAsambleista,{}, {'headers': headers});
+  }
+
+  borrarPoder(idPoder){
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.delete(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderado/eliminar/' + idPoder, {'headers': headers});
+  }
 
 }
