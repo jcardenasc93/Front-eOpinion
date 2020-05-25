@@ -27,7 +27,6 @@ export class CrearEventoComponent implements OnInit {
     this.registerForm = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
       fecha: new FormControl('', [Validators.required]),
-      excel: new FormControl(''),
       correo: new FormControl('', [Validators.required]),
       link: new FormControl('', [Validators.required]),
     });

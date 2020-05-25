@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {UsuariosService} from "../services/usuarios.service";
+import {UsuariosService} from "../../../services/usuarios.service";
 import {ActivatedRoute} from "@angular/router";
 import {Observable} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {map, startWith} from "rxjs/operators";
-import {EditarEventoComponent} from "../admin/evento/editar-evento/editar-evento.component";
+import {EditarEventoComponent} from "../../evento/editar-evento/editar-evento.component";
 import {AnalizarPoderComponent} from "../analizar-poder/analizar-poder.component";
 import {MatDialog} from "@angular/material/dialog";
 import Swal from "sweetalert2";
-import {EventoService} from "../services/evento.service";
+import {EventoService} from "../../../services/evento.service";
 
 class Poder {
   id: any;

@@ -24,8 +24,6 @@
       <input type="date"  class="fadeIn second" name="login" placeholder="fecha" formControlName="fecha">
       <small *ngIf="registerForm.get('fecha').errors?.required && registerForm.get('fecha').touched" class="text-danger"><br>fecha es requerida</small>
 
-      <input type="file" (change)="onChange($event)"  class="fadeIn third" name="login" placeholder="Excel con asistentes" >
-
       <textarea formControlName="correo" (keyup)="autogrow()" placeholder="Mensaje" id="txtInput" style="text-align: center;border-radius: 5px 5px 5px 5px;border: 2px solid #f6f6f6;width: 85%;background-color: #f6f6f6;"  class="fadeIn third"  ></textarea>
       <small *ngIf="registerForm.get('correo').errors?.required && registerForm.get('correo').touched" class="text-danger"><br>Mensaje es requerido</small>
 

@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs";
 import {map, startWith} from "rxjs/operators";
 import Swal from "sweetalert2";
-import {UsuariosService} from "../services/usuarios.service";
+import {UsuariosService} from "../../../services/usuarios.service";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {AdminPoderesComponent} from "../admin-poderes/admin-poderes.component";
 
@@ -73,22 +73,37 @@ export class AnalizarPoderComponent implements OnInit {
   }
 
   savePoder1() {
-    this.userService.adesasociarPoder(this.data.idPoder, this.data.idEvento).subscribe(datas => {
-      this.userService.calculoCoeficientes(this.data.idAsambleista).subscribe(datax => {
-        this.userService.setPoderNull(this.data.idPoder, this.data.idEvento).subscribe(dataz => {
-          this.savePoder();
-          window.location.reload();
-        }, error => {
-          console.log("error poninendo null", error.error)
-          Swal.fire('error!', error.error.detail, 'error');
-        });
-      }, error => {
-        console.log("error coeficientte", error.error)
-        Swal.fire('error!', error.error.detail, 'error');
+    this.userService.getPoderesXEvento(this.data.idEvento).subscribe(dataf => {
+      let pass = true;
+      dataf.apoderados.forEach(dataItem => {
+        if (dataItem.representa_a == this.huehuBOYS.id) {
+          pass = false;
+          Swal.fire('error!', 'Un propietario ya esta representando a ese inmueble', 'error');
+        }
       });
+      if (pass == true) {
+
+        this.userService.adesasociarPoder(this.data.idPoder, this.data.idEvento).subscribe(datas => {
+          this.userService.calculoCoeficientes(this.data.idAsambleista).subscribe(datax => {
+            this.userService.setPoderNull(this.data.idPoder, this.data.idEvento).subscribe(dataz => {
+              this.savePoder();
+              window.location.reload();
+            }, error => {
+              console.log("error poninendo null", error.error)
+              Swal.fire('error!', error.error.detail, 'error');
+            });
+          }, error => {
+            console.log("error coeficientte", error.error)
+            Swal.fire('error!', error.error.detail, 'error');
+          });
+        }, error => {
+          console.log('Error borrado-> ', error.error);
+        });
+      }
     }, error => {
       console.log('Error borrado-> ', error.error);
     });
+
   }
 
 

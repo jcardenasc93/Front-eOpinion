@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpEvent} from "@angular/common/http";
 import Swal from "sweetalert2";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {AdminPreguntaComponent} from "../../admin-pregunta/admin-pregunta.component";
+import {AdminPreguntaComponent} from "../../pregunta/admin-pregunta/admin-pregunta.component";
 import {EventoService} from "../../../services/evento.service";
 
 @Component({

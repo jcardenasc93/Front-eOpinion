@@ -2,7 +2,7 @@
 <form [formGroup]="registerForm">
   <div class="card text-center m-3">
     <div class="card-body">
-      <input type="file" (change)="onChange($event)"  class="fadeIn third" name="login" placeholder="video File" >
+      <input type="file" (change)="onChange($event)" class="fadeIn third" name="login" placeholder="video File">
       <button mat-raised-button color="primary" (click)="subirExcel()">subir excel con asambleistas</button>
 
     </div>
@@ -51,6 +51,26 @@
   <ng-container matColumnDef="mora">
     <th mat-header-cell *matHeaderCellDef> Mora</th>
     <td mat-cell *matCellDef="let element"> {{element.mora}} </td>
+  </ng-container>
+
+
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button color="primary" (click)="createAsambleista()">
+        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+      </button>
+    </th>
+    <td mat-cell *matCellDef="let element"> <button mat-icon-button color="accent"
+              (click)="editAsambleista(element)">
+        <mat-icon aria-label="Edit">edit</mat-icon>
+      </button>
+     <button mat-icon-button color="accent" (click)="deleteAsambleista(element.id)">
+        <mat-icon aria-label="Delete">delete</mat-icon>
+      </button>
+    </td>
+
+
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

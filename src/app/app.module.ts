@@ -7,7 +7,7 @@ import {AppRoutingModule} from "../app-routing.module";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BannerComponent} from './general/banner/banner.component';
 import {MatCardModule} from "@angular/material/card";
-import {AdminPreguntaComponent} from './admin/admin-pregunta/admin-pregunta.component';
+import {AdminPreguntaComponent} from './admin/pregunta/admin-pregunta/admin-pregunta.component';
 import {PreguntaMultipleComponent} from './admin/pregunta/pregunta-multiple/pregunta-multiple.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatIconModule} from "@angular/material/icon";
@@ -30,7 +30,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import { CrearEventoComponent } from './admin/evento/crear-evento/crear-evento.component';
 import { EditarEventoComponent } from './admin/evento/editar-evento/editar-evento.component';
 import {MatDividerModule} from "@angular/material/divider";
-import { AdminAsambleistasComponent } from './admin/admin-asambleistas/admin-asambleistas.component';
+import { AdminAsambleistasComponent } from './admin/asambleistas/admin-asambleistas/admin-asambleistas.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import { EditPreguntaAbiertaComponent } from './admin/pregunta/edit-pregunta-abierta/edit-pregunta-abierta.component';
@@ -39,10 +39,12 @@ import { EditPreguntaMultipleComponent } from './admin/pregunta/edit-pregunta-mu
 import { HomeAsambleistaComponent } from './users/home-asambleista/home-asambleista.component';
 import { CargaPoderesComponent } from './users/carga-poderes/carga-poderes.component';
 import {MatListModule} from "@angular/material/list";
-import { AdminPoderesComponent } from './admin-poderes/admin-poderes.component';
+import { AdminPoderesComponent } from './admin/poderes/admin-poderes/admin-poderes.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import { AnalizarPoderComponent } from './analizar-poder/analizar-poder.component';
+import { AnalizarPoderComponent } from './admin/poderes/analizar-poder/analizar-poder.component';
+import { EditAsambleistaComponent } from './admin/asambleistas/edit-asambleista/edit-asambleista.component';
+import { CreateAsambleistaComponent } from './admin/asambleistas/create-asambleista/create-asambleista.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { AnalizarPoderComponent } from './analizar-poder/analizar-poder.componen
     HomeAsambleistaComponent,
     CargaPoderesComponent,
     AdminPoderesComponent,
-    AnalizarPoderComponent
+    AnalizarPoderComponent,
+    EditAsambleistaComponent,
+    CreateAsambleistaComponent
   ],
   imports: [
     BrowserModule,

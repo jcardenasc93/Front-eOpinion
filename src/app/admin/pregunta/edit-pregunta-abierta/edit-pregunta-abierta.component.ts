@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {EditarEventoComponent} from "../../evento/editar-evento/editar-evento.component";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {AdminPreguntaComponent} from "../../admin-pregunta/admin-pregunta.component";
+import {AdminPreguntaComponent} from "../admin-pregunta/admin-pregunta.component";
 import {EventoService} from "../../../services/evento.service";
 import {PreguntaService} from "../../../services/pregunta.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";

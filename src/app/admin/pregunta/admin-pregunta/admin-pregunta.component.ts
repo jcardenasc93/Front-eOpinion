@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {PreguntaMultipleComponent} from "../pregunta/pregunta-multiple/pregunta-multiple.component";
+import {PreguntaMultipleComponent} from "../pregunta-multiple/pregunta-multiple.component";
 import {MatDialog} from "@angular/material/dialog";
-import {PreguntaAbiertaComponent} from "../pregunta/pregunta-abierta/pregunta-abierta.component";
-import {EventoService} from "../../services/evento.service";
-import {PreguntaService} from "../../services/pregunta.service";
+import {PreguntaAbiertaComponent} from "../pregunta-abierta/pregunta-abierta.component";
+import {EventoService} from "../../../services/evento.service";
+import {PreguntaService} from "../../../services/pregunta.service";
 import {ActivatedRoute} from "@angular/router";
 import Swal from "sweetalert2";
-import {PreguntaAbiertaNumeroComponent} from "../pregunta/pregunta-abierta-numero/pregunta-abierta-numero.component";
-import {EditarEventoComponent} from "../evento/editar-evento/editar-evento.component";
-import {EditPreguntaAbiertaComponent} from "../pregunta/edit-pregunta-abierta/edit-pregunta-abierta.component";
-import {EditPreguntaAbiertaNumeroComponent} from "../pregunta/edit-pregunta-abierta-numero/edit-pregunta-abierta-numero.component";
-import {EditPreguntaMultipleComponent} from "../pregunta/edit-pregunta-multiple/edit-pregunta-multiple.component";
+import {PreguntaAbiertaNumeroComponent} from "../pregunta-abierta-numero/pregunta-abierta-numero.component";
+import {EditarEventoComponent} from "../../evento/editar-evento/editar-evento.component";
+import {EditPreguntaAbiertaComponent} from "../edit-pregunta-abierta/edit-pregunta-abierta.component";
+import {EditPreguntaAbiertaNumeroComponent} from "../edit-pregunta-abierta-numero/edit-pregunta-abierta-numero.component";
+import {EditPreguntaMultipleComponent} from "../edit-pregunta-multiple/edit-pregunta-multiple.component";
 
 @Component({
   selector: 'app-admin-pregunta',
@@ -23,8 +23,9 @@ export class AdminPreguntaComponent implements OnInit {
   public pAbierta;
   public pMultiple;
   public pAbiertaDec;
+  public nomEvent;
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog, private preguntaService: PreguntaService) {
+  constructor(private eventoService: EventoService, private route: ActivatedRoute, public dialog: MatDialog, private preguntaService: PreguntaService) {
   }
 
   ngOnInit(): void {
@@ -32,6 +33,15 @@ export class AdminPreguntaComponent implements OnInit {
     this.getPreguntasAbiertas();
     this.getPreguntasMultiples();
     this.getPreguntasAbiertasDecimal();
+    this.getEventoName();
+  }
+
+  getEventoName(){
+    this.eventoService.getEventoXId(this.idEvent).subscribe(data => {
+      this.nomEvent = data.evento.nombre;
+    }, error => {
+      console.log('Error login-> ', error);
+    });
   }
 
   getPreguntasAbiertas() {
