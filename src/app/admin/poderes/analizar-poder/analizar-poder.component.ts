@@ -72,6 +72,10 @@ export class AnalizarPoderComponent implements OnInit {
     });
   }
 
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   savePoder1() {
     this.userService.getPoderesXEvento(this.data.idEvento).subscribe(dataf => {
       let pass = true;
@@ -82,11 +86,11 @@ export class AnalizarPoderComponent implements OnInit {
         }
       });
       if (pass == true) {
-
         this.userService.adesasociarPoder(this.data.idPoder, this.data.idEvento).subscribe(datas => {
           this.userService.calculoCoeficientes(this.data.idAsambleista).subscribe(datax => {
             this.userService.setPoderNull(this.data.idPoder, this.data.idEvento).subscribe(dataz => {
               this.savePoder();
+              this.delay(1500);
               window.location.reload();
             }, error => {
               console.log("error poninendo null", error.error)
