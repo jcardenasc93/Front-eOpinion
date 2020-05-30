@@ -50,7 +50,8 @@ export class EventoService {
 
   borrarEvento(idEvento: number) {
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
-    console.log('token borrar ', this.token);
     return this.http.post(this.URL_HOST + 'eventos/api/v1/eventos/eliminar/' + idEvento, {}, {'headers': headers});
   }
+
+
 }

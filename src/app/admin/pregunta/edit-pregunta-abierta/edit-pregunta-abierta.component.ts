@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 export class EditPreguntaAbiertaComponent implements OnInit {
   public registerForm: FormGroup;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { idPregunta, enunciado },
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { idPregunta, enunciado,timer },
               public dialogRef: MatDialogRef<EditPreguntaAbiertaComponent>,
               private preguntaService: PreguntaService) {
   }
@@ -27,20 +27,23 @@ export class EditPreguntaAbiertaComponent implements OnInit {
   getEvento(): void {
     this.registerForm = new FormGroup({
       enunciado: new FormControl('', [Validators.required]),
+      timer: new FormControl('', [Validators.required]),
     });
     this.registerForm.get('enunciado').setValue(this.data.enunciado);
+    this.registerForm.get('timer').setValue(this.data.timer);
   }
 
   editEvent() {
     this.preguntaService.editPreguntaAbierta(this.registerForm.value,this.data.idPregunta ).subscribe(data => {
       Swal.fire('Success!', 'Pregunta editada satisfactiriamente', 'success');
+      this.dialogRef.close();
+      window.location.reload();
     }, error => {
       console.log('Error trayendo evento', error);
     });
-
   }
 
   cancel() {
-
+     this.dialogRef.close();
   }
 }

@@ -48,7 +48,7 @@ export class AnalizarPoderComponent implements OnInit {
         if (dataItem.id != this.data.idAsambleista) {
           const poder = new Poder();
           poder.id = dataItem.id;
-          poder.name = dataItem.first_name;
+          poder.name = dataItem.nombre_completo;
           poder.evento = dataItem.evento;
           poder.inmueble = dataItem.inmueble;
           this.options.push(poder);

@@ -25,12 +25,12 @@ export class CreateAsambleistaComponent implements OnInit {
       'email': [null, [Validators.required, Validators.pattern(emailregex)]],
       'inmueble': [null, Validators.required],
       'documento': [null, Validators.required],
-      'first_name': [null, Validators.required],
+      'nombre_completo': [null, Validators.required],
       'celular': [null],
       'coeficiente':  [null, Validators.required],
       'mora':  [false],
       'password': [null, [Validators.required, this.checkPassword]],
-      'username': [null],
+      'username': [null, [Validators.required]],
       'evento':[this.data.idEvento]
     });
   }
@@ -39,14 +39,13 @@ export class CreateAsambleistaComponent implements OnInit {
   }
 
   createAsambleista(){
-    this.formGroup.get('username').setValue(this.formGroup.get('inmueble').value.replace(/ /g, '') + '' + this.formGroup.get('documento').value);
     console.log('username', this.formGroup.get('username'))
     this.usuariosService.createSingleAsambleista(this.formGroup.value).subscribe(async data => {
       Swal.fire('Success!', 'asambleista creado satisfactiriamente', 'success');
       await this.delay(1000);
       window.location.reload();
     }, error => {
-      Swal.fire('Error!', 'Revisa los campos, es posible que sea el formato del telefono ', 'error');
+      Swal.fire('Error!', 'Error creando registro, revisa los campos ', 'error');
       console.log('persistir ', error.error);
     });
 

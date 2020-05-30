@@ -20,6 +20,7 @@
         <button class="btn-create" mat-button (click)="openPregunta(selected)" style="margin-left: 10px">Crear
           Pregunta
         </button>
+          <mat-slide-toggle (click)="changeQuorumStatus()" [(ngModel)]="isChecked" style="float: right">Abrir Quorum</mat-slide-toggle>
       </div>
     </div>
   </div>
@@ -41,19 +42,26 @@
       <div class="col-12 col-md-6">
         <mat-card-actions class="text-center">
 
-          <button class="btn-generic btn-blue" (click)="editarPreguntaAbiertaDecimal(contenidoInt.id,contenidoInt.enunciado)" mat-button>Editar</button>
-          <button class="btn-generic btn-green" mat-button>activar</button>
+          <button class="btn-generic btn-blue" (click)="editarPreguntaAbiertaDecimal(contenidoInt)" mat-button>Editar
+          </button>
+          <button class="btn-generic btn-green" mat-button *ngIf="contenidoInt.activa==false"
+                  (click)="changeActivarDecimal(contenidoInt)">activar
+          </button>
+          <button class="mat-flat-button mat-accent" *ngIf="contenidoInt.activa==true"
+                  (click)="changeActivarDecimal(contenidoInt)">desactivar
+          </button>
           <button class="btn-generic btn-blue" mat-button>resultados</button>
           <button class="btn-generic btn-red" mat-button>restablecer</button>
-          <button class="btn-generic btn-red" mat-button (click)="borrarPreguntaDecimal(contenidoInt.id)">Borrar</button>
+          <button class="btn-generic btn-red" mat-button (click)="borrarPreguntaDecimal(contenidoInt.id)">Borrar
+          </button>
 
         </mat-card-actions>
       </div>
     </div>
   </mat-card>
-   <mat-divider></mat-divider>
+  <mat-divider></mat-divider>
 
-    <mat-card class="col-11 style-card" *ngFor="let contenidoInt of pAbierta">
+  <mat-card class="col-11 style-card" *ngFor="let contenidoInt of pAbierta">
     <mat-card-header class="header-card">
       <mat-card-title>Pregunta abierta</mat-card-title>
     </mat-card-header>
@@ -70,17 +78,25 @@
       <div class="col-12 col-md-6">
         <mat-card-actions class="text-center">
 
-          <button class="btn-generic btn-blue" (click)="editarPreguntaAbierta(contenidoInt.id,contenidoInt.enunciado)" mat-button>Editar</button>
-          <button class="btn-generic btn-green" mat-button>activar</button>
+          <button class="btn-generic btn-blue" (click)="editarPreguntaAbierta(contenidoInt.id,contenidoInt.enunciado,
+          contenidoInt.timer)" mat-button>Editar
+          </button>
+          <button class="btn-generic btn-green" mat-button *ngIf="contenidoInt.activa==false"
+                  (click)="changeActivarAbierta(contenidoInt)">activar
+          </button>
+          <button class="mat-flat-button mat-accent" *ngIf="contenidoInt.activa==true"
+                  (click)="changeActivarAbierta(contenidoInt)">desactivar
+          </button>
           <button class="btn-generic btn-blue" mat-button>resultados</button>
           <button class="btn-generic btn-red" mat-button>restablecer</button>
-          <button class="btn-generic btn-red" mat-button  (click)="borrarPreguntaAbierta(contenidoInt.id)">Borrar</button>
+          <button class="btn-generic btn-red" mat-button (click)="borrarPreguntaAbierta(contenidoInt.id)">Borrar
+          </button>
 
         </mat-card-actions>
       </div>
     </div>
   </mat-card>
-    <mat-card class="col-11 style-card" *ngFor="let contenidoInt of pMultiple">
+  <mat-card class="col-11 style-card" *ngFor="let contenidoInt of pMultiple">
     <mat-card-header class="header-card">
       <mat-card-title>Pregunta seleccion multiple</mat-card-title>
     </mat-card-header>
@@ -98,10 +114,16 @@
         <mat-card-actions class="text-center">
 
           <button class="btn-generic btn-blue" mat-button (click)="editarPreguntaMultiple(contenidoInt)">Editar</button>
-          <button class="btn-generic btn-green" mat-button>activar</button>
+          <button class="btn-generic btn-green" mat-button *ngIf="contenidoInt.activa==false"
+                  (click)="changeActivarMultiple(contenidoInt)">activar
+          </button>
+          <button class="mat-flat-button mat-accent" *ngIf="contenidoInt.activa==true"
+                  (click)="changeActivarMultiple(contenidoInt)">desactivar
+          </button>
           <button class="btn-generic btn-blue" mat-button>resultados</button>
           <button class="btn-generic btn-red" mat-button>restablecer</button>
-          <button class="btn-generic btn-red" mat-button  (click)="borrarPreguntaMultiple(contenidoInt.id)">Borrar</button>
+          <button class="btn-generic btn-red" mat-button (click)="borrarPreguntaMultiple(contenidoInt.id)">Borrar
+          </button>
 
         </mat-card-actions>
       </div>

@@ -73,14 +73,18 @@ export class AdminAsambleistasComponent implements OnInit {
     let mensaje = '';
     this.usuariosService.persistirAsambleistas(this.idEvent).subscribe(data => {
       console.log(data);
-      data.usuarios_no_creados.forEach(dataItem => {
-        console.log(dataItem);
-        mensaje = mensaje + ' \n ' + dataItem;
-      });
-      Swal.fire('Success!', 'Los siguientes usuarios no fueron creados: ' +  mensaje, 'success');
+      try {
+        data.usuarios_no_creados.forEach(dataItem => {
+          console.log(dataItem);
+          mensaje = mensaje + ' \n ' + dataItem;
+        });
+        Swal.fire('Success!', 'Los siguientes usuarios no fueron creados: ' + mensaje, 'success');
+      } catch (err) {
+        Swal.fire('Success!', 'Todos los usuarios fueron creados: ', 'success');
+      }
       this.getAsambleistas();
     }, error => {
-      Swal.fire('error!', 'Error cargando el archivo, ningun usuario fue creado' , 'error');
+      Swal.fire('error!', 'Error cargando el archivo, ningun usuario fue creado', 'error');
     });
   }
 
@@ -103,7 +107,6 @@ export class AdminAsambleistasComponent implements OnInit {
         Swal.fire('error!', 'Oops algo pasó, intenta de nuevo', 'error');
       });
     }
-
   }
 
   createAsambleista(): void {

@@ -94,11 +94,11 @@ export class AdminPoderesComponent implements OnInit {
           for (k = 0; k < this.poderes.length; k++) {
             console.log('representante', asableistas[j].id + ' ' + this.poderes[k].representado_por);
             if (asableistas[j].id == this.poderes[k].representado_por) {
-              this.poderes[k].nomRepresentante = asableistas[j].first_name;
+              this.poderes[k].nomRepresentante = asableistas[j].nombre_completo;
               this.poderes[k].inRep = asableistas[j].inmueble;
             }
             if (asableistas[j].id == this.poderes[k].representa_a) {
-              this.poderes[k].nomPropietario = asableistas[j].first_name;
+              this.poderes[k].nomPropietario = asableistas[j].nombre_completo;
               this.poderes[k].inPro = asableistas[j].inmueble;
             }
           }
@@ -118,7 +118,7 @@ export class AdminPoderesComponent implements OnInit {
       datas.asambleistas.forEach(dataItem => {
         const poder = new Poder();
         poder.id = dataItem.id;
-        poder.name = dataItem.first_name;
+        poder.name = dataItem.nombre_completo;
         this.options.push(poder);
       });
 

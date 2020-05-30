@@ -32,11 +32,15 @@ export class PreguntaMultipleComponent implements OnInit {
       activa: [false],
       respuestasPermitidas: [1, [Validators.required, Validators.min(1)]],
       opciones: this.formBuilder.array([]),
-      evento: [this.data.idEvento]
+      evento: [this.data.idEvento],
+      timer: [null, [Validators.required]],
+      opPresentacion: [null],
+      strictMax:[false,[Validators.required]]
     });
   }
 
   crearPregunta() {
+    this.questionForm.get('opPresentacion').setValue(this.displayType);
     this.preguntaService.createPreguntaMultiple(this.questionForm.value).subscribe(data => {
       Swal.fire('Success!', 'Pregunta multiple creada exitosamente', 'success');
       window.location.reload();

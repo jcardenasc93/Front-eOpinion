@@ -27,7 +27,7 @@ export class EditAsambleistaComponent implements OnInit {
       'email': [this.data.asambleistaObj.email, [Validators.required, Validators.pattern(emailregex)]],
       'inmueble': [this.data.asambleistaObj.inmueble, Validators.required],
       'documento': [this.data.asambleistaObj.documento, Validators.required],
-      'first_name': [this.data.asambleistaObj.first_name, Validators.required],
+      'nombre_completo': [this.data.asambleistaObj.nombre_completo, Validators.required],
       'celular': [this.data.asambleistaObj.celular],
       'coeficiente': [this.data.asambleistaObj.coeficiente, Validators.required],
       'mora': [this.data.asambleistaObj.mora],

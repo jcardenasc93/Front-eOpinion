@@ -26,11 +26,14 @@ export class PreguntaAbiertaComponent implements OnInit {
   initializeForm() {
     this.questionForm = this.formBuilder.group({
       enunciado: ['', [Validators.required]],
+      timer: [null, [Validators.required]],
+      activa: [false, [Validators.required]],
+      evento: [this.data.idEvento, [Validators.required]],
     });
   }
 
   crearPregunta() {
-    this.preguntaService.createPreguntaAbierta(this.questionForm, this.data.idEvento).subscribe(data => {
+    this.preguntaService.createPreguntaAbierta(this.questionForm.value).subscribe(data => {
       Swal.fire('Success!', 'Pregunta creada satisfactiriamente', 'success');
       this.dialogRef.close();
       window.location.reload();

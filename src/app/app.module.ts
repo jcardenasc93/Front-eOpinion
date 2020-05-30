@@ -45,6 +45,10 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { AnalizarPoderComponent } from './admin/poderes/analizar-poder/analizar-poder.component';
 import { EditAsambleistaComponent } from './admin/asambleistas/edit-asambleista/edit-asambleista.component';
 import { CreateAsambleistaComponent } from './admin/asambleistas/create-asambleista/create-asambleista.component';
+import { RespuestaAbiertaComponent } from './users/Respuestas/respuesta-abierta/respuesta-abierta.component';
+import { RespuestaMultipleComponent } from './users/Respuestas/respuesta-multiple/respuesta-multiple.component';
+import { RespuestaDecimalComponent } from './users/Respuestas/respuesta-decimal/respuesta-decimal.component';
+import {CountdownModule} from "ngx-countdown";
 
 @NgModule({
   declarations: [
@@ -69,7 +73,10 @@ import { CreateAsambleistaComponent } from './admin/asambleistas/create-asamblei
     AdminPoderesComponent,
     AnalizarPoderComponent,
     EditAsambleistaComponent,
-    CreateAsambleistaComponent
+    CreateAsambleistaComponent,
+    RespuestaAbiertaComponent,
+    RespuestaMultipleComponent,
+    RespuestaDecimalComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +104,8 @@ import { CreateAsambleistaComponent } from './admin/asambleistas/create-asamblei
     MatToolbarModule,
     MatListModule,
     MatAutocompleteModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    CountdownModule,
   ],
   entryComponents: [PreguntaMultipleComponent, CrearEventoComponent, EditarEventoComponent],
   providers: [

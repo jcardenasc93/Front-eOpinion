@@ -12,7 +12,7 @@ import {PreguntaService} from "../../../services/pregunta.service";
 export class EditPreguntaAbiertaNumeroComponent implements OnInit {
   public registerForm: FormGroup;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { idPregunta, enunciado },
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { pregunta },
               public dialogRef: MatDialogRef<EditPreguntaAbiertaNumeroComponent>,
               private preguntaService: PreguntaService) {
   }
@@ -22,8 +22,10 @@ export class EditPreguntaAbiertaNumeroComponent implements OnInit {
   }
 
   editPregunta() {
-    this.preguntaService.editPreguntaAbiertaNumero(this.registerForm.value, this.data.idPregunta).subscribe(data => {
+    this.preguntaService.editPreguntaAbiertaNumero(this.registerForm.value, this.data.pregunta.id).subscribe(data => {
       Swal.fire('Success!', 'Pregunta editada satisfactiriamente', 'success');
+      this.dialogRef.close();
+      window.location.reload();
     }, error => {
       console.log('Error trayendo evento', error);
     });
@@ -33,8 +35,11 @@ export class EditPreguntaAbiertaNumeroComponent implements OnInit {
   getEvento(): void {
     this.registerForm = new FormGroup({
       enunciado: new FormControl('', [Validators.required]),
+      minimo: new FormControl(this.data.pregunta.minimo, [Validators.required]),
+      maximo: new FormControl(this.data.pregunta.maximo, [Validators.required]),
+      timer: new FormControl(this.data.pregunta.timer, [Validators.required]),
     });
-    this.registerForm.get('enunciado').setValue(this.data.enunciado);
+    this.registerForm.get('enunciado').setValue(this.data.pregunta.enunciado);
   }
 
 

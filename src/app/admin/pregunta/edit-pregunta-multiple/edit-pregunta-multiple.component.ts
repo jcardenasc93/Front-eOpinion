@@ -33,7 +33,9 @@ export class EditPreguntaMultipleComponent implements OnInit {
       activa: [this.data.pregunta.activa],
       respuestasPermitidas: [this.data.pregunta.respuestasPermitidas, [Validators.required, Validators.min(1)]],
       opciones: this.formBuilder.array([]),
-      evento: [this.data.pregunta.evento]
+      evento: [this.data.pregunta.evento],
+      timer: [this.data.pregunta.timer],
+      opPresentacion: [this.data.pregunta.opPresentacion],
     });
     const opciones = this.questionForm.controls.opciones as FormArray;
 
@@ -47,6 +49,7 @@ export class EditPreguntaMultipleComponent implements OnInit {
 
 
   editarPregunta() {
+     this.questionForm.get('opPresentacion').setValue(this.displayType);
     this.preguntaService.deletePreguntaMultiple(this.data.pregunta.id).subscribe(data => {
 
       this.preguntaService.createPreguntaMultiple(this.questionForm.value).subscribe(data => {

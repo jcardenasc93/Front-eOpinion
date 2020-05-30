@@ -28,11 +28,9 @@ export class PreguntaService {
     return this.http.get(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_decimal/evento/' + idEvento, {'headers': headers});
   }
 
-  createPreguntaAbierta(form: any, idEvento) {
+  createPreguntaAbierta(form: any) {
     const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
-    console.log('idEvento', idEvento);
-    return this.http.post(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_abierta/nuevo',
-      {enunciado: form.get('enunciado').value, evento: idEvento, activa: false}, {'headers': headers});
+    return this.http.post(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_abierta/nuevo', form, {'headers': headers});
   }
 
   createPreguntaMultiple(form: any) {
@@ -77,6 +75,62 @@ export class PreguntaService {
     const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
     return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_multiple/actualizar/' + idPregunta, form, {'headers': headers});
   }
+
+  saveMultipleRespuesta(arreglo, idPregunta) {
+    console.log('pregunta', idPregunta);
+    console.log('arreglo', arreglo);
+    let cars = [1, 2, 3];
+    const formData = new FormData();
+    const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.post(this.URL_HOST + 'respuestas/api/v1/respuesta/op_multiple/nuevo/', {
+      pregunta: idPregunta,
+      opciones: arreglo
+    }, {'headers': headers});
+  }
+
+  saveRespuestaAbierta(respuesta, idPregunta) {
+
+    const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.post(this.URL_HOST + 'respuestas/api/v1/respuesta/abierta/nuevo/', {
+      pregunta: idPregunta,
+      respuesta_texto: respuesta
+    }, {'headers': headers});
+  }
+
+  saveRespuestaDecimal(respuesta, idPregunta) {
+    const respuestaFloat = parseFloat(respuesta);
+    console.log('idpregunta', idPregunta);
+    const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.post(this.URL_HOST + 'respuestas/api/v1/respuesta/decimal/nuevo/', {
+      pregunta: idPregunta,
+      respuesta_decimal: respuestaFloat
+    }, {'headers': headers});
+  }
+
+
+  activarMultiple(idPregunta, activa) {
+    const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_multiple/actualizar/' + idPregunta, {activa:activa}, {'headers': headers});
+  }
+    activarAbierta(idPregunta, activa) {
+    const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_abierta/actualizar/' + idPregunta, {activa:activa}, {'headers': headers});
+  }
+    activarDecimal(idPregunta, activa) {
+    const headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/pregunta_decimal/actualizar/' + idPregunta, {activa:activa}, {'headers': headers});
+  }
+    guardarQuorum(idEvento: number) {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.get(this.URL_HOST + 'eventos/api/v1/quorum_asambleista/' + idEvento, {'headers': headers});
+  }
+
+  habilitarQuorum(idEvento: number) {
+    console.log('entro a actuliazr')
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.get(this.URL_HOST + 'eventos/api/v1/quorum_status/' + idEvento, {'headers': headers});
+  }
+
 
 
 }

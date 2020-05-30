@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Crear pregunta selección múltiple</h1>
 <div mat-dialog-content style="margin-bottom: 1em;">
-  <form [formGroup]="questionForm" >
+  <form [formGroup]="questionForm">
     <div class="row-container">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Ingrese aquí la pregunta</mat-label>
@@ -10,6 +10,15 @@
     <div class="row">
       <div class="col">
         <mat-checkbox color="primary" formControlName="puntajeCoeficiente">Votacion Nominal?</mat-checkbox>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" style="width:50%">
+          <mat-label>Timer</mat-label>
+          <input matInput type="number" formControlName="timer">
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-checkbox color="primary" formControlName="strictMax">Respuestas exactas</mat-checkbox>
       </div>
       <div class="col">
         <mat-form-field appearance="outline" style="height:40px; padding-left: 15px">

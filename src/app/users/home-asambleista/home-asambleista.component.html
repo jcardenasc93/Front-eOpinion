@@ -1,27 +1,101 @@
 <app-banner></app-banner>
 <div class="card text-center m-3">
-<mat-card class="example-card">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{usuario.first_name}}</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-  </mat-card-header>
-
-  <mat-card-content>
-<mat-list role="list">
-  <mat-list-item role="listitem"><b>Coeficiente acumulado:&nbsp;</b>  {{usuario.coeficiente}}</mat-list-item>
-  <mat-list-item role="listitem"><b>Inmueble:&nbsp;</b> {{usuario.inmueble}} </mat-list-item>
-  <mat-list-item role="listitem"><b>Estado de cuenta:&nbsp;</b> {{usuario.inmueble ? 'Al dia ': 'En mora'}} </mat-list-item>
-</mat-list>
-
-  </mat-card-content>
-</mat-card>
-  </div>
-<div class="card text-center m-3">
   <div class="card-body">
-    <button mat-raised-button color="primary" (click)="openPoderesModal()">Registro porderes</button>
+    <div class="row">
+      <div class="col">
+        <button mat-raised-button color="primary" (click)="openPoderesModal()">Registro porderes</button>
+      </div>
+      <div class="col">
+        <button mat-raised-button color="warn" (click)="marcarQuorum()">Marcar Quorum</button>
+      </div>
+    </div>
   </div>
 </div>
 <div class="card text-center m-3">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{usuario.nombre_completo}}</mat-card-title>
+    </mat-card-header>
 
+    <mat-card-content>
+      <mat-list role="list">
+        <mat-list-item role="listitem"><b>Coeficiente acumulado:&nbsp;</b>  {{usuario.coeficiente}}</mat-list-item>
+        <mat-list-item role="listitem"><b>Inmueble:&nbsp;</b> {{usuario.inmueble}} </mat-list-item>
+        <mat-list-item role="listitem"><b>Estado de cuenta:&nbsp;</b> {{usuario.inmueble ? 'Al dia ' : 'En mora'}}
+        </mat-list-item>
+      </mat-list>
+
+      <mat-list role="list" *ngFor="let nombre of nombres">
+        <mat-list-item role="listitem"><b>Inmueble:&nbsp;</b>  {{nombre}}</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<div class="card text-center m-3" *ngFor="let pregunta of pMultiples">
+  <mat-card class="example-card">
+    <mat-card-header>
+
+      <mat-card-title>Pregunta multiple</mat-card-title>
+
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list role="list">
+        <mat-list-item role="listitem"><b>Descripcion:&nbsp;</b> {{pregunta.enunciado}}</mat-list-item>
+      </mat-list>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="warn" (click)="gotoPreguntaMultiple(pregunta)">Responder</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div class="card text-center m-3" *ngFor="let pregunta of pAbierta">
+  <mat-card class="example-card">
+    <mat-card-header>
+
+      <mat-card-title>Pregunta Abierta</mat-card-title>
+
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list role="list">
+        <mat-list-item role="listitem"><b>Descripcion:&nbsp;</b> {{pregunta.enunciado}}</mat-list-item>
+      </mat-list>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="warn" (click)="gotoPreguntaAbuerta(pregunta)">Responder</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div class="card text-center m-3" *ngFor="let pregunta of pDecimal">
+  <mat-card class="example-card">
+    <mat-card-header>
+
+      <mat-card-title>Pregunta Decimal</mat-card-title>
+
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list role="list">
+        <mat-list-item role="listitem"><b>Descripcion:&nbsp;</b> {{pregunta.enunciado}}</mat-list-item>
+      </mat-list>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="warn" (click)="gotoPreguntaDecimal(pregunta)">Responder</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div class="card text-center m-3">
+  <div class="card-body">
+    <button mat-raised-button color="accent" (click)="refreshPreguntas()">Siguiente Pregunta</button>
+  </div>
 </div>

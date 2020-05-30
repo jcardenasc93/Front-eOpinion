@@ -11,6 +11,7 @@ import {EditarEventoComponent} from "../../evento/editar-evento/editar-evento.co
 import {EditPreguntaAbiertaComponent} from "../edit-pregunta-abierta/edit-pregunta-abierta.component";
 import {EditPreguntaAbiertaNumeroComponent} from "../edit-pregunta-abierta-numero/edit-pregunta-abierta-numero.component";
 import {EditPreguntaMultipleComponent} from "../edit-pregunta-multiple/edit-pregunta-multiple.component";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-admin-pregunta',
@@ -24,8 +25,14 @@ export class AdminPreguntaComponent implements OnInit {
   public pMultiple;
   public pAbiertaDec;
   public nomEvent;
+  public formGroup: FormGroup;
+  isChecked = false;
 
-  constructor(private eventoService: EventoService, private route: ActivatedRoute, public dialog: MatDialog, private preguntaService: PreguntaService) {
+
+  constructor(private formBuilder: FormBuilder,
+              private eventoService: EventoService, private route: ActivatedRoute,
+              public dialog: MatDialog, private preguntaService: PreguntaService) {
+
   }
 
   ngOnInit(): void {
@@ -36,9 +43,12 @@ export class AdminPreguntaComponent implements OnInit {
     this.getEventoName();
   }
 
-  getEventoName(){
+
+  getEventoName() {
     this.eventoService.getEventoXId(this.idEvent).subscribe(data => {
+      console.log(data)
       this.nomEvent = data.evento.nombre;
+      this.isChecked = data.evento.regitroQuorum;
     }, error => {
       console.log('Error login-> ', error);
     });
@@ -152,23 +162,23 @@ export class AdminPreguntaComponent implements OnInit {
     }
   }
 
-  editarPreguntaAbierta(idPregunta, enunciado): void {
+  editarPreguntaAbierta(idPregunta, enunciado, timer): void {
     const dialogRef = this.dialog.open(EditPreguntaAbiertaComponent, {
       width: '70%',
       data: {
         idPregunta: idPregunta,
-        enunciado: enunciado
+        enunciado: enunciado,
+        timer: timer
       }
     });
   }
 
 
-  editarPreguntaAbiertaDecimal(idPregunta, enunciado): void {
+  editarPreguntaAbiertaDecimal(Pregunta): void {
     const dialogRef = this.dialog.open(EditPreguntaAbiertaNumeroComponent, {
       width: '70%',
       data: {
-        idPregunta: idPregunta,
-        enunciado: enunciado
+        pregunta: Pregunta,
       }
     });
   }
@@ -182,5 +192,43 @@ export class AdminPreguntaComponent implements OnInit {
     });
   }
 
+  changeActivarMultiple(contenidoInt: any) {
+    const activa = !contenidoInt.activa
+    this.preguntaService.activarMultiple(contenidoInt.id, activa).subscribe(data => {
+      console.log('polaridad', data);
+      this.getPreguntasMultiples();
+    }, error => {
+      console.log('Error activa-> ', error);
+    });
+  }
 
+  changeActivarAbierta(contenidoInt: any) {
+    const activa = !contenidoInt.activa
+    this.preguntaService.activarAbierta(contenidoInt.id, activa).subscribe(data => {
+      console.log('polaridad', data);
+      this.getPreguntasAbiertas();
+    }, error => {
+      console.log('Error activa-> ', error);
+    });
+  }
+
+  changeActivarDecimal(contenidoInt: any) {
+    const activa = !contenidoInt.activa
+    this.preguntaService.activarDecimal(contenidoInt.id, activa).subscribe(data => {
+      console.log('polaridad', data);
+      this.getPreguntasAbiertasDecimal();
+    }, error => {
+      console.log('Error activa-> ', error);
+    });
+  }
+
+
+  changeQuorumStatus() {
+    this.preguntaService.habilitarQuorum(this.idEvent).subscribe(data => {
+      console.log('estad', data);
+      Swal.fire('Success!', 'Quorum status updated', 'success');
+    }, error => {
+      console.log('Error activa-> ', error.error);
+    });
+  }
 }

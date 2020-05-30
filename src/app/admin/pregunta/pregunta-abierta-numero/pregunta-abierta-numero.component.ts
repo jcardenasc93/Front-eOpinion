@@ -11,11 +11,12 @@ import Swal from "sweetalert2";
 })
 export class PreguntaAbiertaNumeroComponent implements OnInit {
   questionForm: FormGroup;
+
   constructor(private formBuilder: FormBuilder,
               private preguntaService: PreguntaService,
               public dialogRef: MatDialogRef<PreguntaAbiertaNumeroComponent>,
               @Inject(MAT_DIALOG_DATA) public data: { idEvento }) {
-     this.initializeForm();
+    this.initializeForm();
   }
 
   ngOnInit(): void {
@@ -26,6 +27,9 @@ export class PreguntaAbiertaNumeroComponent implements OnInit {
       enunciado: ['', [Validators.required]],
       evento: [this.data.idEvento],
       activa: [false],
+      minimo: ['', [Validators.required]],
+      maximo: ['', [Validators.required]],
+      timer: ['', [Validators.required]],
     });
   }
 
@@ -40,7 +44,7 @@ export class PreguntaAbiertaNumeroComponent implements OnInit {
       this.dialogRef.close();
       window.location.reload();
     }, error => {
-      console.log('sdsd',error);
+      console.log('sdsd', error);
       Swal.fire('Error!', 'Error creando pregunta', 'error');
     });
   }
