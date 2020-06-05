@@ -114,12 +114,16 @@ export class RespuestaMultipleComponent implements OnInit {
       Swal.fire('Error!', 'Seleccione al menos una opcion de respuesta', 'error');
       return;
     }
+     if (opInt.length == 0) {
+      Swal.fire('Error!', 'Seleccione al menos una opcion de respuesta', 'error');
+      return;
+    }
 
     this.preguntaService.saveMultipleRespuesta(opInt, this.data.preguntaMultiple.id).subscribe(data => {
       Swal.fire('Success!', 'Su respuesta ha sido guardada', 'success');
     }, error => {
       Swal.fire('Error!', error.error.detail, 'error');
-      console.log('error', error.error.detail);
+      console.log('error', error);
     });
   }
 

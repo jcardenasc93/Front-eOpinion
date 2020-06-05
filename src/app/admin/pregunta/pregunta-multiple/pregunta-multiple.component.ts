@@ -27,7 +27,6 @@ export class PreguntaMultipleComponent implements OnInit {
   initializeForm() {
     this.questionForm = this.formBuilder.group({
       enunciado: ['', [Validators.required]],
-      esMultipleResp: [false, [Validators.required]],
       puntajeCoeficiente: [false, [Validators.required]],
       activa: [false],
       respuestasPermitidas: [1, [Validators.required, Validators.min(1)]],
@@ -41,6 +40,7 @@ export class PreguntaMultipleComponent implements OnInit {
 
   crearPregunta() {
     this.questionForm.get('opPresentacion').setValue(this.displayType);
+    console.log('con coeficiente?', this.questionForm.get('puntajeCoeficiente'));
     this.preguntaService.createPreguntaMultiple(this.questionForm.value).subscribe(data => {
       Swal.fire('Success!', 'Pregunta multiple creada exitosamente', 'success');
       window.location.reload();

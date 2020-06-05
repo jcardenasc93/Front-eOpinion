@@ -49,6 +49,10 @@ import { RespuestaAbiertaComponent } from './users/Respuestas/respuesta-abierta/
 import { RespuestaMultipleComponent } from './users/Respuestas/respuesta-multiple/respuesta-multiple.component';
 import { RespuestaDecimalComponent } from './users/Respuestas/respuesta-decimal/respuesta-decimal.component';
 import {CountdownModule} from "ngx-countdown";
+import { ResultadosComponent } from './resultados/resultados.component';
+import {ChartsModule} from "ng2-charts";
+import { QuorumGraphComponent } from './quorum-graph/quorum-graph.component';
+import {MatRippleModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -76,7 +80,9 @@ import {CountdownModule} from "ngx-countdown";
     CreateAsambleistaComponent,
     RespuestaAbiertaComponent,
     RespuestaMultipleComponent,
-    RespuestaDecimalComponent
+    RespuestaDecimalComponent,
+    ResultadosComponent,
+    QuorumGraphComponent
   ],
   imports: [
     BrowserModule,
@@ -106,6 +112,8 @@ import {CountdownModule} from "ngx-countdown";
     MatAutocompleteModule,
     MatSlideToggleModule,
     CountdownModule,
+    ChartsModule,
+    MatRippleModule,
   ],
   entryComponents: [PreguntaMultipleComponent, CrearEventoComponent, EditarEventoComponent],
   providers: [

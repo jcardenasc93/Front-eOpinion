@@ -9,6 +9,7 @@ import {RespuestaMultipleComponent} from "../Respuestas/respuesta-multiple/respu
 import {RespuestaAbiertaComponent} from "../Respuestas/respuesta-abierta/respuesta-abierta.component";
 import {RespuestaDecimalComponent} from "../Respuestas/respuesta-decimal/respuesta-decimal.component";
 import Swal from "sweetalert2";
+import {ResultadosComponent} from "../../resultados/resultados.component";
 
 class PreguntaMultiple {
   enunciado: any;
@@ -19,8 +20,8 @@ class PreguntaMultiple {
   strictMax: any;
   numeracion: any;
   time_final: any;
+  puntajeCoeficiente: any;
 }
-
 
 
 @Component({
@@ -33,12 +34,14 @@ export class HomeAsambleistaComponent implements OnInit {
   constructor(public dialog: MatDialog, public authService: UsuariosService, private preguntaService: PreguntaService,
               private route: ActivatedRoute) {
   }
+
   public nombres = [];
   public idEvento
   public usuario: any;
   public pMultiple;
   public pAbierta;
   public pDecimal;
+  public todayDate = new Date();
   pMultiples: Array<PreguntaMultiple> = [];
 
   ngOnInit(): void {
@@ -48,6 +51,7 @@ export class HomeAsambleistaComponent implements OnInit {
     this.getPreguntasAbiertas();
     this.getPreguntasDecimal();
     this.getPoderes();
+
   }
 
   openPoderesModal(): void {
@@ -102,14 +106,16 @@ export class HomeAsambleistaComponent implements OnInit {
         let j;
         let k;
         const asableistas = datas.asambleistas;
-        const poderes = data.apoderados;
+        console.log('poderes usuario', data);
+        const poderes = data;
         for (j = 0; j < asableistas.length; j++) {
-           for (k = 0; k < poderes.length; k++) {
-             if (asableistas[j].id == poderes[k].representado_por) {
-               this.nombres.push(asableistas[j].inmueble)
-             }
-           }
+          for (k = 0; k < poderes.length; k++) {
+            if (asableistas[j].id == poderes[k].representa_a) {
+              this.nombres.push(asableistas[j].inmueble)
+            }
+          }
         }
+        console.log('poderes', this.nombres)
 
       }, error => {
         console.log('Error login redir-> ', error);
@@ -132,6 +138,7 @@ export class HomeAsambleistaComponent implements OnInit {
           pMultiple.strictMax = dataItem.strictMax;
           pMultiple.numeracion = dataItem.numeracion;
           pMultiple.time_final = dataItem.time_final;
+          pMultiple.puntajeCoeficiente = dataItem.puntajeCoeficiente;
           this.pMultiples.push(pMultiple);
         }
       });
@@ -169,15 +176,54 @@ export class HomeAsambleistaComponent implements OnInit {
   }
 
   refreshPreguntas() {
-window.location.reload();
+    window.location.reload();
   }
 
   marcarQuorum() {
     this.preguntaService.guardarQuorum(this.idEvento).subscribe(data => {
+      window.location.reload();
       Swal.fire('Success!', 'Quorum registrado', 'success');
     }, error => {
-      Swal.fire('error!', error.error.detail, 'error');
-      console.log('Error registrando el QORO', error);
+
+      if (this.usuario.quorumStatus === true) {
+
+        Swal.fire('Mensaje!', 'Usted ya registró quorum', 'info');
+      } else {
+        Swal.fire('error!', error.error.detail, 'error');
+        console.log('Error registrando el QORO', error);
+      }
+
     });
+  }
+
+  gotoResultados(pregunta, finalDate) {
+
+
+    const today = new Date();
+    const currentTime = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const endTime = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + " " + finalDate;
+    const currentTimeToDate = Date.parse(currentTime);
+    const endTimeDate = Date.parse(endTime);
+    let countDown = (endTimeDate - currentTimeToDate) / 1000;
+    console.log('timer', countDown);
+    if (countDown < 0) {
+      this.dialog.open(ResultadosComponent, {
+        width: '70%',
+
+        data: {
+          pregunta: pregunta,
+          idEvento: this.idEvento
+        }
+      });
+
+    } else {
+      Swal.fire('Info!', 'Aun no se han cerrado las votaciones, intente mas tarde', 'info');
+    }
+
+
+  }
+
+  parseFloats(coeficiente): any {
+    return parseFloat(coeficiente);
   }
 }

@@ -34,7 +34,7 @@ export class EditPreguntaAbiertaComponent implements OnInit {
   }
 
   editEvent() {
-    this.preguntaService.editPreguntaAbierta(this.registerForm.value,this.data.idPregunta ).subscribe(data => {
+    this.preguntaService.editPreguntaAbierta(this.registerForm.value, this.data.idPregunta ).subscribe(data => {
       Swal.fire('Success!', 'Pregunta editada satisfactiriamente', 'success');
       this.dialogRef.close();
       window.location.reload();

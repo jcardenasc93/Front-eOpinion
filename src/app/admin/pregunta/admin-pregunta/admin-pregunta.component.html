@@ -1,4 +1,8 @@
 <app-banner></app-banner>
+<div style="margin-top: 30px;text-align: center"> <button (click)="getCoeficienteXrespuesta()"class="mat-flat-button mat-primary">Respuestas Multiples</button>
+ <button class="mat-flat-button mat-primary" (click)="getAnswersByAsambleista()">Respuestas abiertas</button>
+ <button class="mat-flat-button mat-primary"(click)="getAnswersDecimalByAsambleista()">Respuestas decimales</button></div>
+
 <div class="row justify-content-center row-container">
   <div class="col-12">
     <div class="row row-title">
@@ -20,7 +24,11 @@
         <button class="btn-create" mat-button (click)="openPregunta(selected)" style="margin-left: 10px">Crear
           Pregunta
         </button>
-          <mat-slide-toggle (click)="changeQuorumStatus()" [(ngModel)]="isChecked" style="float: right">Abrir Quorum</mat-slide-toggle>
+        <button class="btn-create" style="float: right;margin-left: 20px;" (click)="gotoVerQuoro()">Ver Quorum</button>
+        <button class="btn-create" style="float: right;" (click)="guardarQoro()">Guardar Quorum</button>
+        <mat-slide-toggle (click)="changeQuorumStatus()" [(ngModel)]="isChecked" style="float: right;padding-right: 20px;">Abrir Quorum
+        </mat-slide-toggle>
+
       </div>
     </div>
   </div>
@@ -37,6 +45,8 @@
           <br>
 
           <p class="detail-text">{{contenidoInt.enunciado}}</p>
+
+
         </mat-card-content>
       </div>
       <div class="col-12 col-md-6">
@@ -50,8 +60,9 @@
           <button class="mat-flat-button mat-accent" *ngIf="contenidoInt.activa==true"
                   (click)="changeActivarDecimal(contenidoInt)">desactivar
           </button>
-          <button class="btn-generic btn-blue" mat-button>resultados</button>
-          <button class="btn-generic btn-red" mat-button>restablecer</button>
+
+          <button class="btn-generic btn-red" mat-button (click)="restablecerDecimal(contenidoInt.id)">restablecer
+          </button>
           <button class="btn-generic btn-red" mat-button (click)="borrarPreguntaDecimal(contenidoInt.id)">Borrar
           </button>
 
@@ -73,6 +84,7 @@
           <br>
 
           <p class="detail-text">{{contenidoInt.enunciado}}</p>
+
         </mat-card-content>
       </div>
       <div class="col-12 col-md-6">
@@ -87,8 +99,9 @@
           <button class="mat-flat-button mat-accent" *ngIf="contenidoInt.activa==true"
                   (click)="changeActivarAbierta(contenidoInt)">desactivar
           </button>
-          <button class="btn-generic btn-blue" mat-button>resultados</button>
-          <button class="btn-generic btn-red" mat-button>restablecer</button>
+
+          <button class="btn-generic btn-red" mat-button (click)="restablecerAbierto(contenidoInt.id)">restablecer
+          </button>
           <button class="btn-generic btn-red" mat-button (click)="borrarPreguntaAbierta(contenidoInt.id)">Borrar
           </button>
 
@@ -108,6 +121,7 @@
           <br>
 
           <p class="detail-text">{{contenidoInt.enunciado}}</p>
+          <mat-slide-toggle (click)="bloqueaMora(contenidoInt.id,contenidoInt.bloquea_mora)" [checked]="contenidoInt.bloquea_mora">Bloqueo de Morosos</mat-slide-toggle>
         </mat-card-content>
       </div>
       <div class="col-12 col-md-6">
@@ -120,8 +134,11 @@
           <button class="mat-flat-button mat-accent" *ngIf="contenidoInt.activa==true"
                   (click)="changeActivarMultiple(contenidoInt)">desactivar
           </button>
-          <button class="btn-generic btn-blue" mat-button>resultados</button>
-          <button class="btn-generic btn-red" mat-button>restablecer</button>
+
+          <button class="btn-generic btn-blue" mat-button (click)="gotoResultados(contenidoInt)">resultados</button>
+
+          <button class="btn-generic btn-red" mat-button (click)="restablecerMultiple(contenidoInt.id)">restablecer
+          </button>
           <button class="btn-generic btn-red" mat-button (click)="borrarPreguntaMultiple(contenidoInt.id)">Borrar
           </button>
 

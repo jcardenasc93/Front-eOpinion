@@ -20,17 +20,22 @@
 
     <mat-card-content>
       <mat-list role="list">
-        <mat-list-item role="listitem"><b>Coeficiente acumulado:&nbsp;</b>  {{usuario.coeficiente}}</mat-list-item>
+        <mat-list-item role="listitem"><b>Coeficiente acumulado:&nbsp;</b>  {{parseFloats(usuario.coeficiente)}}</mat-list-item>
         <mat-list-item role="listitem"><b>Inmueble:&nbsp;</b> {{usuario.inmueble}} </mat-list-item>
         <mat-list-item role="listitem"><b>Estado de cuenta:&nbsp;</b> {{usuario.inmueble ? 'Al dia ' : 'En mora'}}
         </mat-list-item>
       </mat-list>
+      <div *ngIf="nombres.length>0">
+        <mat-divider [inset]="true"></mat-divider>
+        <h3 style="text-align: left; padding-top: 20px">Usted esta representando a las siguientes propiedades:</h3>
+        <mat-list role="list" *ngFor="let nombre of nombres">
+          <mat-list-item role="listitem"><b>Inmueble:&nbsp;</b>  {{nombre}}</mat-list-item>
+        </mat-list>
 
-      <mat-list role="list" *ngFor="let nombre of nombres">
-        <mat-list-item role="listitem"><b>Inmueble:&nbsp;</b>  {{nombre}}</mat-list-item>
-      </mat-list>
+      </div>
     </mat-card-content>
   </mat-card>
+
 </div>
 
 
@@ -50,6 +55,7 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="warn" (click)="gotoPreguntaMultiple(pregunta)">Responder</button>
+      <button mat-raised-button color="primary" (click)="gotoResultados(pregunta,pregunta.time_final)">Resultados</button>
     </mat-card-actions>
   </mat-card>
 </div>
