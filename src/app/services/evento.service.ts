@@ -20,8 +20,10 @@ export class EventoService {
     formData.append('bodyCorreo', form.get('bodyCorreo').value);
     formData.append('linkEvento', form.get('link').value);
     formData.append('nombre', form.get('nombre').value);
+    formData.append('link_conferencia', form.get('link_conferencia').value);
+    formData.append('logo_asamblea', form.get('logo_asamblea').value);
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
-    return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/actualizar/' + idEvento, formData,{'headers': headers});
+    return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/actualizar/' + idEvento, formData, {'headers': headers});
   }
 
 
@@ -39,8 +41,10 @@ export class EventoService {
     const formData = new FormData();
     formData.append('nombre', form.get('nombre').value);
     formData.append('fecha', form.get('fecha').value);
-    formData.append('bodyCorreo', form.get('correo').value);
-    formData.append('linkEvento', form.get('link').value)
+    formData.append('bodyCorreo', form.get('bodyCorreo').value);
+    formData.append('link_conferencia', form.get('link_conferencia').value);
+    formData.append('logo_asamblea', form.get('logo_asamblea').value);
+    formData.append('linkEvento', form.get('linkEvento').value);
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
     return this.http.post(this.URL_HOST + 'eventos/api/v1/eventos/nuevo', formData, {
       'headers': headers, reportProgress: true,
@@ -53,5 +57,25 @@ export class EventoService {
     return this.http.post(this.URL_HOST + 'eventos/api/v1/eventos/eliminar/' + idEvento, {}, {'headers': headers});
   }
 
+  saveFiles(evento, documento): Observable<any> {
+    const formData = new FormData();
+    formData.append('evento', evento);
+    formData.append('nombre', documento.name);
+    formData.append('documento', documento);
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.post(this.URL_HOST + 'eventos/api/v1/eventos/documento_nuevo', formData, {
+      'headers': headers, reportProgress: true,
+      observe: 'events'
+    });
+  }
 
+  getFiles(idEvento: number): Observable<any> {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.get(this.URL_HOST + 'eventos/api/v1/eventos/documentos/' + idEvento, {'headers': headers});
+  }
+
+  deleteFile(idEvento) {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.delete(this.URL_HOST + 'eventos/api/v1/eventos/eliminar_documento/' + idEvento, {'headers': headers});
+  }
 }

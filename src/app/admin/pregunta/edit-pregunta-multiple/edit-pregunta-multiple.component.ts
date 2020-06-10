@@ -25,7 +25,7 @@ export class EditPreguntaMultipleComponent implements OnInit {
   }
 
   initializeForm() {
-    console.log('coeficiente',this.data.pregunta.puntajeCoeficiente)
+    console.log('coeficiente', this.data.pregunta.puntajeCoeficiente)
     this.questionForm = this.formBuilder.group({
       enunciado: [this.data.pregunta.enunciado, [Validators.required]],
       esMultipleResp: [this.data.pregunta.esMultipleResp, [Validators.required]],
@@ -36,6 +36,7 @@ export class EditPreguntaMultipleComponent implements OnInit {
       evento: [this.data.pregunta.evento],
       timer: [this.data.pregunta.timer],
       opPresentacion: [this.data.pregunta.opPresentacion],
+      strictMax: [this.data.pregunta.opPresentacion]
     });
     const opciones = this.questionForm.controls.opciones as FormArray;
 
@@ -49,7 +50,7 @@ export class EditPreguntaMultipleComponent implements OnInit {
 
 
   editarPregunta() {
-     this.questionForm.get('opPresentacion').setValue(this.displayType);
+    this.questionForm.get('opPresentacion').setValue(1);
     this.preguntaService.deletePreguntaMultiple(this.data.pregunta.id).subscribe(data => {
 
       this.preguntaService.createPreguntaMultiple(this.questionForm.value).subscribe(data => {

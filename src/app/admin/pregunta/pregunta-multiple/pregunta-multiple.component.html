@@ -26,16 +26,6 @@
           <input type="number" min="1" matInput formControlName="respuestasPermitidas"/>
         </mat-form-field>
       </div>
-      <div class="col">
-        <mat-form-field>
-          <mat-label>Presentacion de pregunta</mat-label>
-          <mat-select [(value)]="displayType">
-            <mat-option value="1">Lista</mat-option>
-            <mat-option value="2">Cuadricula</mat-option>
-            <mat-option value="3">Desplegable</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
     </div>
     <div class="row" style="padding-bottom: 15px;padding-left: 20px">
       <button class="mat-flat-button mat-primary" (click)="agregarOpcion()" style="float: right;">Agregar opción

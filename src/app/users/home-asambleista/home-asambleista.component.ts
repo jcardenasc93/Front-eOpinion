@@ -9,7 +9,9 @@ import {RespuestaMultipleComponent} from "../Respuestas/respuesta-multiple/respu
 import {RespuestaAbiertaComponent} from "../Respuestas/respuesta-abierta/respuesta-abierta.component";
 import {RespuestaDecimalComponent} from "../Respuestas/respuesta-decimal/respuesta-decimal.component";
 import Swal from "sweetalert2";
-import {ResultadosComponent} from "../../resultados/resultados.component";
+import {ResultadosComponent} from "../../general/resultados/resultados.component";
+import {EventoService} from "../../services/evento.service";
+
 
 class PreguntaMultiple {
   enunciado: any;
@@ -30,8 +32,11 @@ class PreguntaMultiple {
   styleUrls: ['./home-asambleista.component.css']
 })
 export class HomeAsambleistaComponent implements OnInit {
+  public nomAsamblea: any;
+  public documents: any;
 
-  constructor(public dialog: MatDialog, public authService: UsuariosService, private preguntaService: PreguntaService,
+  constructor(public dialog: MatDialog, public  eventoService: EventoService,
+              public authService: UsuariosService, private preguntaService: PreguntaService,
               private route: ActivatedRoute) {
   }
 
@@ -43,9 +48,14 @@ export class HomeAsambleistaComponent implements OnInit {
   public pDecimal;
   public todayDate = new Date();
   pMultiples: Array<PreguntaMultiple> = [];
+  asam: any;
+  propietario = 'true';
 
   ngOnInit(): void {
+    console.log('propietario',this.propietario)
     this.idEvento = this.route.snapshot.paramMap.get('idEvento');
+    this.getDocuments();
+    this.getEventoInfo();
     this.getInfoAsambleista();
     this.getPreguntasMultiples();
     this.getPreguntasAbiertas();
@@ -92,6 +102,12 @@ export class HomeAsambleistaComponent implements OnInit {
 
   getInfoAsambleista() {
     this.authService.getUserByToken(sessionStorage.getItem('token')).subscribe(datas => {
+      if (datas[0].propietario == true) {
+        this.propietario = 'true';
+      } else {
+        this.propietario = 'false';
+      }
+      //this.propietario = datas[0].propietario;
       this.usuario = datas[0];
       console.log('usuario data', this.usuario);
     }, error => {
@@ -196,8 +212,16 @@ export class HomeAsambleistaComponent implements OnInit {
     });
   }
 
-  gotoResultados(pregunta, finalDate) {
+  getEventoInfo() {
+    this.eventoService.getEventoXId(this.idEvento).subscribe(data => {
+      console.log('evento', data);
+      this.asam = data.evento;
+    }, error => {
 
+    });
+  }
+
+  gotoResultados(pregunta, finalDate) {
 
     const today = new Date();
     const currentTime = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -209,7 +233,6 @@ export class HomeAsambleistaComponent implements OnInit {
     if (countDown < 0) {
       this.dialog.open(ResultadosComponent, {
         width: '70%',
-
         data: {
           pregunta: pregunta,
           idEvento: this.idEvento
@@ -219,11 +242,36 @@ export class HomeAsambleistaComponent implements OnInit {
     } else {
       Swal.fire('Info!', 'Aun no se han cerrado las votaciones, intente mas tarde', 'info');
     }
+  }
 
-
+  getDocuments() {
+    this.eventoService.getFiles(this.idEvento).subscribe(data => {
+      console.log('documentes', data);
+      this.documents = data.documentos;
+    }, error => {
+    });
   }
 
   parseFloats(coeficiente): any {
     return parseFloat(coeficiente);
+  }
+
+
+  setPropietarioFalse() {
+    this.authService.updateSingleAsambleistaP(false, this.usuario.id).subscribe(data => {
+
+    }, error => {
+      console.log('error', error);
+    });
+
+  }
+
+  setPropietarioTrue() {
+    this.authService.updateSingleAsambleistaP(true, this.usuario.id).subscribe(data => {
+
+    }, error => {
+      console.log('error', error);
+    });
+
   }
 }

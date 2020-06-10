@@ -26,6 +26,12 @@ export class UsuariosService {
     return this.http.get(this.URL_HOST + 'usuarios/api/v1/asambleistas/self', {'headers': headers});
   }
 
+  getUserByToken2(): Observable<any> {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.get(this.URL_HOST + 'usuarios/api/v1/asambleistas/self', {'headers': headers});
+  }
+
+
   createSingleAsambleista(form): Observable<any> {
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
     return this.http.post(this.URL_HOST + 'usuarios/api/v1/asambleistas/nuevo', form, {'headers': headers});
@@ -36,9 +42,14 @@ export class UsuariosService {
     return this.http.patch(this.URL_HOST + 'usuarios/api/v1/asambleistas/actualizar/' + idAsambleistas, form, {'headers': headers});
   }
 
+  updateSingleAsambleistaP(form, idAsambleistas): Observable<any> {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.patch(this.URL_HOST + 'usuarios/api/v1/asambleistas/actualizar/' + idAsambleistas, {propietario:form}, {'headers': headers});
+  }
+
   deleteAsambleista(idAsambleistas): Observable<any> {
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
-    return this.http.post(this.URL_HOST + 'usuarios/api/v1/asambleistas/eliminar/' + idAsambleistas,{}, {'headers': headers});
+    return this.http.post(this.URL_HOST + 'usuarios/api/v1/asambleistas/eliminar/' + idAsambleistas, {}, {'headers': headers});
   }
 
 
@@ -128,6 +139,16 @@ export class UsuariosService {
   borrarPoder(idPoder) {
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
     return this.http.delete(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderado/eliminar/' + idPoder, {'headers': headers});
+  }
+
+  sendInviteEmail(idPersona) {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.get(this.URL_HOST + 'usuarios/api/v1/asambleistas/reenviar_correo/' + idPersona, {'headers': headers});
+  }
+
+  validateAopderado(): Observable<any> {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.get(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderados_self', {'headers': headers});
   }
 
 }

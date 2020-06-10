@@ -1,11 +1,13 @@
 import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
-import {PreguntaService} from "../services/pregunta.service";
+import {PreguntaService} from "../../services/pregunta.service";
 import {FormBuilder} from "@angular/forms";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import * as XLSX from 'xlsx';
-import {UsuariosService} from "../services/usuarios.service";
+import {UsuariosService} from "../../services/usuarios.service";
 import {ActivatedRoute} from "@angular/router";
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import {ChartOptions, ChartType} from "chart.js";
+import {Label} from "ng2-charts";
 
 
 class Enum {
@@ -25,6 +27,7 @@ class Enum {
 export class ResultadosComponent implements OnInit {
   private totalasambleistas = 0;
   private votos = [];
+  public user: any;
 
 
   constructor(private route: ActivatedRoute, private preguntaService: PreguntaService,
@@ -34,14 +37,13 @@ export class ResultadosComponent implements OnInit {
     } else {
       this.displayedColumns = ['opcion', 'descripcion', 'inmuebles', 'porcentaje'];
     }
-
-
-
   }
 
   displayedColumns: string[] = ['opcion', 'descripcion', 'inmuebles', 'porcentaje'];
 
   public coeficientes = [];
+  public porcentaje = [];
+  public tortaLables = [];
 
   public opciones: Array<Enum> = [];
 
@@ -66,29 +68,52 @@ export class ResultadosComponent implements OnInit {
       data: this.votos, label: '# Votos'
     }
   ];
+
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  public pieChartLabels: Label[] = this.tortaLables;
+  public pieChartData: number[] = this.porcentaje;
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartPlugins = [];
+  public pieChartColors = [
+    {
+      backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)', '#f6d186'
+      , '#6886c5', '#f5a7a7', '#c06c84', '#f6d186', '#a8e6cf', '#f6d186', '#be9fe1', '#9cf196',
+      '#96f7d2', '#484c7f', '#c36a2d', '#d8345f', '#445c3c', '#a4d7e1', '#ff8364', '#ef6c57',],
+    },
+  ];
+
+
+
   dataSource: any;
   @ViewChild('TABLE') table: ElementRef;
+
 
   ngOnInit(): void {
     this.getAsamblesitas();
     this.getOpciones();
     this.getCoeficienteXrespuesta();
+    this.getCurrentUser();
   }
 
   getOpciones() {
     let cont = 1;
     this.data.pregunta.opciones.forEach(dataItem => {
       this.barChartLabels.push(cont);
+      this.tortaLables.push(cont)
       cont++;
     });
     this.barChartLabels.push('NS/NR');
+    this.tortaLables.push('NS/NR');
   }
 
   getAsamblesitas() {
     this.userService.getAsableistasXEvento(this.data.idEvento).subscribe(data => {
 
         this.totalasambleistas = data.asambleistas.length;
-        console.log('sd', this.totalasambleistas)
+        console.log('sd', this.totalasambleistas);
 
       },
       error => {
@@ -139,6 +164,7 @@ export class ResultadosComponent implements OnInit {
               votosTotales = votosTotales + dataItem.votos;
               this.votos.push(dataItem.votos);
               this.coeficientes.push(dataItem.coeficiente);
+              this.porcentaje.push(dataItem.porcentaje);
             });
 
             console.log('vootsso', this.totalasambleistas);
@@ -152,9 +178,9 @@ export class ResultadosComponent implements OnInit {
             this.opciones.push(opcion2);
             this.coeficientes.push(opcion2.coeficiente);
             this.votos.push(opcion2.votos);
+            this.porcentaje.push(opcion2.porcentaje);
             console.log('coeficientes ', this.opciones);
             this.dataSource = this.opciones;
-
           },
           error => {
             console.log('Error trayendo pregunta multiple');
@@ -171,6 +197,18 @@ export class ResultadosComponent implements OnInit {
 
 
   }
+
+  getCurrentUser(){
+     this.userService.getUserByToken2().subscribe(datax => {
+       console.log(datax)
+       this.user = datax[0].username;
+       console.log('usuario y tales', datax);
+     },
+          error => {
+            console.log('Error trayendo pregunta multiple');
+          }
+        );
+}
 
   exportAsExcel() {
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.table.nativeElement);

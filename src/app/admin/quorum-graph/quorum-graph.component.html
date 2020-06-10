@@ -16,7 +16,7 @@
 <br>
         <mat-divider [inset]="false"></mat-divider>
 <br>
-
+<div #TABLE>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!--- Note that these columns can be defined in any order.
@@ -43,15 +43,18 @@
   <!-- Symbol Column -->
   <ng-container matColumnDef="inmueblespresentes">
     <th mat-header-cell *matHeaderCellDef> INMUEBLES PRESENTE </th>
-    <td mat-cell *matCellDef="let element"> {{element.coeficiente}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.votos}} </td>
   </ng-container>
 
     <ng-container matColumnDef="inmueblesausentes">
     <th mat-header-cell *matHeaderCellDef> INMUEBLES AUSENTE </th>
-    <td mat-cell *matCellDef="let element"> {{element.coeficiente}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.ausentes}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row   (click)="updateTable(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+</div>
+  <br>
+  <button mat-raised-button color="primary" (click)="exportAsExcel()">Exportar a Excel</button>
 </mat-dialog-content>

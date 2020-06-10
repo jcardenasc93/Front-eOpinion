@@ -12,8 +12,8 @@ import {EditPreguntaAbiertaComponent} from "../edit-pregunta-abierta/edit-pregun
 import {EditPreguntaAbiertaNumeroComponent} from "../edit-pregunta-abierta-numero/edit-pregunta-abierta-numero.component";
 import {EditPreguntaMultipleComponent} from "../edit-pregunta-multiple/edit-pregunta-multiple.component";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {QuorumGraphComponent} from "../../../quorum-graph/quorum-graph.component";
-import {ResultadosComponent} from "../../../resultados/resultados.component";
+import {QuorumGraphComponent} from "../../quorum-graph/quorum-graph.component";
+import {ResultadosComponent} from "../../../general/resultados/resultados.component";
 import {UsuariosService} from "../../../services/usuarios.service";
 import {ExcelServiceService} from "../../../services/excel-service.service";
 
@@ -33,6 +33,10 @@ class RespAbierta {
   inmueble: any;
   pregunta: any;
   respuesta: any;
+  coeficiente: any;
+  votos: any;
+  opcion: any;
+  apoderado: any;
 }
 
 @Component({
@@ -56,6 +60,7 @@ export class AdminPreguntaComponent implements OnInit {
   public formGroup: FormGroup;
   isChecked = false;
   private respDecimal: Array<RespAbierta> = [];
+  public respMultXAsam: Array<RespAbierta> = [];
 
 
   constructor(private formBuilder: FormBuilder,
@@ -333,7 +338,11 @@ export class AdminPreguntaComponent implements OnInit {
     });
   }
 
-  getCoeficienteXrespuesta() {
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async getCoeficienteXrespuesta() {
     this.userService.getAsableistasXEvento(this.idEvent).subscribe(datax => {
         this.totalasambleistas = datax.asambleistas.length;
         console.log('9perros', this.pMultiple);
@@ -413,92 +422,60 @@ export class AdminPreguntaComponent implements OnInit {
         console.log('Error trayendo pregunta multiple');
       }
     );
+    await this.delay(2500);
     this.excelService.exportAsExcelFile(this.opcionesTotal, 'resumen de respuestas');
-
+    this.opcionesTotal = [];
+    this.getMulipleResXrespuesta();
   }
 
   getMulipleResXrespuesta() {
-    this.userService.getAsableistasXEvento(this.idEvent).subscribe(datax => {
+    console.log('sdssdsddssdsdsdsdsdsdssdsdsdsdsd')
+    this.userService.getAsableistasXEvento(this.idEvent).subscribe(async datax => {
         this.totalasambleistas = datax.asambleistas.length;
         console.log('9perros', this.pMultiple);
         this.pMultiple.forEach(dataItem => {
           this.preguntaService.getRespuestas(dataItem.id).subscribe(data => {
               let cont = 1;
-              dataItem.opciones.forEach(dataItems => {
-                const opcion = new Enum();
-                opcion.index = cont;
-                opcion.id = dataItems.id;
-                opcion.opcion = dataItems.opcion;
-                opcion.pregunta = dataItem.enunciado;
-                opcion.votos = 0;
-                opcion.coeficiente = 0;
-                opcion.porcentaje = 0;
-                this.opciones.push(opcion);
-                cont++;
-              });
-              console.log('respuestas', data)
-              // console.log('pregunta', this.data.pregunta)
-              // console.log('opciones respondidas', data[1].opciones)
-              let i = 0;
-              for (i; i < this.opciones.length; i++) {
-                let j = 0;
-                for (j; j < data.length; j++) {
-                  let k = 0;
-                  for (k; k < data[j].opciones.length; k++) {
-                    if (this.opciones[i].id == data[j].opciones[k]) {
-                      this.opciones[i].coeficiente = this.opciones[i].coeficiente + parseFloat(data[j].coeficientes);
-                      this.opciones[i].votos = this.opciones[i].votos + data[j].votos;
-                      this.opciones[i].porcentaje = this.opciones[i].votos / this.totalasambleistas * 100;
-                    }
+              console.log('respuestas multiples xd', data);
+              datax.asambleistas.forEach(asambleita => {
+                data.forEach(asam => {
+                  if (asambleita.id == asam.asambleista) {
+                    asam.opciones.forEach(dataItems => {
+                      dataItem.opciones.forEach(opcions => {
+                        console.log('opciones', opcions.id);
+                        console.log('oprespuesta', dataItems)
+
+                        if (opcions.id == dataItems) {
+                          const opcion = new RespAbierta();
+                          opcion.opcion = opcions.opcion;
+                          opcion.pregunta = dataItem.enunciado;
+                          opcion.inmueble = asambleita.inmueble;
+                          opcion.coeficiente = asambleita.coeficiente;
+                          opcion.apoderado = asambleita.propietario;
+                          this.respMultXAsam.push(opcion);
+                          cont++;
+                          return;
+                        }
+                      });
+                    });
                   }
-                }
-              }
-
-              let coeficienteVotado = 0;
-              let votosTotales = 0;
-              this.opciones.forEach(dataItemx => {
-                coeficienteVotado = coeficienteVotado + dataItemx.coeficiente;
-                votosTotales = votosTotales + dataItemx.votos;
-                this.votos.push(dataItemx.votos);
-                this.coeficientes.push(dataItemx.coeficiente);
+                });
               });
-
-              console.log('vootsso', this.totalasambleistas);
-
-              const opcion2 = new Enum();
-              opcion2.index = 'NS/NR';
-              opcion2.opcion = 'NS/NR';
-              opcion2.coeficiente = 100 - coeficienteVotado;
-              opcion2.votos = this.totalasambleistas - votosTotales;
-              opcion2.porcentaje = opcion2.votos / this.totalasambleistas * 100;
-              this.opciones.push(opcion2);
-              this.coeficientes.push(opcion2.coeficiente);
-              this.votos.push(opcion2.votos);
-
-              //this.dataSource = this.opciones;
-              this.opciones.forEach(dataItemz => {
-                this.opcionesTotal.push(dataItemz);
-              });
-              this.opciones = [];
-              console.log('coeficientes ', this.opcionesTotal);
 
             },
             error => {
               console.log('Error trayendo pregunta multiple');
             }
           );
-
         });
-
-
-      }
-      ,
-      error => {
+        await this.delay(2500);
+        console.log('preguntas del reasco xd ', this.respMultXAsam);
+        this.excelService.exportAsExcelFile(this.respMultXAsam, 'Resumen de preguntas por asistentes');
+        this.respMultXAsam = [];
+      }, error => {
         console.log('Error trayendo pregunta multiple');
       }
     );
-    this.excelService.exportAsExcelFile(this.opcionesTotal, 'resumen de respuestas');
-
   }
 
   getAnswersByAsambleista() {
@@ -506,7 +483,7 @@ export class AdminPreguntaComponent implements OnInit {
       console.log('asambleustas', datax.asambleistas);
 
 
-      this.preguntaService.getPreguntaAbierta(this.idEvent).subscribe(pregunta => {
+      this.preguntaService.getPreguntaAbierta(this.idEvent).subscribe(async pregunta => {
         pregunta.pregunta_abierta.forEach(dataItem => {
           this.preguntaService.getRespuestasAbiertas(dataItem.id).subscribe(repuestasXpregunta => {
             repuestasXpregunta.forEach(dataItemz => {
@@ -534,7 +511,7 @@ export class AdminPreguntaComponent implements OnInit {
           });
 
         });
-
+        await this.delay(2500);
         this.excelService.exportAsExcelFile(this.respAbiertas, 'Resumen de respuestas abiertas');
       }, error => {
         console.log('Error trayendo pregunta multiple');
@@ -549,9 +526,7 @@ export class AdminPreguntaComponent implements OnInit {
   getAnswersDecimalByAsambleista() {
     this.userService.getAsableistasXEvento(this.idEvent).subscribe(datax => {
       console.log('asambleustas', datax.asambleistas);
-
-
-      this.preguntaService.getPreguntaAbiertaDecimal(this.idEvent).subscribe(pregunta => {
+      this.preguntaService.getPreguntaAbiertaDecimal(this.idEvent).subscribe(async pregunta => {
         pregunta.pregunta_decimal.forEach(dataItem => {
           this.preguntaService.getRespuestasDecimales(dataItem.id).subscribe(repuestasXpregunta => {
             repuestasXpregunta.forEach(dataItemz => {
@@ -579,8 +554,7 @@ export class AdminPreguntaComponent implements OnInit {
           });
 
         });
-
-
+        await this.delay(2500);
         this.excelService.exportAsExcelFile(this.respDecimal, 'Resumen de respuestas abiertas');
         this.respDecimal = [];
       }, error => {

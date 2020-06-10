@@ -2,6 +2,9 @@
 <div class="card text-center m-3">
   <div class="card-body">
     <div class="row">
+      <div class="col" *ngIf="asam.logo_asamblea!=null">
+        <img style="height: 100px;width: 100px" src="{{asam.logo_asamblea}}" id="icon" alt="User Icon"/>
+      </div>
       <div class="col">
         <button mat-raised-button color="primary" (click)="openPoderesModal()">Registro porderes</button>
       </div>
@@ -13,27 +16,59 @@
 </div>
 <div class="card text-center m-3">
   <mat-card class="example-card">
+
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{usuario.nombre_completo}}</mat-card-title>
+      <mat-card-title>{{asam.nombre}}</mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
-      <mat-list role="list">
-        <mat-list-item role="listitem"><b>Coeficiente acumulado:&nbsp;</b>  {{parseFloats(usuario.coeficiente)}}</mat-list-item>
-        <mat-list-item role="listitem"><b>Inmueble:&nbsp;</b> {{usuario.inmueble}} </mat-list-item>
-        <mat-list-item role="listitem"><b>Estado de cuenta:&nbsp;</b> {{usuario.inmueble ? 'Al dia ' : 'En mora'}}
-        </mat-list-item>
-      </mat-list>
-      <div *ngIf="nombres.length>0">
-        <mat-divider [inset]="true"></mat-divider>
-        <h3 style="text-align: left; padding-top: 20px">Usted esta representando a las siguientes propiedades:</h3>
-        <mat-list role="list" *ngFor="let nombre of nombres">
-          <mat-list-item role="listitem"><b>Inmueble:&nbsp;</b>  {{nombre}}</mat-list-item>
+      <div class="row">
+        <div class="col-lg-6">
+
+          <mat-list role="list">
+            <mat-list-item role="listitem"><b>Nombre:&nbsp;</b>  {{usuario.nombre_completo}}</mat-list-item>
+            <mat-list-item role="listitem"><b>Coeficiente
+              acumulado:&nbsp;</b>  {{parseFloats(usuario.coeficiente) + parseFloats(usuario.coeficienteTotal)}}
+            </mat-list-item>
+            <mat-list-item role="listitem"><b>Inmueble:&nbsp;</b> {{usuario.inmueble}} </mat-list-item>
+            <mat-list-item role="listitem"><b>Estado de cuenta:&nbsp;</b> {{usuario.mora ? 'En mora ' : 'Al día'}}
+            </mat-list-item>
+            <mat-list-item role="listitem"><b><a href="{{asam.link_conferencia}}" target="_blank">Ir a la video
+              conferencia </a></b>
+            </mat-list-item>
+          </mat-list>
+          <div *ngIf="nombres.length>0">
+            <mat-divider [inset]="true"></mat-divider>
+            <h3 style="text-align: left; padding-top: 20px">Usted esta representando a las siguientes propiedades:</h3>
+            <mat-list role="list" *ngFor="let nombre of nombres">
+              <mat-list-item role="listitem"><b>Inmueble:&nbsp;</b>  {{nombre}}</mat-list-item>
+            </mat-list>
+
+          </div>
+        </div>
+        <mat-list role="list">
+          <mat-list-item role="listitem"><b>Documentos:</b></mat-list-item>
+          <mat-list-item style="text-align: left" role="listitem" *ngFor="let documento of documents"><b><a
+            href="{{documento.documento}}" target="_blank">{{documento.nombre}}</a></b></mat-list-item>
         </mat-list>
 
       </div>
+
+      <section style="float: left" class="example-section">
+        <label class="example-margin">seleccione su estado: </label>
+        <mat-radio-group [(ngModel)]="propietario">
+          <mat-radio-button style="margin-left: 10px" class="example-margin" value="true" (click)="setPropietarioTrue()">
+            Propietario
+          </mat-radio-button>
+          <mat-radio-button style="margin-left: 10px" class="example-margin" value="false"
+                            (click)="setPropietarioFalse()">Apoderado
+          </mat-radio-button>
+        </mat-radio-group>
+      </section>
+
     </mat-card-content>
+
   </mat-card>
 
 </div>
@@ -55,7 +90,8 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="warn" (click)="gotoPreguntaMultiple(pregunta)">Responder</button>
-      <button mat-raised-button color="primary" (click)="gotoResultados(pregunta,pregunta.time_final)">Resultados</button>
+      <button mat-raised-button color="primary" (click)="gotoResultados(pregunta,pregunta.time_final)">Resultados
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>
@@ -105,3 +141,4 @@
     <button mat-raised-button color="accent" (click)="refreshPreguntas()">Siguiente Pregunta</button>
   </div>
 </div>
+<app-footer></app-footer>

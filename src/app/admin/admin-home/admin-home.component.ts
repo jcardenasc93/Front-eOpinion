@@ -5,6 +5,8 @@ import {CrearEventoComponent} from "../evento/crear-evento/crear-evento.componen
 import {MatDialog} from "@angular/material/dialog";
 import {EditarEventoComponent} from "../evento/editar-evento/editar-evento.component";
 import {Router} from "@angular/router";
+import {CargaPoderesComponent} from "../../users/carga-poderes/carga-poderes.component";
+import {CargaDocumentosComponent} from "../carga-documentos/carga-documentos.component";
 
 @Component({
   selector: 'app-admin-home',
@@ -27,6 +29,15 @@ export class AdminHomeComponent implements OnInit {
 
 
 
+  }
+
+  subirDocumentos(idEvento): void {
+    this.dialog.open(CargaDocumentosComponent, {
+      width: '70%',
+      data: {
+        idEvento: idEvento,
+      }
+    });
   }
 
   onPageChange($event) {

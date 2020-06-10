@@ -77,7 +77,7 @@ export class RespuestaMultipleComponent implements OnInit {
       const opcion = new Opciones();
       opcion.id = dataItem.id;
       opcion.opcion = dataItem.opcion;
-      if (this.data.preguntaMultiple.numeracion == true) {
+      if (this.data.preguntaMultiple.numeracion != true) {
         opcion.numero = this.enum[j].number;
       } else {
         opcion.letra = this.enum[j].letra;

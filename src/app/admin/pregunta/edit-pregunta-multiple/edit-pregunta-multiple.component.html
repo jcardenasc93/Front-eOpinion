@@ -17,20 +17,13 @@
           <input matInput type="number" formControlName="timer">
         </mat-form-field>
       </div>
+            <div class="col">
+        <mat-checkbox color="primary" formControlName="strictMax">Respuestas exactas</mat-checkbox>
+      </div>
       <div class="col">
         <mat-form-field appearance="outline" style="height:40px; padding-left: 15px">
           <mat-label>Numero de respuestas</mat-label>
           <input type="number" min="1" matInput formControlName="respuestasPermitidas"/>
-        </mat-form-field>
-      </div>
-      <div class="col">
-        <mat-form-field>
-          <mat-label>Presentacion de pregunta</mat-label>
-          <mat-select [(value)]="displayType">
-            <mat-option value="1">Lista</mat-option>
-            <mat-option value="2">Cuadricula</mat-option>
-            <mat-option value="3">Desplegable</mat-option>
-          </mat-select>
         </mat-form-field>
       </div>
     </div>

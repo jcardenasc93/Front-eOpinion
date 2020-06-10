@@ -27,8 +27,10 @@ export class CrearEventoComponent implements OnInit {
     this.registerForm = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
       fecha: new FormControl('', [Validators.required]),
-      correo: new FormControl('', [Validators.required]),
-      link: new FormControl('', [Validators.required]),
+      bodyCorreo: new FormControl('', [Validators.required]),
+      link_conferencia: new FormControl('', [Validators.required]),
+      linkEvento: new FormControl('Nerf Master YI'),
+      logo_asamblea: new FormControl(''),
     });
   }
 
@@ -46,7 +48,8 @@ export class CrearEventoComponent implements OnInit {
   onChange(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.registerForm.get('file').setValue(file);
+       console.log('logo_asamblea', event.target.files[0])
+      this.registerForm.get('logo_asamblea').setValue(file);
     }
   }
 
@@ -78,7 +81,7 @@ export class CrearEventoComponent implements OnInit {
         }
       }, error => {
         console.log('Error registrandose-> ', error);
-        Swal.fire('Oops...', error, 'error');
+        Swal.fire('Oops...', 'revise los campos', 'error');
         this.progress = 0;
       });
     } else {

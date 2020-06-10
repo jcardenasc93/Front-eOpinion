@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
   }
 
 
-
   login() {
     const user = this.registerForm.get('username').value;
     const pass = this.registerForm.get('password').value;
@@ -33,13 +32,19 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem('token', data.auth_token);
       console.log('respuesta login ', sessionStorage.getItem('token'));
       this.authService.getUserByToken(data.auth_token).subscribe(datas => {
-        sessionStorage.setItem('is_staff', datas[0].is_staff);
-        if (datas[0].is_staff == true) {
-          this.router.navigate(['/home']);
-        } else {
-          this.router.navigate(['/home-asambleitsa/' + datas[0].evento]);
-        }
+        this.authService.validateAopderado().subscribe(datax => {
+          Swal.fire('Oops...', 'Ya estas siendo representado por otro asambleista.', 'error');
+          sessionStorage.setItem('token', 'null');
+        }, error => {
 
+          sessionStorage.setItem('is_staff', datas[0].is_staff);
+          if (datas[0].is_staff == true) {
+            this.router.navigate(['/home']);
+          } else {
+            this.router.navigate(['/home-asambleitsa/' + datas[0].evento]);
+          }
+
+        });
       }, error => {
         console.log('Error login redir-> ', error);
 
@@ -50,16 +55,5 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  /*
-    getUserPk() {
-      this.authService.getUserId().subscribe(
-        response => {
-          sessionStorage.setItem('pkUser', response.body.pk);
-          this.router.navigate(['/list-competition']);
-        }, error => {
-          console.log('error getUser', error);
-        }
-      );
-    }*/
 
 }

@@ -116,4 +116,13 @@ export class AdminAsambleistasComponent implements OnInit {
       }
     });
   }
+
+  sendEmail(idPersona: any) {
+    this.usuariosService.sendInviteEmail(idPersona).subscribe(data => {
+       Swal.fire('Success!', 'Correo reenviado satisfactoriamente', 'success');
+    }, error => {
+      Swal.fire('error!', 'Oops algo pasó, intenta de nuevo', 'error');
+    });
+
+  }
 }

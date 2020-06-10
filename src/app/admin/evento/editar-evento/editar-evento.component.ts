@@ -30,6 +30,9 @@ export class EditarEventoComponent implements OnInit {
       fecha: new FormControl('', [Validators.required]),
       bodyCorreo: new FormControl('', [Validators.required]),
       link: new FormControl('', [Validators.required]),
+      link_conferencia: new FormControl('', [Validators.required]),
+      logo_asamblea: new FormControl('', [Validators.required]),
+
     });
 
     this.eventoService.getEventoXId(this.data.idEvento).subscribe(data => {
@@ -38,7 +41,8 @@ export class EditarEventoComponent implements OnInit {
       this.registerForm.get('fecha').setValue(data.evento.fecha);
       this.registerForm.get('bodyCorreo').setValue(data.evento.bodyCorreo);
       this.registerForm.get('link').setValue(data.evento.linkEvento);
-
+      this.registerForm.get('link_conferencia').setValue(data.evento.link_conferencia);
+      this.registerForm.get('logo_asamblea').setValue(data.evento.logo_asamblea);
     }, error => {
       console.log('Error trayendo evento', error);
     });
@@ -53,6 +57,14 @@ export class EditarEventoComponent implements OnInit {
     }, error => {
       console.log('Error trayendo evento', error);
     });
+  }
+
+    onChange(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+       console.log('logo_asamblea', event.target.files[0])
+      this.registerForm.get('logo_asamblea').setValue(file);
+    }
   }
 
   autogrow() {

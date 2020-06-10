@@ -39,7 +39,7 @@ export class PreguntaMultipleComponent implements OnInit {
   }
 
   crearPregunta() {
-    this.questionForm.get('opPresentacion').setValue(this.displayType);
+    this.questionForm.get('opPresentacion').setValue(1);
     console.log('con coeficiente?', this.questionForm.get('puntajeCoeficiente'));
     this.preguntaService.createPreguntaMultiple(this.questionForm.value).subscribe(data => {
       Swal.fire('Success!', 'Pregunta multiple creada exitosamente', 'success');

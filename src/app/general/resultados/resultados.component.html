@@ -20,9 +20,24 @@
               [legend]="barChartLegend"
               [plugins]="barChartPlugins"
               [chartType]="barChartType">
+
       </canvas>
     </div>
   </div>
+
+  <div style="display: block;" *ngIf="puntajeXcoeficiente==false">
+  <canvas baseChart
+    [data]="pieChartData"
+    [labels]="pieChartLabels"
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins"
+          [colors]="pieChartColors"
+    [legend]="pieChartLegend">
+
+  </canvas>
+</div>
+
 
 
   <br>
@@ -72,5 +87,5 @@
     </table>
   </div>
   <br>
-  <button mat-raised-button color="primary" (click)="exportAsExcel()">Exportar a Excel</button>
+  <button *ngIf="user=='sergio'" mat-raised-button color="primary" (click)="exportAsExcel()">Exportar a Excel</button>
 </mat-dialog-content>

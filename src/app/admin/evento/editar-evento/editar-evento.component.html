@@ -17,9 +17,10 @@
     <small *ngIf="registerForm.get('nombre').errors?.required && registerForm.get('nombre').touched"
            class="text-danger"><br>Nombre es requerido</small>
 
-    <input type="text" id="link" class="fadeIn second" name="login" placeholder="Link con documentos de drive" formControlName="link">
-      <small *ngIf="registerForm.get('link').errors?.required && registerForm.get('link').touched" class="text-danger"><br>link es requerido</small>
+    <input type="text" id="link" class="fadeIn second" name="login" placeholder="Link de zoom" formControlName="link_conferencia">
+      <small *ngIf="registerForm.get('link_conferencia').errors?.required && registerForm.get('link_conferencia').touched" class="text-danger"><br>link es requerido</small>
 
+    <input type="file" id="file" (change)="onChange($event)" class="fadeIn second" name="login" placeholder="logo_asamblea" >
 
     <input type="date" id="fecha" class="fadeIn second" name="fecha" placeholder="fecha" formControlName="fecha" >
     <small *ngIf="registerForm.get('fecha').errors?.required && registerForm.get('fecha').touched"

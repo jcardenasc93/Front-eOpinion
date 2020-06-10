@@ -49,10 +49,14 @@ import { RespuestaAbiertaComponent } from './users/Respuestas/respuesta-abierta/
 import { RespuestaMultipleComponent } from './users/Respuestas/respuesta-multiple/respuesta-multiple.component';
 import { RespuestaDecimalComponent } from './users/Respuestas/respuesta-decimal/respuesta-decimal.component';
 import {CountdownModule} from "ngx-countdown";
-import { ResultadosComponent } from './resultados/resultados.component';
+import { ResultadosComponent } from './general/resultados/resultados.component';
 import {ChartsModule} from "ng2-charts";
-import { QuorumGraphComponent } from './quorum-graph/quorum-graph.component';
+import { QuorumGraphComponent } from './admin/quorum-graph/quorum-graph.component';
 import {MatRippleModule} from "@angular/material/core";
+import { CargaDocumentosComponent } from './admin/carga-documentos/carga-documentos.component';
+import { FooterComponent } from './footer/footer.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -82,7 +86,9 @@ import {MatRippleModule} from "@angular/material/core";
     RespuestaMultipleComponent,
     RespuestaDecimalComponent,
     ResultadosComponent,
-    QuorumGraphComponent
+    QuorumGraphComponent,
+    CargaDocumentosComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -114,6 +120,8 @@ import {MatRippleModule} from "@angular/material/core";
     CountdownModule,
     ChartsModule,
     MatRippleModule,
+    MatSidenavModule,
+    MatRadioModule,
   ],
   entryComponents: [PreguntaMultipleComponent, CrearEventoComponent, EditarEventoComponent],
   providers: [
