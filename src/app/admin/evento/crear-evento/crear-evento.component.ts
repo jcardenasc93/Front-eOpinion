@@ -28,9 +28,10 @@ export class CrearEventoComponent implements OnInit {
       nombre: new FormControl('', [Validators.required]),
       fecha: new FormControl('', [Validators.required]),
       bodyCorreo: new FormControl('', [Validators.required]),
-      link_conferencia: new FormControl('', [Validators.required]),
+      link_conferencia: new FormControl('', ),
       linkEvento: new FormControl('Nerf Master YI'),
       logo_asamblea: new FormControl(''),
+      codConferencia: new FormControl(''),
     });
   }
 

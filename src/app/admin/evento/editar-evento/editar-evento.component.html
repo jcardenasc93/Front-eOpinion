@@ -18,7 +18,8 @@
            class="text-danger"><br>Nombre es requerido</small>
 
     <input type="text" id="link" class="fadeIn second" name="login" placeholder="Link de zoom" formControlName="link_conferencia">
-      <small *ngIf="registerForm.get('link_conferencia').errors?.required && registerForm.get('link_conferencia').touched" class="text-danger"><br>link es requerido</small>
+
+     <input type="text" id="linkCon" class="fadeIn second" name="login" placeholder="Código de conferencia" formControlName="codConferencia">
 
     <input type="file" id="file" (change)="onChange($event)" class="fadeIn second" name="login" placeholder="logo_asamblea" >
 

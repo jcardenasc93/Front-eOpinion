@@ -81,6 +81,8 @@ export class AdminPreguntaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
     this.idEvent = this.route.snapshot.paramMap.get('idEvento');
     this.getPreguntasAbiertas();
     this.getPreguntasMultiples();
@@ -111,6 +113,7 @@ export class AdminPreguntaComponent implements OnInit {
   getPreguntasMultiples() {
     this.preguntaService.getPreguntaMultiple(this.idEvent).subscribe(data => {
       this.pMultiple = data.pregunta_multiple;
+      this.pMultiple = this.pMultiple.sort((a, b) => b.id - a.id);
       console.log('preguntas multiples', data.pregunta_multiple);
     }, error => {
       console.log('Error login-> ', error);
@@ -342,6 +345,7 @@ export class AdminPreguntaComponent implements OnInit {
     console.log('LA mora a 1000', !bloqueaMora);
     this.preguntaService.bloqueaMoraPreguntaMultiple(!bloqueaMora, idPregunta).subscribe(data => {
       Swal.fire('Success!', 'Mora actualizada con exito', 'success');
+      window.location.reload();
     }, error => {
       console.log('Error Quroro-> ', error.error);
     });

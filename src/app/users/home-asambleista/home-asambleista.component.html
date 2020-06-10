@@ -28,8 +28,10 @@
 
           <mat-list role="list">
             <mat-list-item role="listitem"><b>Nombre:&nbsp;</b>  {{usuario.nombre_completo}}</mat-list-item>
-            <mat-list-item role="listitem"><b>Coeficiente
+            <mat-list-item role="listitem" *ngIf="parseFloats(usuario.coeficiente)>0"><b>Coeficiente
               acumulado:&nbsp;</b>  {{parseFloats(usuario.coeficiente) + parseFloats(usuario.coeficienteTotal)}}
+            </mat-list-item>
+                        <mat-list-item role="listitem"><b>Numero de votos:&nbsp;</b>  {{votos+1}}
             </mat-list-item>
             <mat-list-item role="listitem"><b>Inmueble:&nbsp;</b> {{usuario.inmueble}} </mat-list-item>
             <mat-list-item role="listitem"><b>Estado de cuenta:&nbsp;</b> {{usuario.mora ? 'En mora ' : 'Al día'}}

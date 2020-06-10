@@ -34,6 +34,7 @@ class PreguntaMultiple {
 export class HomeAsambleistaComponent implements OnInit {
   public nomAsamblea: any;
   public documents: any;
+  public votos=0;
 
   constructor(public dialog: MatDialog, public  eventoService: EventoService,
               public authService: UsuariosService, private preguntaService: PreguntaService,
@@ -127,10 +128,11 @@ export class HomeAsambleistaComponent implements OnInit {
         for (j = 0; j < asableistas.length; j++) {
           for (k = 0; k < poderes.length; k++) {
             if (asableistas[j].id == poderes[k].representa_a) {
-              this.nombres.push(asableistas[j].inmueble)
+              this.nombres.push(asableistas[j].inmueble);
             }
           }
         }
+        this.votos = this.nombres.length;
         console.log('poderes', this.nombres)
 
       }, error => {

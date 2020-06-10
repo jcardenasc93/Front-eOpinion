@@ -15,13 +15,24 @@ export class EventoService {
 
   updateEvento(idEvento, form: any): Observable<any> {
     const formData = new FormData();
-    formData.append('id', idEvento);
-    formData.append('fecha', form.get('fecha').value);
-    formData.append('bodyCorreo', form.get('bodyCorreo').value);
-    formData.append('linkEvento', form.get('link').value);
-    formData.append('nombre', form.get('nombre').value);
-    formData.append('link_conferencia', form.get('link_conferencia').value);
-    formData.append('logo_asamblea', form.get('logo_asamblea').value);
+    if (form.get('nombre').value != 'cristianoRonaldo') {
+      formData.append('nombre', form.get('nombre').value);
+    }
+
+
+    if (form.get('bodyCorreo').value != 'cristianoRonaldo') {
+      formData.append('bodyCorreo', form.get('bodyCorreo').value);
+    }
+    if (form.get('link_conferencia').value != 'cristianoRonaldo') {
+      formData.append('link_conferencia', form.get('link_conferencia').value);
+    }
+    if (form.get('logo_asamblea').value != 'cristianoRonaldo') {
+      formData.append('logo_asamblea', form.get('logo_asamblea').value);
+    }
+    if (form.get('codConferencia').value != 'cristianoRonaldo') {
+      formData.append('codConferencia', form.get('codConferencia').value);
+    }
+        formData.append('fecha', form.get('fecha').value);
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
     return this.http.patch(this.URL_HOST + 'eventos/api/v1/eventos/actualizar/' + idEvento, formData, {'headers': headers});
   }
