@@ -28,6 +28,13 @@ class Enum {
   pregunta: any;
 }
 
+class Opcion {
+  id: any;
+  enunciado: any;
+  opcion: any;
+  index: any;
+}
+
 
 class RespAbierta {
   inmueble: any;
@@ -37,6 +44,7 @@ class RespAbierta {
   votos: any;
   opcion: any;
   apoderado: any;
+  index: any;
 }
 
 @Component({
@@ -61,6 +69,7 @@ export class AdminPreguntaComponent implements OnInit {
   isChecked = false;
   private respDecimal: Array<RespAbierta> = [];
   public respMultXAsam: Array<RespAbierta> = [];
+  public opcionesArray: Array<Opcion> = [];
 
 
   constructor(private formBuilder: FormBuilder,
@@ -435,28 +444,42 @@ export class AdminPreguntaComponent implements OnInit {
         console.log('9perros', this.pMultiple);
         this.pMultiple.forEach(dataItem => {
           this.preguntaService.getRespuestas(dataItem.id).subscribe(data => {
-              let cont = 1;
+
               console.log('respuestas multiples xd', data);
               datax.asambleistas.forEach(asambleita => {
                 data.forEach(asam => {
                   if (asambleita.id == asam.asambleista) {
                     asam.opciones.forEach(dataItems => {
-                      dataItem.opciones.forEach(opcions => {
+
+                      let cont = 1;
+                      dataItem.opciones.forEach(opcionex => {
+                        const objOpcion = new Opcion();
+                        objOpcion.index = cont;
+                        objOpcion.opcion = opcionex.opcion;
+                        objOpcion.id = opcionex.id;
+                        this.opcionesArray.push(objOpcion);
+                        cont++;
+                      });
+
+
+                      this.opcionesArray.forEach(opcions => {
+
                         console.log('opciones', opcions.id);
                         console.log('oprespuesta', dataItems)
 
                         if (opcions.id == dataItems) {
                           const opcion = new RespAbierta();
+                          opcion.index = opcions.index;
                           opcion.opcion = opcions.opcion;
                           opcion.pregunta = dataItem.enunciado;
                           opcion.inmueble = asambleita.inmueble;
                           opcion.coeficiente = asambleita.coeficiente;
                           opcion.apoderado = asambleita.propietario;
                           this.respMultXAsam.push(opcion);
-                          cont++;
                           return;
                         }
                       });
+                      this.opcionesArray=[];
                     });
                   }
                 });
