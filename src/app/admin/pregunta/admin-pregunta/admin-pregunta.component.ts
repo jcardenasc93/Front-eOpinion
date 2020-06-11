@@ -16,6 +16,7 @@ import {QuorumGraphComponent} from "../../quorum-graph/quorum-graph.component";
 import {ResultadosComponent} from "../../../general/resultados/resultados.component";
 import {UsuariosService} from "../../../services/usuarios.service";
 import {ExcelServiceService} from "../../../services/excel-service.service";
+import {PromedioDecimalComponent} from "../../../promedio-decimal/promedio-decimal.component";
 
 
 class Enum {
@@ -595,4 +596,13 @@ export class AdminPreguntaComponent implements OnInit {
   }
 
 
+  gotoResultadosDecimal(pregunta) {
+      this.dialog.open(PromedioDecimalComponent, {
+        width: '70%',
+        data: {
+          pregunta: pregunta,
+          idEvento: this.idEvent
+        }
+      });
+    }
 }

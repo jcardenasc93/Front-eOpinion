@@ -181,7 +181,7 @@ export class PreguntaService {
 
     getRespuestasDecimales(idPregunta: number): Observable<any> {
     console.log('entro a actuliazr')
-    let headers = new HttpHeaders({'Authorization': 'Token ' + '19ab845c3087581a222af7346376e4e0db927735'});
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
     return this.http.get(this.URL_HOST + 'respuestas/api/v1/respuesta/decimal/' + idPregunta, {'headers': headers});
   }
 
