@@ -57,6 +57,7 @@ import { CargaDocumentosComponent } from './admin/carga-documentos/carga-documen
 import { FooterComponent } from './footer/footer.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatRadioModule} from "@angular/material/radio";
+import { PromedioDecimalComponent } from './promedio-decimal/promedio-decimal.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import {MatRadioModule} from "@angular/material/radio";
     ResultadosComponent,
     QuorumGraphComponent,
     CargaDocumentosComponent,
-    FooterComponent
+    FooterComponent,
+    PromedioDecimalComponent
   ],
   imports: [
     BrowserModule,

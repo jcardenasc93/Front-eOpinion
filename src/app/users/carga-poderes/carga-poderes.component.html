@@ -1,6 +1,6 @@
 <mat-dialog-content>
   <h1>Cargue de poder</h1>
-  <p>Por favor carga el archivo con el poder que te envió el propietario</p>
+  <p>Por favor carga el poder que te envió el propietario debidamente diligenciado, en formato PDF, JPG…</p>
   <div class="progress form-group" *ngIf="progress > 0">
     <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
     </div>
@@ -25,12 +25,12 @@
     </button>
   </div>
   <br><br><br>
-<h2><p>Descripcion de estados:</p></h2>
+  <h2><p>Descripción de Estados:</p></h2> <p>Los poderes cargados serán validados y podrás confirmar su estado posteriormente</p>
   <table>
     <tr>
       <td><p>Aceptado: <img style="height: 20px"src="https://cdn0.iconfinder.com/data/icons/fintech-solutions-flat-24/24/done_ok_complete_success_check-512.png">
 </p></td>
-      <td> <p>En revision:<img  style="height: 20px" src="https://p7.hiclipart.com/preview/1014/79/675/under-construction-icon-computer-icons-architectural-engineering-free-construction-files.jpg">
+      <td> <p>En revisión:<img  style="height: 20px" src="https://p7.hiclipart.com/preview/1014/79/675/under-construction-icon-computer-icons-architectural-engineering-free-construction-files.jpg">
 </p></td>
     </tr>
   </table>
@@ -52,7 +52,7 @@
     element
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef style="text-align: center"> Estado de aprobacion</th>
+      <th mat-header-cell *matHeaderCellDef style="text-align: center"> Estado de aprobación</th>
       <td mat-cell *matCellDef="let element" style="text-align: center">
         <img *ngIf="element.validado==true" style="height: 20px"
              src="https://cdn0.iconfinder.com/data/icons/fintech-solutions-flat-24/24/done_ok_complete_success_check-512.png">

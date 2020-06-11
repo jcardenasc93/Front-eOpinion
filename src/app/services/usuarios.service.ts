@@ -93,6 +93,11 @@ export class UsuariosService {
     return this.http.get(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderados/', {'headers': headers});
   }
 
+  getPoderXAsamblea(idAsmablea): Observable<any> {
+    let headers = new HttpHeaders({'Authorization': 'Token 19ab845c3087581a222af7346376e4e0db927735'});
+    return this.http.get(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderados/'+idAsmablea, {'headers': headers});
+  }
+
   getPoderesXEvento(idEvento): Observable<any> {
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
     return this.http.get(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderados/' + idEvento, {'headers': headers});

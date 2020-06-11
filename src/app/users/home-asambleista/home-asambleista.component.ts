@@ -11,6 +11,7 @@ import {RespuestaDecimalComponent} from "../Respuestas/respuesta-decimal/respues
 import Swal from "sweetalert2";
 import {ResultadosComponent} from "../../general/resultados/resultados.component";
 import {EventoService} from "../../services/evento.service";
+import {PromedioDecimalComponent} from "../../promedio-decimal/promedio-decimal.component";
 
 
 class PreguntaMultiple {
@@ -34,7 +35,7 @@ class PreguntaMultiple {
 export class HomeAsambleistaComponent implements OnInit {
   public nomAsamblea: any;
   public documents: any;
-  public votos=0;
+  public votos = 0;
 
   constructor(public dialog: MatDialog, public  eventoService: EventoService,
               public authService: UsuariosService, private preguntaService: PreguntaService,
@@ -53,7 +54,7 @@ export class HomeAsambleistaComponent implements OnInit {
   propietario = 'true';
 
   ngOnInit(): void {
-    console.log('propietario',this.propietario)
+    console.log('propietario', this.propietario)
     this.idEvento = this.route.snapshot.paramMap.get('idEvento');
     this.getDocuments();
     this.getEventoInfo();
@@ -205,9 +206,9 @@ export class HomeAsambleistaComponent implements OnInit {
 
       if (this.usuario.quorumStatus === true) {
 
-        Swal.fire('Mensaje!', 'Usted ya registró quorum', 'info');
+        Swal.fire('Mensaje!', 'Usted ya registró su quórum', 'info');
       } else {
-        Swal.fire('error!', error.error.detail, 'error');
+        Swal.fire('error!', 'La verificación del quórum no se encuentra abierta', 'error');
         console.log('Error registrando el QORO', error);
       }
 
@@ -275,5 +276,27 @@ export class HomeAsambleistaComponent implements OnInit {
       console.log('error', error);
     });
 
+  }
+
+  gotoResultadosDecimal(pregunta, finalDate) {
+    const today = new Date();
+    const currentTime = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const endTime = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + " " + finalDate;
+    const currentTimeToDate = Date.parse(currentTime);
+    const endTimeDate = Date.parse(endTime);
+    let countDown = (endTimeDate - currentTimeToDate) / 1000;
+    console.log('timer', countDown);
+    if (countDown < 0) {
+      this.dialog.open(PromedioDecimalComponent, {
+        width: '70%',
+        data: {
+          pregunta: pregunta,
+          idEvento: this.idEvento
+        }
+      });
+
+    } else {
+      Swal.fire('Info!', 'Aun no se han cerrado las votaciones, intente mas tarde', 'info');
+    }
   }
 }

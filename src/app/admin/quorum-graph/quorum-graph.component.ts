@@ -72,7 +72,7 @@ export class QuorumGraphComponent implements OnInit {
         opcion.date_time = dataItem.date_time.substring(11).slice(0, -13);
         this.listaQoro.push(opcion);
       });
-      this.dataSource = this.listaQoro;
+      this.dataSource = this.listaQoro.reverse();
       console.log('QUOROS', this.listaQoro);
     }, error => {
       Swal.fire('Error!', 'Error creando pregunta', 'error');

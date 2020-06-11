@@ -52,7 +52,22 @@ export class ResultadosComponent implements OnInit {
 
   public barChartOptions = {
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true
+          }
+        }
+      ]
+    },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
   };
   public barChartLabels = [];
   public barChartType = 'bar';
@@ -71,6 +86,18 @@ export class ResultadosComponent implements OnInit {
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
+    tooltips: {
+      enabled: true,
+      mode: 'single',
+      callbacks: {
+        label(tooltipItem, data) {
+          const allData = data.datasets[tooltipItem.datasetIndex].data;
+          const tooltipLabel = data.labels[tooltipItem.index];
+          const tooltipData = allData[tooltipItem.index];
+          return tooltipLabel + ': ' + tooltipData + '%';
+        }
+      }
+    }
   };
   public pieChartLabels: Label[] = this.tortaLables;
   public pieChartData: number[] = this.porcentaje;
