@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Crear pregunta abierta Numero</h1>
+<div mat-dialog-content style="margin-bottom: 1em;">
+  <form [formGroup]="questionForm" (ngSubmit)="crearPreguntaNumero()">
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" style="width:100%">
+          <mat-label>Valor minimo</mat-label>
+
+          <input matInput type="number" formControlName="minimo">
+
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" style="width:100%">
+          <mat-label>Valor maximo</mat-label>
+
+          <input matInput type="number" formControlName="maximo">
+
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" style="width:100%">
+          <mat-label>Timer (segudos)</mat-label>
+
+          <input matInput type="number" formControlName="timer">
+
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <div class="row-container">
+      <mat-form-field appearance="outline" style="width:100%">
+        <mat-label>Ingrese aquí la pregunta</mat-label>
+        <input type="text" matInput placeholder="Enunciado" formControlName="enunciado"/>
+      </mat-form-field>
+    </div>
+    <div class="form-actions">
+      <button id="cancel-button" class="mat-stroked-button" type="button" (click)="cancel()">
+        Cancelar
+      </button>
+      <button class="mat-flat-button mat-primary" type="submit">Guardar</button>
+    </div>
+  </form>
+</div>
+

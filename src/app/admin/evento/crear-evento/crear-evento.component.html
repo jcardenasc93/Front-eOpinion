@@ -1,0 +1,37 @@
+  <div class="wrapper fadeInDown" style="background-color: #fffff; text-align: center" >
+
+    <!-- Tabs Titles -->
+    <h2 class="active"> Crear evento </h2>
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="" id="icon" alt="User Icon"/>
+    </div>
+
+    <!-- Login Form -->
+    <form [formGroup]="registerForm">
+             <div class="progress form-group" *ngIf="progress > 0">
+            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
+            </div>
+        </div>
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="Nombre de la asamblea" formControlName="nombre">
+      <small *ngIf="registerForm.get('nombre').errors?.required && registerForm.get('nombre').touched" class="text-danger"><br>Nombre es requerido</small>
+
+       <input type="text" id="link" class="fadeIn second" name="login" placeholder="Link de conferencia" formControlName="link_conferencia">
+
+      <input type="text" id="linkCon" class="fadeIn second" name="login" placeholder="Contraseña de reunión" formControlName="codConferencia">
+
+      <input type="file" id="file" (change)="onChange($event)" class="fadeIn second" name="login" placeholder="logo_asamblea" >
+
+      <input type="date"  class="fadeIn second" name="login" placeholder="fecha" formControlName="fecha">
+      <small *ngIf="registerForm.get('fecha').errors?.required && registerForm.get('fecha').touched" class="text-danger"><br>fecha es requerida</small><br>
+
+      <textarea formControlName="bodyCorreo" (keyup)="autogrow()" placeholder="Mensaje" id="txtInput" style="text-align: center;border-radius: 5px 5px 5px 5px;border: 2px solid #f6f6f6;width: 85%;background-color: #f6f6f6;"  class="fadeIn third"  ></textarea>
+      <small *ngIf="registerForm.get('bodyCorreo').errors?.required && registerForm.get('bodyCorreo').touched" class="text-danger"><br>Mensaje es requerido</small>
+
+
+      <br>
+      <br>
+      <input type="submit" class="fadeIn fourth" value="Crear" (click)="crearEvento()" >
+    </form>
+
+</div>

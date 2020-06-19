@@ -2,13 +2,13 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {AdminHomeComponent} from './admin-home/admin-home.component';
+import {AdminHomeComponent} from './admin/admin-home/admin-home.component';
 import {AppRoutingModule} from "../app-routing.module";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {BannerComponent} from './banner/banner.component';
+import {BannerComponent} from './general/banner/banner.component';
 import {MatCardModule} from "@angular/material/card";
-import {AdminPreguntaComponent} from './admin-pregunta/admin-pregunta.component';
-import {PreguntaMultipleComponent} from './pregunta/pregunta-multiple/pregunta-multiple.component';
+import {AdminPreguntaComponent} from './admin/pregunta/admin-pregunta/admin-pregunta.component';
+import {PreguntaMultipleComponent} from './admin/pregunta/pregunta-multiple/pregunta-multiple.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -18,9 +18,46 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
-import { PreguntaAbiertaComponent } from './pregunta/pregunta-abierta/pregunta-abierta.component';
-import { PreguntaSimpleComponent } from './pregunta/pregunta-simple/pregunta-simple.component';
-import { PreguntaAbiertaNumeroComponent } from './pregunta/pregunta-abierta-numero/pregunta-abierta-numero.component';
+import { PreguntaAbiertaComponent } from './admin/pregunta/pregunta-abierta/pregunta-abierta.component';
+import { PreguntaSimpleComponent } from './admin/pregunta/pregunta-simple/pregunta-simple.component';
+import { PreguntaAbiertaNumeroComponent } from './admin/pregunta/pregunta-abierta-numero/pregunta-abierta-numero.component';
+import { LoginComponent } from './general/login/login.component';
+import { RegistroComponent } from './admin/registro/registro.component';
+import {HttpClientModule} from '@angular/common/http';
+import {AuthGuardService} from './auth-guard.service';
+import {JwPaginationComponent} from "jw-angular-pagination";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { CrearEventoComponent } from './admin/evento/crear-evento/crear-evento.component';
+import { EditarEventoComponent } from './admin/evento/editar-evento/editar-evento.component';
+import {MatDividerModule} from "@angular/material/divider";
+import { AdminAsambleistasComponent } from './admin/asambleistas/admin-asambleistas/admin-asambleistas.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import { EditPreguntaAbiertaComponent } from './admin/pregunta/edit-pregunta-abierta/edit-pregunta-abierta.component';
+import { EditPreguntaAbiertaNumeroComponent } from './admin/pregunta/edit-pregunta-abierta-numero/edit-pregunta-abierta-numero.component';
+import { EditPreguntaMultipleComponent } from './admin/pregunta/edit-pregunta-multiple/edit-pregunta-multiple.component';
+import { HomeAsambleistaComponent } from './users/home-asambleista/home-asambleista.component';
+import { CargaPoderesComponent } from './users/carga-poderes/carga-poderes.component';
+import {MatListModule} from "@angular/material/list";
+import { AdminPoderesComponent } from './admin/poderes/admin-poderes/admin-poderes.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { AnalizarPoderComponent } from './admin/poderes/analizar-poder/analizar-poder.component';
+import { EditAsambleistaComponent } from './admin/asambleistas/edit-asambleista/edit-asambleista.component';
+import { CreateAsambleistaComponent } from './admin/asambleistas/create-asambleista/create-asambleista.component';
+import { RespuestaAbiertaComponent } from './users/Respuestas/respuesta-abierta/respuesta-abierta.component';
+import { RespuestaMultipleComponent } from './users/Respuestas/respuesta-multiple/respuesta-multiple.component';
+import { RespuestaDecimalComponent } from './users/Respuestas/respuesta-decimal/respuesta-decimal.component';
+import {CountdownModule} from "ngx-countdown";
+import { ResultadosComponent } from './general/resultados/resultados.component';
+import {ChartsModule} from "ng2-charts";
+import { QuorumGraphComponent } from './admin/quorum-graph/quorum-graph.component';
+import {MatRippleModule} from "@angular/material/core";
+import { CargaDocumentosComponent } from './admin/carga-documentos/carga-documentos.component';
+import { FooterComponent } from './footer/footer.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatRadioModule} from "@angular/material/radio";
+import { PromedioDecimalComponent } from './promedio-decimal/promedio-decimal.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +68,29 @@ import { PreguntaAbiertaNumeroComponent } from './pregunta/pregunta-abierta-nume
     PreguntaMultipleComponent,
     PreguntaAbiertaComponent,
     PreguntaSimpleComponent,
-    PreguntaAbiertaNumeroComponent
+    PreguntaAbiertaNumeroComponent,
+    LoginComponent,
+    RegistroComponent,
+    CrearEventoComponent,
+    EditarEventoComponent,
+    AdminAsambleistasComponent,
+    EditPreguntaAbiertaComponent,
+    EditPreguntaAbiertaNumeroComponent,
+    EditPreguntaMultipleComponent,
+    HomeAsambleistaComponent,
+    CargaPoderesComponent,
+    AdminPoderesComponent,
+    AnalizarPoderComponent,
+    EditAsambleistaComponent,
+    CreateAsambleistaComponent,
+    RespuestaAbiertaComponent,
+    RespuestaMultipleComponent,
+    RespuestaDecimalComponent,
+    ResultadosComponent,
+    QuorumGraphComponent,
+    CargaDocumentosComponent,
+    FooterComponent,
+    PromedioDecimalComponent
   ],
   imports: [
     BrowserModule,
@@ -51,12 +110,26 @@ import { PreguntaAbiertaNumeroComponent } from './pregunta/pregunta-abierta-nume
     BrowserAnimationsModule,
     MatCardModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule,
+    MatPaginatorModule,
+    MatDividerModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatListModule,
+    MatAutocompleteModule,
+    MatSlideToggleModule,
+    CountdownModule,
+    ChartsModule,
+    MatRippleModule,
+    MatSidenavModule,
+    MatRadioModule,
   ],
-  entryComponents: [PreguntaMultipleComponent],
+  entryComponents: [PreguntaMultipleComponent, CrearEventoComponent, EditarEventoComponent],
   providers: [
     {provide: MatDialogRef, useValue: {}},
-    {provide: MAT_DIALOG_DATA, useValue: {}}
+    {provide: MAT_DIALOG_DATA, useValue: {}},
+    AuthGuardService,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,40 @@
+<div class="wrapper fadeInDown" style="background-color: #fffff; text-align: center">
+
+  <!-- Tabs Titles -->
+  <h2 class="active"> Editar evento </h2>
+
+
+  <!-- Icon -->
+  <div class="fadeIn first">
+    <img src="http://www.pngall.com/wp-content/uploads/2/Upload-PNG-Image-File.png" id="icon" alt="User Icon"/>
+  </div>
+
+  <!-- Login Form -->
+  <form [formGroup]="registerForm">
+
+    <input type="text" id="nombre" class="fadeIn second" name="nombre" placeholder="Nombre de la asamblea"
+           formControlName="nombre" >
+    <small *ngIf="registerForm.get('nombre').errors?.required && registerForm.get('nombre').touched"
+           class="text-danger"><br>Nombre es requerido</small>
+
+    <input type="text" id="link" class="fadeIn second" name="login" placeholder="Link de zoom" formControlName="link_conferencia">
+
+     <input type="text" id="linkCon" class="fadeIn second" name="login" placeholder="Contraseña de reunión" formControlName="codConferencia">
+
+    <input type="file" id="file" (change)="onChange($event)" class="fadeIn second" name="login" placeholder="logo_asamblea" >
+
+    <input type="date" id="fecha" class="fadeIn second" name="fecha" placeholder="fecha" formControlName="fecha" >
+    <small *ngIf="registerForm.get('fecha').errors?.required && registerForm.get('fecha').touched"
+           class="text-danger"><br>fecha es requerida</small>
+
+    <textarea formControlName="bodyCorreo" id="bodyCorreo" name="bodyCorreo" (keyup)="autogrow()" placeholder="body del correo" id="txtInput"
+              style="text-align: center;border-radius: 5px 5px 5px 5px;border: 2px solid #f6f6f6;width: 85%;background-color: #f6f6f6;"
+              class="fadeIn third"></textarea>
+    <small *ngIf="registerForm.get('bodyCorreo').errors?.required && registerForm.get('bodyCorreo').touched"
+           class="text-danger"><br>Mensaje es requerido</small>
+    <br>
+    <br>
+    <input type="submit" class="fadeIn fourth" value="GUARDAR CAMBIOS" (click)="editEvent()">
+  </form>
+
+</div>

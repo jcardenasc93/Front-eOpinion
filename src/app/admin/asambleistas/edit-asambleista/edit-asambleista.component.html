@@ -1,0 +1,62 @@
+<mat-dialog-content>
+<mat-toolbar color="primary">
+  <span class="fill-remaining-space">Crear asambleista</span>
+</mat-toolbar>
+<br>
+
+<form [formGroup]="formGroup" novalidate>
+<mat-form-field class="form-element">
+      <input matInput placeholder="Email address" formControlName="email" style="width: 100%">
+      <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
+        {{ getErrorEmail() }}
+      </mat-error>
+    </mat-form-field>
+
+  <mat-form-field class="form-element">
+      <input matInput placeholder="inmueble" formControlName="inmueble">
+      <mat-error *ngIf="!formGroup.controls['inmueble'].valid && formGroup.controls['inmueble'].touched">
+       Campo requerido
+      </mat-error>
+    </mat-form-field>
+
+  <mat-form-field class="form-element">
+      <input type="number" matInput placeholder="documento" formControlName="documento">
+      <mat-error *ngIf="!formGroup.controls['documento'].valid && formGroup.controls['documento'].touched">
+       Campo requerido
+      </mat-error>
+    </mat-form-field>
+
+  <mat-form-field class="form-element">
+      <input matInput placeholder="nombre" formControlName="nombre_completo">
+      <mat-error *ngIf="!formGroup.controls['nombre_completo'].valid && formGroup.controls['nombre_completo'].touched">
+        Campo requerido
+      </mat-error>
+    </mat-form-field>
+
+  <mat-form-field class="form-element">
+      <input  matInput placeholder="celular" formControlName="celular">
+      <mat-error *ngIf="!formGroup.controls['celular'].valid && formGroup.controls['celular'].touched">
+       Campo requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-element">
+      <input type="number" matInput placeholder="coeficiente" formControlName="coeficiente">
+      <mat-error *ngIf="!formGroup.controls['coeficiente'].valid && formGroup.controls['coeficiente'].touched">
+        Campo requerido
+      </mat-error>
+    </mat-form-field>
+
+
+
+  <div class="form-element">
+      <mat-checkbox formControlName="mora" value="1">Usuario en mora</mat-checkbox>
+    </div>
+
+  <div class="form-element">
+      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid" (click)="updateAsambleista()">Submit Form</button>
+    </div>
+
+
+</form>
+</mat-dialog-content>
