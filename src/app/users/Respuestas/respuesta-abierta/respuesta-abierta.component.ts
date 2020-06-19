@@ -60,7 +60,11 @@ console.log(currentTime);
       Swal.fire('Success!', 'Respuesta guardada exitosamente', 'success');
     }, error => {
       console.log('error', error)
-      Swal.fire('Error!', error.error.detail+' o excedió el límite de caracteres permitido', 'error');
+      if(error.error.detail==undefined){
+        Swal.fire('Error!', 'Excedió el límite de caracteres permitido', 'error');
+      }else{
+        Swal.fire('Error!', error.error.detail, 'error');
+      }
     });
   }
 }

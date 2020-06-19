@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlBack: 'https://eopinion-backend.herokuapp.com/'
+  urlBack: 'https://eopinionbackend.herokuapp.com/'
 };
 
 /*

@@ -23,7 +23,7 @@ class Enum {
   id: any;
   coeficiente: any;
   opcion: any;
-  index: any;
+  INDEX: any;
   votos: any;
   porcentaje: number;
   pregunta: any;
@@ -73,6 +73,7 @@ export class AdminPreguntaComponent implements OnInit {
   public opcionesArray: Array<Opcion> = [];
 
 
+
   constructor(private formBuilder: FormBuilder,
               private eventoService: EventoService, private route: ActivatedRoute,
               public dialog: MatDialog, private preguntaService: PreguntaService,
@@ -90,6 +91,7 @@ export class AdminPreguntaComponent implements OnInit {
     this.getPreguntasAbiertasDecimal();
     this.getEventoName();
   }
+
 
 
   getEventoName() {
@@ -275,7 +277,7 @@ export class AdminPreguntaComponent implements OnInit {
   changeQuorumStatus() {
     this.preguntaService.habilitarQuorum(this.idEvent).subscribe(data => {
       console.log('estad', data);
-      Swal.fire('Success!', 'Quorum status updated', 'success');
+      Swal.fire('Aceptado!', 'Estado del quórum actualizado', 'success');
     }, error => {
       console.log('Error activa-> ', error.error);
     });
@@ -365,7 +367,7 @@ export class AdminPreguntaComponent implements OnInit {
               let cont = 1;
               dataItem.opciones.forEach(dataItems => {
                 const opcion = new Enum();
-                opcion.index = cont;
+                opcion.INDEX = cont;
                 opcion.id = dataItems.id;
                 opcion.opcion = dataItems.opcion;
                 opcion.pregunta = dataItem.enunciado;
@@ -405,7 +407,7 @@ export class AdminPreguntaComponent implements OnInit {
               console.log('vootsso', this.totalasambleistas);
 
               const opcion2 = new Enum();
-              opcion2.index = 'NS/NR';
+              opcion2.INDEX = 'NS/NR';
               opcion2.opcion = 'NS/NR';
               opcion2.coeficiente = 100 - coeficienteVotado;
               opcion2.votos = this.totalasambleistas - votosTotales;
@@ -479,7 +481,13 @@ export class AdminPreguntaComponent implements OnInit {
                           opcion.pregunta = dataItem.enunciado;
                           opcion.inmueble = asambleita.inmueble;
                           opcion.coeficiente = asambleita.coeficiente;
-                          opcion.apoderado = asambleita.propietario;
+                          if(asambleita.propietario==true){
+                            opcion.apoderado = 'Propietario';
+                          }
+                          if(asambleita.propietario==false){
+                            opcion.apoderado = 'Apoderado';
+                          }
+
                           this.respMultXAsam.push(opcion);
                           return;
                         }

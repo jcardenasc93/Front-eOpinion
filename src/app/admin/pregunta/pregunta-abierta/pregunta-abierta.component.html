@@ -1,10 +1,10 @@
-<h1 mat-dialog-title>Crear pregunta abierta</h1>
+<h1 mat-dialog-title>Crear Pregunta Abierta</h1>
 <div mat-dialog-content style="margin-bottom: 1em;">
   <form [formGroup]="questionForm" (ngSubmit)="crearPregunta()">
     <div class="row">
       <div class="col-3">
         <mat-form-field appearance="outline" style="width:100%">
-          <mat-label>Timer</mat-label>
+          <mat-label>Timer (segundos)</mat-label>
           <input matInput type="number" formControlName="timer">
         </mat-form-field>
       </div>

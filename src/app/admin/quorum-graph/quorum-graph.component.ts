@@ -48,7 +48,7 @@ export class QuorumGraphComponent implements OnInit {
   public pieChartPlugins = [];
   public pieChartColors = [
     {
-      backgroundColor: ['#ffb6b6', '#cbe2b0'],
+      backgroundColor: ['#cbe2b0', '#ffb6b6'],
     },];
 
   public listaQoro = [];

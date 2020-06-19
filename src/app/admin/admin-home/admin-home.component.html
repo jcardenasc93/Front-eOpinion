@@ -1,10 +1,10 @@
 <app-banner></app-banner>
 <div class="card text-center m-3">
   <div class="card-body">
-      <button mat-raised-button color="primary" (click)="openCrearEvento()">Crear evento</button>
-    </div>
+    <button mat-raised-button color="primary" (click)="openCrearEvento()">Crear evento</button>
+  </div>
 
-    </div>
+</div>
 <div class="card text-center m-3">
   <div class="card-body" *ngFor="let evento of currentItemsToShow, let i=index;">
     <div class="flex-grid">
@@ -17,12 +17,18 @@
             <p>Fecha del evento: {{evento.fecha}}</p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-raised-button style="background-color: #1a731a; color: white  " (click)="gotoEvento(evento.id)">Ir</button>
-            <button mat-raised-button color="accent"(click)="editarEvento(evento.id)">Editar </button>
+            <button mat-raised-button style="background-color: #1a731a; color: white  " (click)="gotoEvento(evento.id)">
+              Ir
+            </button>
+            <button mat-raised-button color="accent" (click)="editarEvento(evento.id)">Editar</button>
             <button mat-raised-button color="warn" (click)="borrarEvento(evento.id)">Eliminar</button>
-            <button mat-raised-button color="primary" (click)="gotoAsambleistas(evento.id)">Ver asambleistas</button>
-            <button mat-raised-button color="primary" (click)="subirDocumentos(evento.id)">Subir documentos</button>
-            <button mat-raised-button color="primary" (click)="gotoPoderes(evento.id)">Ver Poderes</button>
+            <button mat-raised-button color="primary" (click)="gotoAsambleistas(evento.id)">Ver Asambleístas</button>
+            <button mat-raised-button style="background-color: #1c8adb;color:white"
+                    (click)="subirDocumentos(evento.id)">Subir Documentos
+            </button>
+            <button mat-raised-button style="background-color: coral;color:white " (click)="gotoPoderes(evento.id)">Ver
+              Poderes
+            </button>
           </mat-card-actions>
         </mat-card>
       </div>
