@@ -51,8 +51,8 @@ export class EditAsambleistaComponent implements OnInit {
   }
 
   getErrorEmail() {
-    return this.formGroup.get('email').hasError('required') ? 'Field is required' :
-      this.formGroup.get('email').hasError('pattern') ? 'Not a valid emailaddress' : '';
+    return this.formGroup.get('email').hasError('required') ? 'Campo requerido' :
+      this.formGroup.get('email').hasError('pattern') ? 'No es un correo válido' : '';
   }
 
 

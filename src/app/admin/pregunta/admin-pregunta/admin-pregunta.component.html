@@ -1,6 +1,6 @@
 <app-banner></app-banner>
-<div style="margin-top: 30px;text-align: center"> <button (click)="getCoeficienteXrespuesta()" class="mat-flat-button mat-primary">Respuestas de Selección</button>
- <button class="mat-flat-button mat-primary" (click)="getAnswersByAsambleista()">Respuestas Abiertas</button>
+<div style="margin-top: 30px;text-align: center"> <button (click)="getCoeficienteXrespuesta()" class="mat-flat-button mat-primary"  style="margin-right: 10px; background-color: #1c8adb">Respuestas de Selección</button>
+ <button class="mat-flat-button mat-primary" style="margin-right: 10px;background-color: #665fee" (click)="getAnswersByAsambleista()">Respuestas Abiertas</button>
  <button class="mat-flat-button mat-primary"(click)="getAnswersDecimalByAsambleista()">Respuestas Numéricas Decimales</button></div>
 
 <div class="row justify-content-center row-container">
@@ -61,7 +61,7 @@
                   (click)="changeActivarDecimal(contenidoInt)">Desactivar
           </button>
 
-          <button class="btn-generic btn-blue" mat-button (click)="gotoResultadosDecimal(contenidoInt)">Resultados</button>
+          <button class="btn-generic btn-blue" mat-button (click)="gotoResultadosDecimal(contenidoInt)" style="background-color: coral">Resultados</button>
 
           <button class="btn-generic btn-water" mat-button (click)="restablecerDecimal(contenidoInt.id)">Restablecer
           </button>
@@ -114,7 +114,10 @@
   <mat-card class="col-11 style-card" *ngFor="let contenidoInt of pMultiple">
     <mat-card-header class="header-card">
       <mat-card-title>Pregunta de Selección</mat-card-title>
+
+
     </mat-card-header>
+
     <div class="row">
       <div class="col-12 col-md-6">
         <mat-card-content>
@@ -137,7 +140,7 @@
                   (click)="changeActivarMultiple(contenidoInt)">Desactivar
           </button>
 
-          <button class="btn-generic btn-blue" mat-button (click)="gotoResultados(contenidoInt)">Resultados</button>
+          <button class="btn-generic btn-blue" mat-button (click)="gotoResultados(contenidoInt)" style="background-color: coral">Resultados</button>
 
           <button class="btn-generic btn-water" mat-button (click)="restablecerMultiple(contenidoInt.id)">Restablecer
           </button>

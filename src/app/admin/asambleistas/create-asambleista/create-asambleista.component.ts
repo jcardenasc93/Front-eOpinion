@@ -52,13 +52,13 @@ export class CreateAsambleistaComponent implements OnInit {
   }
 
   getErrorEmail() {
-    return this.formGroup.get('email').hasError('required') ? 'Field is required' :
-      this.formGroup.get('email').hasError('pattern') ? 'Not a valid emailaddress' : '';
+    return this.formGroup.get('email').hasError('required') ? 'Campo requerido' :
+      this.formGroup.get('email').hasError('pattern') ? 'No es un correo válido' : '';
   }
 
   getErrorPassword() {
-    return this.formGroup.get('password').hasError('required') ? 'Field is required (at least eight characters, one uppercase letter and one number)' :
-      this.formGroup.get('password').hasError('requirements') ? 'Password needs to be at least eight characters, one uppercase letter and one number' : '';
+    return this.formGroup.get('password').hasError('required') ? 'Campo requerido (Por lo menos 8 caracteres, una letra mayúscula y un número)' :
+      this.formGroup.get('password').hasError('requirements') ? 'Por lo menos 8 caracteres, una letra mayúscula y un número' : '';
   }
 
 

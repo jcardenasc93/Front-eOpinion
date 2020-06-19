@@ -36,7 +36,7 @@ export class RespuestaMultipleComponent implements OnInit {
 
   public questionForm;
   public opciones: Array<Opciones> = [];
-  public enunciado = this.data.preguntaMultiple.enunciado;
+  public enunciado = this.data.preguntaMultiple.enunciado
   public mensajeEnunciado;
   public alphabet = 'aabcdefghijklmnopqrstuvwxyz';
   public enum: Array<Enum> = [];

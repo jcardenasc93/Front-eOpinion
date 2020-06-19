@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlBack: 'https://eopinion-backend.herokuapp.com/'
+  urlBack: 'https://eopinionbackend.herokuapp.com/'
 };

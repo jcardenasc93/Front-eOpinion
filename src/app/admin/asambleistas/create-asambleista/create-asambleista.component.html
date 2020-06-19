@@ -9,47 +9,47 @@
   <mat-form-field class="form-element">
     <input matInput placeholder="Nombre de usuario" formControlName="username" style="width: 100%">
     <mat-error *ngIf="!formGroup.controls['username'].valid && formGroup.controls['username'].touched">
-      {{ getErrorEmail() }}
+      Campo requerido
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="form-element">
-    <input matInput placeholder="Email address" formControlName="email" style="width: 100%">
+    <input matInput placeholder="Correo electrónico" formControlName="email" style="width: 100%">
     <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
       {{ getErrorEmail() }}
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="form-element">
-    <input matInput placeholder="inmueble" formControlName="inmueble">
+    <input matInput placeholder="Inmueble" formControlName="inmueble">
     <mat-error *ngIf="!formGroup.controls['inmueble'].valid && formGroup.controls['inmueble'].touched">
       Campo requerido
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="form-element">
-    <input type="number" matInput placeholder="documento" formControlName="documento">
+    <input type="number" matInput placeholder="Número de documento de identidad" formControlName="documento">
     <mat-error *ngIf="!formGroup.controls['documento'].valid && formGroup.controls['documento'].touched">
       Campo requerido
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="form-element">
-    <input matInput placeholder="nombre" formControlName="nombre_completo">
+    <input matInput placeholder="Nombre" formControlName="nombre_completo">
     <mat-error *ngIf="!formGroup.controls['nombre_completo'].valid && formGroup.controls['nombre_completo'].touched">
       Campo requerido
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="form-element">
-    <input type="number" matInput placeholder="celular" formControlName="celular">
+    <input type="number" matInput placeholder="Celular" formControlName="celular">
     <mat-error *ngIf="!formGroup.controls['celular'].valid && formGroup.controls['celular'].touched">
       Campo requerido
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="form-element">
-    <input type="number" matInput placeholder="coeficiente" formControlName="coeficiente">
+    <input type="number" matInput placeholder="Coeficiente" formControlName="coeficiente">
     <mat-error *ngIf="!formGroup.controls['coeficiente'].valid && formGroup.controls['coeficiente'].touched">
       Campo requerido
     </mat-error>
@@ -57,7 +57,7 @@
 
 
   <mat-form-field class="form-element">
-    <input matInput placeholder="Password" formControlName="password">
+    <input matInput placeholder="Contraseña" formControlName="password">
     <mat-hint>Choose a password of at least eight characters, one uppercase letter and one number</mat-hint>
     <mat-error *ngIf="!formGroup.controls['password'].valid && formGroup.controls['password'].touched">
       {{ getErrorPassword() }}
@@ -66,12 +66,12 @@
 
 
   <div class="form-element">
-    <mat-checkbox formControlName="mora" value="1">Usuaro en mora?</mat-checkbox>
+    <mat-checkbox formControlName="mora" value="1">Usuario en mora?</mat-checkbox>
   </div>
 
   <div class="form-element">
     <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid"
-            (click)="createAsambleista()">Submit Form
+            (click)="createAsambleista()">Enviar formulario
     </button>
   </div>
 
