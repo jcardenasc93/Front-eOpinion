@@ -168,7 +168,7 @@ export class ResultadosComponent implements OnInit {
             });
             console.log('respuestas', data)
             console.log('pregunta', this.data.pregunta)
-            console.log('opciones respondidas', data[1].opciones)
+            //console.log('opciones respondidas', data[1].opciones)
             let i = 0;
             for (i; i < this.opciones.length; i++) {
               let j = 0;
