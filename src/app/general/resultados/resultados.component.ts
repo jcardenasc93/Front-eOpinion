@@ -107,11 +107,10 @@ export class ResultadosComponent implements OnInit {
   public pieChartColors = [
     {
       backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)', '#f6d186'
-      , '#6886c5', '#f5a7a7', '#c06c84', '#f6d186', '#a8e6cf', '#f6d186', '#be9fe1', '#9cf196',
-      '#96f7d2', '#484c7f', '#c36a2d', '#d8345f', '#445c3c', '#a4d7e1', '#ff8364', '#ef6c57',],
+        , '#6886c5', '#f5a7a7', '#c06c84', '#f6d186', '#a8e6cf', '#f6d186', '#be9fe1', '#9cf196',
+        '#96f7d2', '#484c7f', '#c36a2d', '#d8345f', '#445c3c', '#a4d7e1', '#ff8364', '#ef6c57',],
     },
   ];
-
 
 
   dataSource: any;
@@ -168,7 +167,7 @@ export class ResultadosComponent implements OnInit {
             });
             console.log('respuestas', data)
             console.log('pregunta', this.data.pregunta)
-            console.log('opciones respondidas', data[1].opciones)
+            //console.log('opciones respondidas', data[1].opciones)
             let i = 0;
             for (i; i < this.opciones.length; i++) {
               let j = 0;
@@ -194,13 +193,22 @@ export class ResultadosComponent implements OnInit {
               this.porcentaje.push(dataItem.porcentaje);
             });
 
-            console.log('vootsso', this.totalasambleistas);
+            console.log('respuestas', data)
 
+
+            console.log('entro al if multiole')
+            let totalVotos = 0;
+            let totalCoeficiente = 0;
+            data.forEach(dataItem => {
+              totalVotos = dataItem.votos + totalVotos;
+              totalCoeficiente = parseFloat(dataItem.coeficientes) + totalCoeficiente;
+              console.log('total coeficiente ', totalCoeficiente);
+            });
             const opcion2 = new Enum();
             opcion2.index = 'NS/NR';
             opcion2.opcion = 'NS/NR';
-            opcion2.coeficiente = 100 - coeficienteVotado;
-            opcion2.votos = this.totalasambleistas - votosTotales;
+            opcion2.coeficiente = 100 - totalCoeficiente;
+            opcion2.votos = this.totalasambleistas - totalVotos;
             opcion2.porcentaje = opcion2.votos / this.totalasambleistas * 100;
             this.opciones.push(opcion2);
             this.coeficientes.push(opcion2.coeficiente);
@@ -208,6 +216,18 @@ export class ResultadosComponent implements OnInit {
             this.porcentaje.push(opcion2.porcentaje);
             console.log('coeficientes ', this.opciones);
             this.dataSource = this.opciones;
+
+
+            /*
+                        console.log('vootsso', this.totalasambleistas);
+                        const opcion2 = new Enum();
+                        opcion2.index = 'NS/NR';
+                        opcion2.opcion = 'NS/NR';
+                        opcion2.coeficiente = 100 - coeficienteVotado;
+                        opcion2.votos = this.totalasambleistas - votosTotales;
+                        opcion2.porcentaje = opcion2.votos / this.totalasambleistas * 100;
+                        this.opciones.push(opcion2);*/
+
           },
           error => {
             console.log('Error trayendo pregunta multiple');
@@ -225,17 +245,17 @@ export class ResultadosComponent implements OnInit {
 
   }
 
-  getCurrentUser(){
-     this.userService.getUserByToken2().subscribe(datax => {
-       console.log(datax)
-       this.user = datax[0].username;
-       console.log('usuario y tales', datax);
-     },
-          error => {
-            console.log('Error trayendo pregunta multiple');
-          }
-        );
-}
+  getCurrentUser() {
+    this.userService.getUserByToken2().subscribe(datax => {
+        console.log(datax)
+        this.user = datax[0].username;
+        console.log('usuario y tales', datax);
+      },
+      error => {
+        console.log('Error trayendo pregunta multiple');
+      }
+    );
+  }
 
   exportAsExcel() {
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.table.nativeElement);
