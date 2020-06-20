@@ -295,7 +295,7 @@ export class AdminPreguntaComponent implements OnInit {
   }
 
   restablecerAbierto(id: any) {
-    this.preguntaService.resetearPreguntaDecimal(id).subscribe(data => {
+    this.preguntaService.resetearPreguntaAbierta(id).subscribe(data => {
       Swal.fire('Success!', 'Respuestas reestablecidas con éxito', 'success');
     }, error => {
       console.log('Error activa-> ', error.error);
