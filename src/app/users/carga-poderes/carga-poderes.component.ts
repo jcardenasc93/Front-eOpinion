@@ -98,7 +98,7 @@ export class CargaPoderesComponent implements OnInit {
           case HttpEventType.Response:
             console.log('Video subido satisfactoriamente!', event.body);
 
-            Swal.fire('Success!', 'Archivo subido satisfactiriamente', 'success');
+            Swal.fire('Success!', 'Archivo subido satisfactoriamente', 'success');
             this.progress = 0;
             this.files.splice(0, 1)
             this.getPoderesXusuario();
