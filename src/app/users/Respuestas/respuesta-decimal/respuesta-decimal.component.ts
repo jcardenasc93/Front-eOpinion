@@ -1,8 +1,9 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {PreguntaService} from "../../../services/pregunta.service";
 import Swal from "sweetalert2";
+import {CdkTextareaAutosize} from "@angular/cdk/text-field";
 
 @Component({
   selector: 'app-respuesta-decimal',
@@ -10,6 +11,7 @@ import Swal from "sweetalert2";
   styleUrls: ['./respuesta-decimal.component.css']
 })
 export class RespuestaDecimalComponent implements OnInit {
+  @ViewChild('autosize') autosize: CdkTextareaAutosize;
   public questionForm: FormGroup;
   respuesta_decimal = this.data.preguntaDecimal.enunciado;
   public countDown;

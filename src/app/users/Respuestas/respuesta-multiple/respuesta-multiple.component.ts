@@ -1,9 +1,10 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {FormArray, FormBuilder, Validators} from "@angular/forms";
 import {PreguntaService} from "../../../services/pregunta.service";
 import Swal from "sweetalert2";
 import {log} from "util";
+import {CdkTextareaAutosize} from "@angular/cdk/text-field";
 
 class PreguntaAbierta {
   enunciado: any;
@@ -33,6 +34,8 @@ class Enum {
   styleUrls: ['./respuesta-multiple.component.css']
 })
 export class RespuestaMultipleComponent implements OnInit {
+
+   @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
   public questionForm;
   public opciones: Array<Opciones> = [];

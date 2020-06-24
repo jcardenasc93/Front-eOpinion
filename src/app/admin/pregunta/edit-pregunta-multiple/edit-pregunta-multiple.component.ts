@@ -36,7 +36,7 @@ export class EditPreguntaMultipleComponent implements OnInit {
       evento: [this.data.pregunta.evento],
       timer: [this.data.pregunta.timer],
       opPresentacion: [this.data.pregunta.opPresentacion],
-      strictMax: [this.data.pregunta.opPresentacion]
+      strictMax: [this.data.pregunta.strictMax]
     });
     const opciones = this.questionForm.controls.opciones as FormArray;
 

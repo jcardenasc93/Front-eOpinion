@@ -40,6 +40,7 @@
              <mat-list-item role="listitem"><b>Contraseña de Reunión: {{asam.codConferencia}}  </b>
             </mat-list-item>
           </mat-list>
+
           <div *ngIf="nombres.length>0">
             <mat-divider [inset]="true"></mat-divider>
             <h3 style="text-align: left; padding-top: 20px">Usted esta representando a las siguientes propiedades:</h3>
@@ -48,6 +49,7 @@
             </mat-list>
 
           </div>
+
         </div>
         <mat-list role="list">
           <mat-list-item role="listitem"><b>Documentos Reunión:</b></mat-list-item>
@@ -56,7 +58,7 @@
         </mat-list>
 
       </div>
-
+<!--
       <section style="float: left" class="example-section">
         <label class="example-margin">Seleccione su Calidad de Asistente: </label>
         <mat-radio-group [(ngModel)]="propietario">
@@ -68,7 +70,7 @@
           </mat-radio-button>
         </mat-radio-group>
       </section>
-
+-->
     </mat-card-content>
 
   </mat-card>

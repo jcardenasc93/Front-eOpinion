@@ -58,6 +58,7 @@ import { FooterComponent } from './footer/footer.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatRadioModule} from "@angular/material/radio";
 import { PromedioDecimalComponent } from './promedio-decimal/promedio-decimal.component';
+import {OrderModule} from "ngx-order-pipe";
 
 @NgModule({
   declarations: [
@@ -124,6 +125,7 @@ import { PromedioDecimalComponent } from './promedio-decimal/promedio-decimal.co
     MatRippleModule,
     MatSidenavModule,
     MatRadioModule,
+    OrderModule,
   ],
   entryComponents: [PreguntaMultipleComponent, CrearEventoComponent, EditarEventoComponent],
   providers: [

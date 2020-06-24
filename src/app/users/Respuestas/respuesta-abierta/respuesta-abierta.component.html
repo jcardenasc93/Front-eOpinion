@@ -1,5 +1,10 @@
 <mat-dialog-content>
-<h1 mat-dialog-title>{{enunciado}}</h1>
+    <h1 mat-dialog-title>
+    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="10" readonly
+              style="width: 100%; height: available;border: none;overflow:hidden;outline: none; ">{{enunciado}}
+    </textarea>
+  </h1>
 <h3 *ngIf="countDown>0">Esta pregunta se vencerá en <countdown [config]="{leftTime: countDown}" ></countdown></h3>
 <h3 *ngIf="countDown<=0">Esta pregunta se ha vencido.</h3>
 
