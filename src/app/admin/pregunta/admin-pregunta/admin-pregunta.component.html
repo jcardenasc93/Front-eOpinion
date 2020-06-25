@@ -33,6 +33,47 @@
     </div>
   </div>
 
+  <mat-card class="col-11 style-card" *ngFor="let contenidoInt of pMultiple ">
+    <mat-card-header class="header-card">
+      <mat-card-title>Pregunta de Selección</mat-card-title>
+
+
+    </mat-card-header>
+
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <mat-card-content>
+          <br>
+          <p class="title">Enunciado</p>
+          <br>
+
+          <p class="detail-text">{{contenidoInt.enunciado}}</p>
+          <mat-slide-toggle (click)="bloqueaMora(contenidoInt.id,contenidoInt.bloquea_mora)" [checked]="contenidoInt.bloquea_mora">Bloqueo de Morosos</mat-slide-toggle>
+        </mat-card-content>
+      </div>
+      <div class="col-12 col-md-6">
+        <mat-card-actions class="text-center">
+
+          <button class="btn-generic btn-blue" mat-button (click)="editarPreguntaMultiple(contenidoInt)">Editar</button>
+          <button class="btn-generic btn-green" mat-button *ngIf="contenidoInt.activa==false"
+                  (click)="changeActivarMultiple(contenidoInt)">Activar
+          </button>
+          <button class="mat-flat-button mat-accent" *ngIf="contenidoInt.activa==true"
+                  (click)="changeActivarMultiple(contenidoInt)">Desactivar
+          </button>
+
+          <button class="btn-generic btn-blue" mat-button (click)="gotoResultados(contenidoInt)" style="background-color: coral">Resultados</button>
+
+          <button class="btn-generic btn-water" mat-button (click)="restablecerMultiple(contenidoInt.id)">Restablecer
+          </button>
+          <button class="btn-generic btn-red" mat-button (click)="borrarPreguntaMultiple(contenidoInt.id)">Borrar
+          </button>
+
+        </mat-card-actions>
+      </div>
+    </div>
+  </mat-card>
+
   <mat-card class="col-11 style-card" *ngFor="let contenidoInt of pAbiertaDec">
     <mat-card-header class="header-card">
       <mat-card-title>Pregunta Numérica Decimal</mat-card-title>
@@ -111,46 +152,7 @@
       </div>
     </div>
   </mat-card>
-  <mat-card class="col-11 style-card" *ngFor="let contenidoInt of pMultiple">
-    <mat-card-header class="header-card">
-      <mat-card-title>Pregunta de Selección</mat-card-title>
 
-
-    </mat-card-header>
-
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <mat-card-content>
-          <br>
-          <p class="title">Enunciado</p>
-          <br>
-
-          <p class="detail-text">{{contenidoInt.enunciado}}</p>
-          <mat-slide-toggle (click)="bloqueaMora(contenidoInt.id,contenidoInt.bloquea_mora)" [checked]="contenidoInt.bloquea_mora">Bloqueo de Morosos</mat-slide-toggle>
-        </mat-card-content>
-      </div>
-      <div class="col-12 col-md-6">
-        <mat-card-actions class="text-center">
-
-          <button class="btn-generic btn-blue" mat-button (click)="editarPreguntaMultiple(contenidoInt)">Editar</button>
-          <button class="btn-generic btn-green" mat-button *ngIf="contenidoInt.activa==false"
-                  (click)="changeActivarMultiple(contenidoInt)">Activar
-          </button>
-          <button class="mat-flat-button mat-accent" *ngIf="contenidoInt.activa==true"
-                  (click)="changeActivarMultiple(contenidoInt)">Desactivar
-          </button>
-
-          <button class="btn-generic btn-blue" mat-button (click)="gotoResultados(contenidoInt)" style="background-color: coral">Resultados</button>
-
-          <button class="btn-generic btn-water" mat-button (click)="restablecerMultiple(contenidoInt.id)">Restablecer
-          </button>
-          <button class="btn-generic btn-red" mat-button (click)="borrarPreguntaMultiple(contenidoInt.id)">Borrar
-          </button>
-
-        </mat-card-actions>
-      </div>
-    </div>
-  </mat-card>
 
 </div>
 

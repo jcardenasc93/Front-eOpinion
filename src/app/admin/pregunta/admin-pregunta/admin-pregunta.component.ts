@@ -481,12 +481,13 @@ export class AdminPreguntaComponent implements OnInit {
                           opcion.pregunta = dataItem.enunciado;
                           opcion.inmueble = asambleita.inmueble;
                           opcion.coeficiente = asambleita.coeficiente;
+                          /*
                           if(asambleita.propietario==true){
                             opcion.apoderado = 'Propietario';
                           }
                           if(asambleita.propietario==false){
                             opcion.apoderado = 'Apoderado';
-                          }
+                          }*/
 
                           this.respMultXAsam.push(opcion);
                           return;

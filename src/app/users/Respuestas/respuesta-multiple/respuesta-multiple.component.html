@@ -1,8 +1,15 @@
 <mat-dialog-content>
-<h1 mat-dialog-title>{{enunciado}}</h1>
-<h3 *ngIf="countDown>0">Esta pregunta se vencerá en <countdown [config]="{leftTime: countDown}" ></countdown></h3>
-<h3 *ngIf="countDown<=0">Esta pregunta se ha vencido.</h3>
-<div mat-dialog-content style="margin-bottom: 1em;">
+  <h1 mat-dialog-title>
+    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="10" readonly
+              style="width: 100%; height: available;border: none;overflow:hidden;outline: none; ">{{enunciado}}
+    </textarea>
+  </h1>
+  <h3 *ngIf="countDown>0">Esta pregunta se vencerá en
+    <countdown [config]="{leftTime: countDown}"></countdown>
+  </h3>
+  <h3 *ngIf="countDown<=0">Esta pregunta se ha vencido.</h3>
+  <div mat-dialog-content style="margin-bottom: 1em;">
 
 
     <mat-label>{{mensajeEnunciado}}</mat-label>
@@ -10,7 +17,8 @@
     <div class="row-container" *ngFor="let opcion of opciones">
       <div class="col-3">
         <mat-checkbox class="margin-left-25" (change)="checkOptionAnswer($event.checked, opcion.id)"
-                      [checked]="false"   labelPosition="before" style="columns: 2;"> {{opcion.letra}} {{opcion.numero}}. {{opcion.opcion}}
+                      [checked]="false" labelPosition="before" style="columns: 2;"> {{opcion.letra}} {{opcion.numero}}
+          . {{opcion.opcion}}
         </mat-checkbox>
       </div>
     </div>
@@ -19,5 +27,5 @@
       <button class="mat-flat-button mat-primary" (click)="enviarRespuestas()">Enviar respuesta</button>
     </div>
 
-</div>
+  </div>
 </mat-dialog-content>

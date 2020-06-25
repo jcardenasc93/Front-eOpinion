@@ -2,9 +2,9 @@
 <div mat-dialog-content style="margin-bottom: 1em;">
   <form [formGroup]="questionForm" >
     <div class="row-container">
-      <mat-form-field appearance="outline" style="width:100%">
+      <mat-form-field class="example-full-width" style="width:100%">
         <mat-label>Ingrese aquí la pregunta</mat-label>
-        <input type="text" matInput placeholder="Enunciado" formControlName="enunciado"/>
+        <textarea matInput placeholder="Enunciado" formControlName="enunciado"></textarea>
       </mat-form-field>
     </div>
     <div class="row">

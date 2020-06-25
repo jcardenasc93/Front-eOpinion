@@ -84,7 +84,13 @@ export class AdminAsambleistasComponent implements OnInit {
       }
       this.getAsambleistas();
     }, error => {
-      Swal.fire('error!', 'Error cargando el archivo, ningun usuario fue creado', 'error');
+      console.log(error);
+      if (error.status != 400 || error.status != 401) {
+        this.delay(1500);
+        Swal.fire('success!', 'cargue de archivos exitosa!', 'success');
+      }else{
+        Swal.fire('error!', 'Error cargando el archivo, ningun usuario fue creado', 'error');
+      }
     });
   }
 
@@ -119,7 +125,7 @@ export class AdminAsambleistasComponent implements OnInit {
 
   sendEmail(idPersona: any) {
     this.usuariosService.sendInviteEmail(idPersona).subscribe(data => {
-       Swal.fire('Success!', 'Correo reenviado satisfactoriamente', 'success');
+      Swal.fire('Success!', 'Correo reenviado satisfactoriamente', 'success');
     }, error => {
       Swal.fire('error!', 'Oops algo pasó, intenta de nuevo', 'error');
     });

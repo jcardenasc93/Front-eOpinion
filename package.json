@@ -46,6 +46,7 @@
     "karma-jasmine-html-reporter": "^1.4.2",
     "ng2-charts": "^2.3.2",
     "ngx-countdown": "^9.0.1",
+    "ngx-order-pipe": "^2.0.4",
     "path": "^0.12.7",
     "protractor": "~5.4.3",
     "rxjs": "~6.5.4",
