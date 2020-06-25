@@ -20,6 +20,7 @@ export class AdminAsambleistasComponent implements OnInit {
   public dataSource;
   public registerForm: FormGroup;
   displayedColumns: string[] = ['inmueble', 'nombres', 'documento', 'email', 'celular', 'coeficiente', 'mora', 'actions'];
+  public totalAsambleistas=0;
 
   constructor(private usuariosService: UsuariosService, private route: ActivatedRoute, public dialog: MatDialog) {
   }
@@ -34,6 +35,7 @@ export class AdminAsambleistasComponent implements OnInit {
     this.usuariosService.getAsableistasXEvento(this.idEvent).subscribe(data => {
       console.log('asambleista', data.asambleistas);
       this.dataSource = data.asambleistas;
+      this.totalAsambleistas = this.dataSource.length;
     }, error => {
       console.log('Error login-> ', error.error);
     });
