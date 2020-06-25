@@ -47,11 +47,12 @@ export class CargaPoderesComponent implements OnInit {
 
 
   getPoderesXusuario() {
-    this.userService.getPoderXusuario().subscribe(data => {
+    this.userService.getPoderXusuario().subscribe(datax => {
 
       let x;
       let i = 0;
       var a = "";
+      let data= datax.poderes;
       for (i = 0; i < data.length; i++) {
         try {
           data[i].documento_poder = data[i].documento_poder.substring(data[i].documento_poder.lastIndexOf('/') + 1);

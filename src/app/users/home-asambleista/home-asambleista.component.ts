@@ -125,7 +125,7 @@ export class HomeAsambleistaComponent implements OnInit {
         let k;
         const asableistas = datas.asambleistas;
         console.log('poderes usuario', data);
-        const poderes = data;
+        const poderes = data.poderes;
         for (j = 0; j < asableistas.length; j++) {
           for (k = 0; k < poderes.length; k++) {
             if (asableistas[j].id == poderes[k].representa_a) {
