@@ -39,7 +39,7 @@ export class EditAsambleistaComponent implements OnInit {
 
   updateAsambleista() {
     this.usuariosService.updateSingleAsambleista(this.formGroup.value, this.data.asambleistaObj.id).subscribe(async data => {
-      Swal.fire('Success!', 'asambleista creado satisfactiriamente', 'success');
+      Swal.fire('Success!', 'asambleista creado satisfactoriamente', 'success');
       await this.delay(1000);
       window.location.reload();
 

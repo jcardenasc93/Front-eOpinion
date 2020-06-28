@@ -109,7 +109,7 @@ export class AdminAsambleistasComponent implements OnInit {
   deleteAsambleista(id: any) {
     if (confirm('Esta seguro de eliminar este asambleista?')) {
       this.usuariosService.deleteAsambleista(id).subscribe(data => {
-        Swal.fire('Success!', 'Evento editado satisfactiriamente', 'success');
+        Swal.fire('Success!', 'Evento editado satisfactoriamente', 'success');
         this.getAsambleistas();
       }, error => {
         Swal.fire('error!', 'Oops algo pasó, intenta de nuevo', 'error');
