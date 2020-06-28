@@ -519,7 +519,7 @@ export class AdminPreguntaComponent implements OnInit {
                               this.respMultXAsam.push(opcion);
 
                               this.apoderadosArray.forEach(power => {
-                                if (asambleita.id == power.representado_por && power.representado_por != undefined) {
+                                if (asambleita.id == power.representado_por && power.id != undefined) {
                                   const opcionss = new RespAbierta();
                                   opcionss.index = opcions.index;
                                   opcionss.opcion = opcions.opcion;
