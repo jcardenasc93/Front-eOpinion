@@ -48,6 +48,14 @@ class RespAbierta {
   index: any;
 }
 
+class Apoderado {
+  id: any;
+  nombre: any;
+  inmueble: any;
+  coeficiente: any;
+  representado_por: any;
+}
+
 @Component({
   selector: 'app-admin-pregunta',
   templateUrl: './admin-pregunta.component.html',
@@ -71,7 +79,7 @@ export class AdminPreguntaComponent implements OnInit {
   private respDecimal: Array<RespAbierta> = [];
   public respMultXAsam: Array<RespAbierta> = [];
   public opcionesArray: Array<Opcion> = [];
-
+  public apoderadosArray: Array<Apoderado> = [];
 
 
   constructor(private formBuilder: FormBuilder,
@@ -91,7 +99,6 @@ export class AdminPreguntaComponent implements OnInit {
     this.getPreguntasAbiertasDecimal();
     this.getEventoName();
   }
-
 
 
   getEventoName() {
@@ -180,7 +187,7 @@ export class AdminPreguntaComponent implements OnInit {
   borrarPreguntaAbierta(idPregunta) {
     if (confirm('Esta seguro de eliminar esta pregunta?')) {
       this.preguntaService.deletePreguntaAbierta(idPregunta).subscribe(data => {
-        Swal.fire('Success!', 'Pregunta borrada satisfactiriamente', 'success');
+        Swal.fire('Success!', 'Pregunta borrada satisfactoriamente', 'success');
         window.location.reload();
       }, error => {
         console.log('Error login-> ', error);
@@ -192,7 +199,7 @@ export class AdminPreguntaComponent implements OnInit {
   borrarPreguntaMultiple(idPregunta) {
     if (confirm('Esta seguro de eliminar esta pregunta?')) {
       this.preguntaService.deletePreguntaMultiple(idPregunta).subscribe(data => {
-        Swal.fire('Success!', 'Pregunta borrada satisfactiriamente', 'success');
+        Swal.fire('Success!', 'Pregunta borrada satisfactoriamente', 'success');
         window.location.reload();
       }, error => {
         console.log('Error login-> ', error);
@@ -205,7 +212,7 @@ export class AdminPreguntaComponent implements OnInit {
     if (confirm('Esta seguro de eliminar esta pregunta?')) {
 
       this.preguntaService.deletePreguntaDecimal(idPregunta).subscribe(data => {
-        Swal.fire('Success!', 'Pregunta borrada satisfactiriamente', 'success');
+        Swal.fire('Success!', 'Pregunta borrada satisfactoriamente', 'success');
         window.location.reload();
       }, error => {
         console.log('Error login-> ', error);
@@ -445,70 +452,109 @@ export class AdminPreguntaComponent implements OnInit {
   }
 
   getMulipleResXrespuesta() {
-    console.log('sdssdsddssdsdsdsdsdsdssdsdsdsdsd')
-    this.userService.getAsableistasXEvento(this.idEvent).subscribe(async datax => {
-        this.totalasambleistas = datax.asambleistas.length;
-        console.log('9perros', this.pMultiple);
-        this.pMultiple.forEach(dataItem => {
-          this.preguntaService.getRespuestas(dataItem.id).subscribe(data => {
-
-              console.log('respuestas multiples xd', data);
-              datax.asambleistas.forEach(asambleita => {
-                data.forEach(asam => {
-                  if (asambleita.id == asam.asambleista) {
-                    asam.opciones.forEach(dataItems => {
-
-                      let cont = 1;
-                      dataItem.opciones.forEach(opcionex => {
-                        const objOpcion = new Opcion();
-                        objOpcion.index = cont;
-                        objOpcion.opcion = opcionex.opcion;
-                        objOpcion.id = opcionex.id;
-                        this.opcionesArray.push(objOpcion);
-                        cont++;
-                      });
-
-
-                      this.opcionesArray.forEach(opcions => {
-
-                        console.log('opciones', opcions.id);
-                        console.log('oprespuesta', dataItems)
-
-                        if (opcions.id == dataItems) {
-                          const opcion = new RespAbierta();
-                          opcion.index = opcions.index;
-                          opcion.opcion = opcions.opcion;
-                          opcion.pregunta = dataItem.enunciado;
-                          opcion.inmueble = asambleita.inmueble;
-                          opcion.coeficiente = asambleita.coeficiente;
-                          /*
-                          if(asambleita.propietario==true){
-                            opcion.apoderado = 'Propietario';
-                          }
-                          if(asambleita.propietario==false){
-                            opcion.apoderado = 'Apoderado';
-                          }*/
-
-                          this.respMultXAsam.push(opcion);
-                          return;
-                        }
-                      });
-                      this.opcionesArray=[];
-                    });
-                  }
-                });
-              });
-
-            },
-            error => {
-              console.log('Error trayendo pregunta multiple');
-            }
-          );
+    this.userService.getPoderesXEvento(this.idEvent).subscribe(async powers => {
+        powers.apoderados.forEach(power => {
+          const apoderado = new Apoderado();
+          apoderado.id = power.representa_a;
+          apoderado.representado_por = power.representado_por;
+          this.apoderadosArray.push(apoderado);
         });
-        await this.delay(2500);
-        console.log('preguntas del reasco xd ', this.respMultXAsam);
-        this.excelService.exportAsExcelFile(this.respMultXAsam, 'Resumen de preguntas por asistentes');
-        this.respMultXAsam = [];
+        console.log('apoderados', this.apoderadosArray);
+        console.log('sdssdsddssdsdsdsdsdsdssdsdsdsdsd')
+        this.userService.getAsableistasXEvento(this.idEvent).subscribe(async datax => {
+            datax.asambleistas.forEach(asambleistaService => {
+              this.apoderadosArray.forEach(apoderado => {
+                if (apoderado.id == asambleistaService.id) {
+                  apoderado.inmueble = asambleistaService.inmueble
+                  apoderado.coeficiente = asambleistaService.coeficiente
+                  return;
+                }
+              });
+            });
+
+
+            this.totalasambleistas = datax.asambleistas.length;
+            console.log('9perros', this.pMultiple);
+            this.pMultiple.forEach(dataItem => {
+              this.preguntaService.getRespuestas(dataItem.id).subscribe(data => {
+
+                  console.log('respuestas multiples xd', data);
+                  datax.asambleistas.forEach(asambleita => {
+                    data.forEach(asam => {
+                      if (asambleita.id == asam.asambleista) {
+                        asam.opciones.forEach(dataItems => {
+
+                          let cont = 1;
+                          dataItem.opciones.forEach(opcionex => {
+                            const objOpcion = new Opcion();
+                            objOpcion.index = cont;
+                            objOpcion.opcion = opcionex.opcion;
+                            objOpcion.id = opcionex.id;
+                            this.opcionesArray.push(objOpcion);
+                            cont++;
+                          });
+
+
+                          this.opcionesArray.forEach(opcions => {
+
+                            console.log('opciones', opcions.id);
+                            console.log('oprespuesta', dataItems)
+
+                            if (opcions.id == dataItems) {
+                              const opcion = new RespAbierta();
+                              opcion.index = opcions.index;
+                              opcion.opcion = opcions.opcion;
+                              opcion.pregunta = dataItem.enunciado;
+                              opcion.inmueble = asambleita.inmueble;
+                              opcion.coeficiente = asambleita.coeficiente;
+
+                              /*
+                              if(asambleita.propietario==true){
+                                opcion.apoderado = 'Propietario';
+                              }
+                              if(asambleita.propietario==false){
+                                opcion.apoderado = 'Apoderado';
+                              }*/
+
+                              this.respMultXAsam.push(opcion);
+
+                              this.apoderadosArray.forEach(power => {
+                                if (asambleita.id == power.representado_por) {
+                                  const opcionss = new RespAbierta();
+                                  opcionss.index = opcions.index;
+                                  opcionss.opcion = opcions.opcion;
+                                  opcionss.pregunta = dataItem.enunciado;
+                                  opcionss.inmueble = power.inmueble;
+                                  opcionss.coeficiente = power.coeficiente;
+                                  this.respMultXAsam.push(opcionss);
+                                  return;
+                                }
+                              });
+                              return;
+                            }
+                          });
+                          this.opcionesArray = [];
+                        });
+                      }
+                    });
+                  });
+
+                },
+                error => {
+                  console.log('Error trayendo pregunta multiple');
+                }
+              );
+            });
+            await this.delay(2500);
+
+
+            console.log('preguntas del reasco xd ', this.respMultXAsam);
+            this.excelService.exportAsExcelFile(this.respMultXAsam, 'Resumen de preguntas por asistentes');
+            this.respMultXAsam = [];
+          }, error => {
+            console.log('Error trayendo pregunta multiple');
+          }
+        );
       }, error => {
         console.log('Error trayendo pregunta multiple');
       }
@@ -606,12 +652,12 @@ export class AdminPreguntaComponent implements OnInit {
 
 
   gotoResultadosDecimal(pregunta) {
-      this.dialog.open(PromedioDecimalComponent, {
-        width: '70%',
-        data: {
-          pregunta: pregunta,
-          idEvento: this.idEvent
-        }
-      });
-    }
+    this.dialog.open(PromedioDecimalComponent, {
+      width: '70%',
+      data: {
+        pregunta: pregunta,
+        idEvento: this.idEvent
+      }
+    });
+  }
 }

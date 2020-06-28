@@ -40,7 +40,7 @@ export class PreguntaAbiertaNumeroComponent implements OnInit {
 
     this.preguntaService.createPreguntaDecimal(this.questionForm.value).subscribe(data => {
 
-      Swal.fire('Success!', 'Pregunta creada satisfactiriamente', 'success');
+      Swal.fire('Success!', 'Pregunta creada satisfactoriamente', 'success');
       this.dialogRef.close();
       window.location.reload();
     }, error => {

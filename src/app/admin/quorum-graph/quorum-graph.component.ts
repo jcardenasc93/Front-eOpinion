@@ -37,7 +37,7 @@ export class QuorumGraphComponent implements OnInit {
     monkeyPatchChartJsLegend();
   }
 
-  displayedColumns: string[] = ['index', 'coeficientepresente', 'coeficienteausente', 'inmueblespresentes', 'inmueblesausentes'];
+  displayedColumns: string[] = ['index', 'coeficientepresente', 'coeficienteausente', 'inmueblespresentes', 'inmueblesausentes', 'actions'];
   public pieChartOptions: ChartOptions = {
     responsive: true,
   };
@@ -52,7 +52,7 @@ export class QuorumGraphComponent implements OnInit {
     },];
 
   public listaQoro = [];
-@ViewChild('TABLE') table: ElementRef;
+  @ViewChild('TABLE') table: ElementRef;
 
   ngOnInit(): void {
     this.getQuorums();
@@ -61,25 +61,26 @@ export class QuorumGraphComponent implements OnInit {
   getQuorums() {
     this.preguntaService.getQuorumXEvento(this.data.idEvent).subscribe(data => {
       this.usuarioService.getAsableistasXEvento(this.data.idEvent).subscribe(datax => {
-      console.log('QUOROS', data);
-      console.log('sambleistas leng', datax.asambleistas.length );
-      data.quorums.forEach(dataItem => {
-        const opcion = new Enum();
-        opcion.coeficiente = dataItem.coeficiente_registrado;
-        opcion.votos = dataItem.cantidadPersonas;
-        opcion.ausentes = datax.asambleistas.length - dataItem.cantidadPersonas;
-        opcion.coeficienteAusente = 100 - dataItem.coeficiente_registrado;
-        opcion.date_time = dataItem.date_time.substring(11).slice(0, -13);
-        this.listaQoro.push(opcion);
+        console.log('QUOROS', data);
+        console.log('sambleistas leng', datax.asambleistas.length);
+        data.quorums.forEach(dataItem => {
+          const opcion = new Enum();
+          opcion.coeficiente = dataItem.coeficiente_registrado;
+          opcion.votos = dataItem.cantidadPersonas;
+          opcion.ausentes = datax.asambleistas.length - dataItem.cantidadPersonas;
+          opcion.coeficienteAusente = 100 - dataItem.coeficiente_registrado;
+          opcion.date_time = dataItem.date_time.substring(11).slice(0, -13);
+          opcion.id = dataItem.id;
+          this.listaQoro.push(opcion);
+        });
+        this.dataSource = this.listaQoro.reverse();
+        console.log('QUOROS', this.listaQoro);
+      }, error => {
+        Swal.fire('Error!', 'Error creando pregunta', 'error');
+        console.log('error', error);
       });
-      this.dataSource = this.listaQoro.reverse();
-      console.log('QUOROS', this.listaQoro);
-    }, error => {
-      Swal.fire('Error!', 'Error creando pregunta', 'error');
-      console.log('error', error);
-    });
 
-            }, error => {
+    }, error => {
       Swal.fire('Error!', 'Error creando pregunta', 'error');
       console.log('error', error);
     });
@@ -101,4 +102,15 @@ export class QuorumGraphComponent implements OnInit {
     /* save to file */
     XLSX.writeFile(wb, 'SheetJS.xlsx');
   }
+
+  deleteQuoro(id) {
+    this.preguntaService.deleteQuorum(id).subscribe(data => {
+      Swal.fire('success!', 'borrado exitoso', 'success');
+      window.location.reload();
+    }, error => {
+      Swal.fire('Error!', 'Error borrando quorum', 'error');
+      console.log('error', error);
+    });
+  }
+
 }

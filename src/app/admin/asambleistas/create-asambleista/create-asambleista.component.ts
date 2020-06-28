@@ -41,7 +41,7 @@ export class CreateAsambleistaComponent implements OnInit {
   createAsambleista(){
     console.log('username', this.formGroup.get('username'))
     this.usuariosService.createSingleAsambleista(this.formGroup.value).subscribe(async data => {
-      Swal.fire('Success!', 'asambleista creado satisfactiriamente', 'success');
+      Swal.fire('Success!', 'asambleista creado satisfactoriamente', 'success');
       await this.delay(1000);
       window.location.reload();
     }, error => {

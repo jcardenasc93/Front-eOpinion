@@ -76,7 +76,7 @@ export class CrearEventoComponent implements OnInit {
             break;
           case HttpEventType.Response:
             console.log('Video subido satisfactoriamente!', event.body);
-            Swal.fire('Success!', 'Evento creado satisfactiriamente', 'success');
+            Swal.fire('Success!', 'Evento creado satisfactoriamente', 'success');
             this.dialogRef.close();
             window.location.reload();
         }

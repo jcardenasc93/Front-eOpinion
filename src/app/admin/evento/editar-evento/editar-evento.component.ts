@@ -75,11 +75,11 @@ export class EditarEventoComponent implements OnInit {
 
     this.eventoService.updateEvento(this.data.idEvento, this.registerForm).subscribe(data => {
       console.log("exitoso edit ", data)
-      Swal.fire('Success!', 'Evento editado satisfactiriamente', 'success');
+      Swal.fire('Success!', 'Evento editado satisfactoriamente', 'success');
       this.dialogRef.close();
       window.location.reload();
     }, error => {
-      Swal.fire('error!', 'Evento editado satisfactiriamente', 'error');
+      Swal.fire('error!', 'Evento editado satisfactoriamente', 'error');
       console.log('Error trayendo evento', error);
       window.location.reload();
     });
