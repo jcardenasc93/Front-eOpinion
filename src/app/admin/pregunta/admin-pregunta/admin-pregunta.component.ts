@@ -519,7 +519,7 @@ export class AdminPreguntaComponent implements OnInit {
                               this.respMultXAsam.push(opcion);
 
                               this.apoderadosArray.forEach(power => {
-                                if (asambleita.id == power.representado_por) {
+                                if (asambleita.id == power.representado_por && power.representado_por != undefined) {
                                   const opcionss = new RespAbierta();
                                   opcionss.index = opcions.index;
                                   opcionss.opcion = opcions.opcion;
@@ -533,6 +533,7 @@ export class AdminPreguntaComponent implements OnInit {
                               return;
                             }
                           });
+
                           this.opcionesArray = [];
                         });
                       }
@@ -545,7 +546,9 @@ export class AdminPreguntaComponent implements OnInit {
                 }
               );
             });
+
             await this.delay(2500);
+            this.apoderadosArray = [];
 
 
             console.log('preguntas del reasco xd ', this.respMultXAsam);
