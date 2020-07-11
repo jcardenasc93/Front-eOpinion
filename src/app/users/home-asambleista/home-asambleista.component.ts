@@ -209,7 +209,7 @@ export class HomeAsambleistaComponent implements OnInit {
         Swal.fire('Mensaje!', 'Usted ya registró su quórum', 'info');
       } else {
         Swal.fire('error!', 'La verificación del quórum no se encuentra abierta', 'error');
-        console.log('Error registrando el QORO', error);
+        console.log('Error registrando el QORO', error.error);
       }
 
     });

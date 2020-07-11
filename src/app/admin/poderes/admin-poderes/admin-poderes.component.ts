@@ -41,7 +41,7 @@ export class AdminPoderesComponent implements OnInit {
   filteredOptions: Observable<User[]>;
 
 
-  public currentItemsToShow;
+  public currentItemsToShow ;
   public eventosSize;
   private poderes: Array<Poder> = [];
   private idEvent: string;

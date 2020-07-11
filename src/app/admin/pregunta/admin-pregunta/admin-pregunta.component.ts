@@ -17,6 +17,7 @@ import {ResultadosComponent} from "../../../general/resultados/resultados.compon
 import {UsuariosService} from "../../../services/usuarios.service";
 import {ExcelServiceService} from "../../../services/excel-service.service";
 import {PromedioDecimalComponent} from "../../../promedio-decimal/promedio-decimal.component";
+import {TimmerComponent} from "../../../timmer/timmer.component";
 
 
 class Enum {
@@ -291,30 +292,34 @@ export class AdminPreguntaComponent implements OnInit {
   }
 
   restablecerDecimal(id: any) {
-
-    console.log('Error activa-> ', 'sdsdsdds');
-    this.preguntaService.resetearPreguntaDecimal(id).subscribe(data => {
-      console.log('Error activa-> ', 'sdsdsdds');
-      Swal.fire('Success!', 'Respuestas reestablecidas con éxito', 'success');
-    }, error => {
-      console.log('Error activa-> ', error.error);
-    });
+    if (confirm('Esta seguro de restablecer esta pregunta?')) {
+      this.preguntaService.resetearPreguntaDecimal(id).subscribe(data => {
+        console.log('Error activa-> ', 'sdsdsdds');
+        Swal.fire('Success!', 'Respuestas reestablecidas con éxito', 'success');
+      }, error => {
+        console.log('Error activa-> ', error.error);
+      });
+    }
   }
 
   restablecerAbierto(id: any) {
-    this.preguntaService.resetearPreguntaAbierta(id).subscribe(data => {
-      Swal.fire('Success!', 'Respuestas reestablecidas con éxito', 'success');
-    }, error => {
-      console.log('Error activa-> ', error.error);
-    });
+    if (confirm('Esta seguro de restablecer esta pregunta?')) {
+      this.preguntaService.resetearPreguntaAbierta(id).subscribe(data => {
+        Swal.fire('Success!', 'Respuestas reestablecidas con éxito', 'success');
+      }, error => {
+        console.log('Error activa-> ', error.error);
+      });
+    }
   }
 
   restablecerMultiple(id: any) {
-    this.preguntaService.resetearPreguntaMultiple(id).subscribe(data => {
-      Swal.fire('Success!', 'Respuestas reestablecidas con éxito', 'success');
-    }, error => {
-      console.log('Error activa-> ', error.error);
-    });
+     if (confirm('Esta seguro de restablecer esta pregunta?')) {
+       this.preguntaService.resetearPreguntaMultiple(id).subscribe(data => {
+         Swal.fire('Success!', 'Respuestas reestablecidas con éxito', 'success');
+       }, error => {
+         console.log('Error activa-> ', error.error);
+       });
+     }
   }
 
   guardarQoro() {
@@ -520,6 +525,10 @@ export class AdminPreguntaComponent implements OnInit {
 
                               this.apoderadosArray.forEach(power => {
                                 if (asambleita.id == power.representado_por && power.id != undefined) {
+                                  /*
+                                  if (power.mora == true && dataItem.bloqueamora == true) {
+                                    return;
+                                  }*/
                                   const opcionss = new RespAbierta();
                                   opcionss.index = opcions.index;
                                   opcionss.opcion = opcions.opcion;
@@ -660,6 +669,15 @@ export class AdminPreguntaComponent implements OnInit {
       data: {
         pregunta: pregunta,
         idEvento: this.idEvent
+      }
+    });
+  }
+
+  abrirTimerModal(pregunta: any) {
+    this.dialog.open(TimmerComponent, {
+      width: '70%',
+      data: {
+        pregunta: pregunta,
       }
     });
   }
