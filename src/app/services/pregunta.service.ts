@@ -191,6 +191,11 @@ export class PreguntaService {
     return this.http.get(this.URL_HOST + 'eventos/api/v1/eventos/quorum/' + idEvento, {'headers': headers});
   }
 
+  getNewQuorumXEvento(idEvento): Observable<any> {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.get(this.URL_HOST + 'eventos/api/v1/quorum_report/' + idEvento, {'headers': headers});
+  }
+
   deleteQuorum(idQuorum): Observable<any>{
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
     return this.http.delete(this.URL_HOST + 'eventos/api/v1/eventos/eliminar_quorum/' + idQuorum, {'headers': headers});

@@ -59,6 +59,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatRadioModule} from "@angular/material/radio";
 import { PromedioDecimalComponent } from './promedio-decimal/promedio-decimal.component';
 import {OrderModule} from "ngx-order-pipe";
+import { TimmerComponent } from './timmer/timmer.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import {OrderModule} from "ngx-order-pipe";
     QuorumGraphComponent,
     CargaDocumentosComponent,
     FooterComponent,
-    PromedioDecimalComponent
+    PromedioDecimalComponent,
+    TimmerComponent
   ],
   imports: [
     BrowserModule,

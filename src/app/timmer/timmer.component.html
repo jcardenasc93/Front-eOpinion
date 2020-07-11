@@ -1,0 +1,4 @@
+  <h3 *ngIf="countDown>0">Esta pregunta se vencerá en
+    <countdown [config]="{leftTime: countDown}"></countdown>
+  </h3>
+  <h3 *ngIf="countDown<=0">Esta pregunta se ha vencido.</h3>

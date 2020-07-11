@@ -7,6 +7,7 @@ import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSe
 import * as XLSX from "xlsx";
 import {EventoService} from "../../services/evento.service";
 import {UsuariosService} from "../../services/usuarios.service";
+import {ExcelServiceService} from "../../services/excel-service.service";
 
 
 class Enum {
@@ -32,7 +33,8 @@ export class QuorumGraphComponent implements OnInit {
 
   constructor(private preguntaService: PreguntaService,
               @Inject(MAT_DIALOG_DATA) public data: { idEvent },
-              private usuarioService: UsuariosService) {
+              private usuarioService: UsuariosService,
+              private excelService: ExcelServiceService) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }
@@ -56,6 +58,17 @@ export class QuorumGraphComponent implements OnInit {
 
   ngOnInit(): void {
     this.getQuorums();
+  }
+
+  getnewCoro(idQoro) {
+    this.preguntaService.getNewQuorumXEvento(idQoro).subscribe(data => {
+      console.log('nuevos qoros', data);
+      this.excelService.exportAsExcelFile(data, 'sample');
+
+    }, error => {
+      Swal.fire('Error!', 'Error creando pregunta', 'error');
+      console.log('error', error);
+    });
   }
 
   getQuorums() {
