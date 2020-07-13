@@ -122,8 +122,11 @@ export class RespuestaMultipleComponent implements OnInit {
       return;
     }
 
-    this.preguntaService.saveMultipleRespuesta(opInt, this.data.preguntaMultiple.id).subscribe(data => {
+    this.preguntaService.saveMultipleRespuesta(opInt, this.data.preguntaMultiple.id).subscribe(async data => {
+
       Swal.fire('Success!', 'Su respuesta ha sido guardada', 'success');
+      await this.delay(2500);
+      window.location.reload();
     }, error => {
       Swal.fire('Error!', error.error.detail, 'error');
       console.log('error', error);
@@ -137,6 +140,11 @@ export class RespuestaMultipleComponent implements OnInit {
         answer.check = value;
       }
     });
+  }
+
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 }

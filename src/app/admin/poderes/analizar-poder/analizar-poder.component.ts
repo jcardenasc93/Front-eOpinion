@@ -61,7 +61,7 @@ export class AnalizarPoderComponent implements OnInit {
 
   async savePoder() {
     this.userService.aprobarPoder(this.huehuBOYS.id, this.huehuBOYS.evento, this.data.idPoder).subscribe(data => {
-      this.userService.calculoCoeficientes(this.data.idAsambleista).subscribe( datas => {
+      this.userService.calculoCoeficientes(this.data.idAsambleista).subscribe(datas => {
         Swal.fire('Success!', 'Poder aceptado exitosamente', 'success');
       }, error => {
         console.log('error calculocoeficiente', error);
@@ -122,4 +122,13 @@ export class AnalizarPoderComponent implements OnInit {
   }
 
 
+  setselfPoder() {
+    this.userService.setPoderExterno(this.data.idPoder, this.data.idEvento).subscribe(async datas => {
+      Swal.fire('Success!', 'Asociado correctamente', 'success');
+      await this.delay(1800);
+      window.location.reload();
+    }, error => {
+      console.log('Error borrado-> ', error.error);
+    });
+  }
 }

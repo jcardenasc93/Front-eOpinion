@@ -23,6 +23,7 @@ class Poder {
   nomPropietario: any;
   inRep: any;
   inPro: any;
+  externo: any;
 }
 
 export interface User {
@@ -79,6 +80,7 @@ export class AdminPoderesComponent implements OnInit {
         poder.representa_a = dataItem.representa_a;
         poder.representado_por = dataItem.representado_por;
         poder.evento = dataItem.evento;
+        poder.externo = dataItem.externo;
         this.poderes.push(poder);
       });
 
@@ -103,7 +105,7 @@ export class AdminPoderesComponent implements OnInit {
             }
           }
         }
-        this.currentItemsToShow = this.poderes.slice(0, 5);
+        this.currentItemsToShow = this.poderes;
       }, error => {
         console.log('Error login-> ', error.error);
       });

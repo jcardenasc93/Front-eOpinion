@@ -42,12 +42,18 @@ export class RespuestaDecimalComponent implements OnInit {
   }
 
   enviarRespuesta() {
-    this.preguntaService.saveRespuestaDecimal(this.questionForm.get('respuesta_decimal').value.toFixed(3), this.data.preguntaDecimal.id).subscribe(data => {
+    this.preguntaService.saveRespuestaDecimal(this.questionForm.get('respuesta_decimal').value.toFixed(3), this.data.preguntaDecimal.id).subscribe(async data => {
       Swal.fire('Success!', 'Respuesta guardada exitosamente', 'success');
+      await this.delay(2500);
+      window.location.reload();
     }, error => {
       console.log('error', error.error)
       Swal.fire('Error!', error.error.detail, 'error');
     });
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 

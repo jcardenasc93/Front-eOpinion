@@ -59,8 +59,10 @@ console.log(currentTime);
 
 
   enviarRespuesta() {
-    this.preguntaService.saveRespuestaAbierta(this.questionForm.get('enunciado').value, this.data.preguntaAbierta.id).subscribe(data => {
+    this.preguntaService.saveRespuestaAbierta(this.questionForm.get('enunciado').value, this.data.preguntaAbierta.id).subscribe(async data => {
       Swal.fire('Success!', 'Respuesta guardada exitosamente', 'success');
+      await this.delay(2500);
+      window.location.reload();
     }, error => {
       console.log('error', error)
       if(error.error.detail==undefined){
@@ -69,5 +71,8 @@ console.log(currentTime);
         Swal.fire('Error!', error.error.detail, 'error');
       }
     });
+  }
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }
