@@ -11,8 +11,11 @@
             <mat-list role="list">
               <mat-list-item role="listitem"><b>Apoderado:&nbsp;</b> {{poder.nomRepresentante}} -  {{poder.inRep}}
               </mat-list-item>
-              <mat-list-item role="listitem"><b>Representa a: &nbsp;</b> {{poder.nomPropietario}} - {{poder.inPro}}
+              <mat-list-item *ngIf="poder.externo!=true" role="listitem"><b>Representa a: &nbsp;</b> {{poder.nomPropietario}} - {{poder.inPro}}
               </mat-list-item>
+              <mat-list-item *ngIf="poder.externo==true" role="listitem"><b>Representa a: &nbsp;</b> {{poder.nomRepresentante}} - {{poder.inRep}}
+              </mat-list-item>
+
               <mat-list-item role="listitem"><a href="{{poder.documento_poder}}" target="_blank">Descargar Poder</a>
 
               </mat-list-item>

@@ -123,6 +123,15 @@ export class UsuariosService {
     return this.http.patch(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderado/actualizar/' + idPoder, {
       validado: false,
       evento: evento,
+      externo: false,
+    }, {'headers': headers});
+  }
+
+   setPoderExterno(idPoder, evento) {
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token});
+    return this.http.patch(this.URL_HOST + 'usuarios/api/v1/asambleistas/apoderado/actualizar/' + idPoder, {
+      externo: true,
+      evento: evento,
     }, {'headers': headers});
   }
 
