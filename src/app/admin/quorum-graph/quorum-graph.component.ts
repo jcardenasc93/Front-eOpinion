@@ -21,6 +21,14 @@ class Enum {
   ausentes: any;
 }
 
+
+class Quorum {
+  inmbueble: any;
+  coeficiente: any;
+  calidad: any;
+}
+
+
 @Component({
   selector: 'app-quorum-graph',
   templateUrl: './quorum-graph.component.html',
@@ -30,6 +38,7 @@ export class QuorumGraphComponent implements OnInit {
   public dataSource: any;
   selectedRowIndex: number = -1;
   public titulo;
+  private quorum: Array<Quorum> = [];
 
   constructor(private preguntaService: PreguntaService,
               @Inject(MAT_DIALOG_DATA) public data: { idEvent },
@@ -63,7 +72,23 @@ export class QuorumGraphComponent implements OnInit {
   getnewCoro(idQoro) {
     this.preguntaService.getNewQuorumXEvento(idQoro).subscribe(data => {
       console.log('nuevos qoros', data);
-      this.excelService.exportAsExcelFile(data, 'sample');
+
+      data.forEach(dataItem => {
+        const quoro = new Quorum();
+        quoro.inmbueble = dataItem.inmueble;
+        quoro.coeficiente = dataItem.coeficiente;
+        if (dataItem.apoderado == true) {
+          quoro.calidad = 'APODERADO';
+        } else {
+          quoro.calidad = 'PROPIETARIO';
+        }
+        this.quorum.push(quoro);
+      });
+
+
+      this.excelService.exportAsExcelFile(this.quorum, 'quorum');
+
+      this.quorum = [];
 
     }, error => {
       Swal.fire('Error!', 'Error creando pregunta', 'error');
