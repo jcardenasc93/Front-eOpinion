@@ -54,9 +54,9 @@
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef style="text-align: center"> Estado de aprobación</th>
       <td mat-cell *matCellDef="let element" style="text-align: center">
-        <img *ngIf="element.validado==true" style="height: 20px"
+        <img *ngIf="element.validado==true || element.externo == true " style="height: 20px"
              src="https://cdn0.iconfinder.com/data/icons/fintech-solutions-flat-24/24/done_ok_complete_success_check-512.png">
-        <img *ngIf="element.representa_a == null && element.validado==false" style="height: 20px"
+        <img *ngIf="element.representa_a == null && element.validado==false && element.externo != true" style="height: 20px"
              src="https://p7.hiclipart.com/preview/1014/79/675/under-construction-icon-computer-icons-architectural-engineering-free-construction-files.jpg">
         <img *ngIf="element.representa_a != null && element.validado==false" style="height: 20px"
              src="https://cdn3.iconfinder.com/data/icons/symbol-1-1/36/73-512.png">
