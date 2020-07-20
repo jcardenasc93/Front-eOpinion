@@ -20,7 +20,7 @@
     </mat-form-field>
 
   <mat-form-field class="form-element">
-      <input type="number" matInput placeholder="Número de documento de identidad" formControlName="documento">
+      <input matInput placeholder="Número de documento de identidad" formControlName="documento">
       <mat-error *ngIf="!formGroup.controls['documento'].valid && formGroup.controls['documento'].touched">
        Campo requerido
       </mat-error>
