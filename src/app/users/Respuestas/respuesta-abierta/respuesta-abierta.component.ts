@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PreguntaService} from "../../../services/pregunta.service";
 import Swal from "sweetalert2";
 import {CdkTextareaAutosize} from "@angular/cdk/text-field";
@@ -20,7 +20,8 @@ export class RespuestaAbiertaComponent implements OnInit {
   public countDown;
 
   constructor(private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: { preguntaAbierta },
-              private preguntaService: PreguntaService) {
+              private preguntaService: PreguntaService,
+              public dialogRef: MatDialogRef<RespuestaAbiertaComponent>) {
 
   }
 
@@ -62,7 +63,8 @@ console.log(currentTime);
     this.preguntaService.saveRespuestaAbierta(this.questionForm.get('enunciado').value, this.data.preguntaAbierta.id).subscribe(async data => {
       Swal.fire('Success!', 'Respuesta guardada exitosamente', 'success');
       await this.delay(2500);
-      window.location.reload();
+      this.dialogRef.close();
+      //window.location.reload();
     }, error => {
       console.log('error', error)
       if(error.error.detail==undefined){

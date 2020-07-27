@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PreguntaService} from "../../../services/pregunta.service";
 import Swal from "sweetalert2";
 import {CdkTextareaAutosize} from "@angular/cdk/text-field";
@@ -17,7 +17,8 @@ export class RespuestaDecimalComponent implements OnInit {
   public countDown;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { preguntaDecimal },
-              private preguntaService: PreguntaService, private formBuilder: FormBuilder) {
+              private preguntaService: PreguntaService, private formBuilder: FormBuilder,
+              public dialogRef: MatDialogRef<RespuestaDecimalComponent>) {
   }
 
   ngOnInit(): void {
@@ -45,7 +46,8 @@ export class RespuestaDecimalComponent implements OnInit {
     this.preguntaService.saveRespuestaDecimal(this.questionForm.get('respuesta_decimal').value.toFixed(3), this.data.preguntaDecimal.id).subscribe(async data => {
       Swal.fire('Success!', 'Respuesta guardada exitosamente', 'success');
       await this.delay(2500);
-      window.location.reload();
+      this.dialogRef.close();
+      //window.location.reload();
     }, error => {
       console.log('error', error.error)
       Swal.fire('Error!', error.error.detail, 'error');

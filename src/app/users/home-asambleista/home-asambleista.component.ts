@@ -146,6 +146,7 @@ export class HomeAsambleistaComponent implements OnInit {
 
   getPreguntasMultiples() {
     this.preguntaService.getPreguntaMultiple(this.idEvento).subscribe(data => {
+      this.pMultiples = [];
       console.log('p multiples', data)
       data.pregunta_multiple.forEach(dataItem => {
         if (dataItem.activa == true) {
@@ -195,7 +196,9 @@ export class HomeAsambleistaComponent implements OnInit {
   }
 
   refreshPreguntas() {
-    window.location.reload();
+    this.getPreguntasMultiples();
+    this.getPreguntasAbiertas();
+    this.getPreguntasDecimal();
   }
 
   marcarQuorum() {

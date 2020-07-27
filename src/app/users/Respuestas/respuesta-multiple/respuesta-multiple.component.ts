@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormArray, FormBuilder, Validators} from "@angular/forms";
 import {PreguntaService} from "../../../services/pregunta.service";
 import Swal from "sweetalert2";
@@ -35,7 +35,7 @@ class Enum {
 })
 export class RespuestaMultipleComponent implements OnInit {
 
-   @ViewChild('autosize') autosize: CdkTextareaAutosize;
+  @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
   public questionForm;
   public opciones: Array<Opciones> = [];
@@ -46,7 +46,8 @@ export class RespuestaMultipleComponent implements OnInit {
   public countDown;
 
   constructor(private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: { preguntaMultiple },
-              private preguntaService: PreguntaService) {
+              private preguntaService: PreguntaService,
+              public dialogRef: MatDialogRef<RespuestaMultipleComponent>) {
   }
 
   ngOnInit(): void {
@@ -110,14 +111,14 @@ export class RespuestaMultipleComponent implements OnInit {
       }
     });
     if (opInt.length > 1 && this.data.preguntaMultiple.respuestasPermitidas == 1) {
-       Swal.fire('Error!', 'Solo debe seleccionar una opcion de respuesta', 'error');
-       return;
+      Swal.fire('Error!', 'Solo debe seleccionar una opcion de respuesta', 'error');
+      return;
     }
     if (opInt.length == 0) {
       Swal.fire('Error!', 'Seleccione al menos una opcion de respuesta', 'error');
       return;
     }
-     if (opInt.length == 0) {
+    if (opInt.length == 0) {
       Swal.fire('Error!', 'Seleccione al menos una opcion de respuesta', 'error');
       return;
     }
@@ -126,7 +127,7 @@ export class RespuestaMultipleComponent implements OnInit {
 
       Swal.fire('Success!', 'Su respuesta ha sido guardada', 'success');
       await this.delay(2500);
-      window.location.reload();
+      this.dialogRef.close();
     }, error => {
       Swal.fire('Error!', error.error.detail, 'error');
       console.log('error', error);
