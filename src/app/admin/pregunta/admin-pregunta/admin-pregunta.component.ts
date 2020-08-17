@@ -55,6 +55,7 @@ class Apoderado {
   inmueble: any;
   coeficiente: any;
   representado_por: any;
+  mora: any;
 }
 
 @Component({
@@ -313,13 +314,13 @@ export class AdminPreguntaComponent implements OnInit {
   }
 
   restablecerMultiple(id: any) {
-     if (confirm('Esta seguro de restablecer esta pregunta?')) {
-       this.preguntaService.resetearPreguntaMultiple(id).subscribe(data => {
-         Swal.fire('Success!', 'Respuestas reestablecidas con éxito', 'success');
-       }, error => {
-         console.log('Error activa-> ', error.error);
-       });
-     }
+    if (confirm('Esta seguro de restablecer esta pregunta?')) {
+      this.preguntaService.resetearPreguntaMultiple(id).subscribe(data => {
+        Swal.fire('Success!', 'Respuestas reestablecidas con éxito', 'success');
+      }, error => {
+        console.log('Error activa-> ', error.error);
+      });
+    }
   }
 
   guardarQoro() {
@@ -472,6 +473,7 @@ export class AdminPreguntaComponent implements OnInit {
                 if (apoderado.id == asambleistaService.id) {
                   apoderado.inmueble = asambleistaService.inmueble
                   apoderado.coeficiente = asambleistaService.coeficiente
+                  apoderado.mora = asambleistaService.mora
                   return;
                 }
               });
@@ -502,17 +504,24 @@ export class AdminPreguntaComponent implements OnInit {
 
                           this.opcionesArray.forEach(opcions => {
 
-                            console.log('opciones', opcions.id);
-                            console.log('oprespuesta', dataItems)
+                            //console.log('opciones', opcions.id);
+                            //console.log('oprespuesta', dataItems)
 
                             if (opcions.id == dataItems) {
-                              const opcion = new RespAbierta();
-                              opcion.index = opcions.index;
-                              opcion.opcion = opcions.opcion;
-                              opcion.pregunta = dataItem.enunciado;
-                              opcion.inmueble = asambleita.inmueble;
-                              opcion.coeficiente = asambleita.coeficiente;
 
+                              if (asambleita.mora == true && dataItem.bloquea_mora == true) {
+
+
+                              } else {
+
+                                const opcion = new RespAbierta();
+                                opcion.index = opcions.index;
+                                opcion.opcion = opcions.opcion;
+                                opcion.pregunta = dataItem.enunciado;
+                                opcion.inmueble = asambleita.inmueble;
+                                opcion.coeficiente = asambleita.coeficiente;
+                                this.respMultXAsam.push(opcion);
+                              }
                               /*
                               if(asambleita.propietario==true){
                                 opcion.apoderado = 'Propietario';
@@ -521,14 +530,15 @@ export class AdminPreguntaComponent implements OnInit {
                                 opcion.apoderado = 'Apoderado';
                               }*/
 
-                              this.respMultXAsam.push(opcion);
+
 
                               this.apoderadosArray.forEach(power => {
                                 if (asambleita.id == power.representado_por && power.id != undefined) {
-                                  /*
-                                  if (power.mora == true && dataItem.bloqueamora == true) {
+
+                                  if (power.mora == true && dataItem.bloquea_mora == true) {
                                     return;
-                                  }*/
+                                  }
+                                  console.log('apoderado listo', power.inmueble)
                                   const opcionss = new RespAbierta();
                                   opcionss.index = opcions.index;
                                   opcionss.opcion = opcions.opcion;
@@ -556,7 +566,7 @@ export class AdminPreguntaComponent implements OnInit {
               );
             });
 
-            await this.delay(2500);
+            await this.delay(60000);
             this.apoderadosArray = [];
 
 
@@ -606,7 +616,7 @@ export class AdminPreguntaComponent implements OnInit {
           });
 
         });
-        await this.delay(2500);
+        await this.delay(60000);
         this.excelService.exportAsExcelFile(this.respAbiertas, 'Resumen de respuestas abiertas');
       }, error => {
         console.log('Error trayendo pregunta multiple');
