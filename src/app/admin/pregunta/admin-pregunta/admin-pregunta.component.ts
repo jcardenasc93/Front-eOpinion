@@ -504,8 +504,8 @@ export class AdminPreguntaComponent implements OnInit {
 
                           this.opcionesArray.forEach(opcions => {
 
-                            console.log('opciones', opcions.id);
-                            console.log('oprespuesta', dataItems)
+                            //console.log('opciones', opcions.id);
+                            //console.log('oprespuesta', dataItems)
 
                             if (opcions.id == dataItems) {
 
@@ -538,6 +538,7 @@ export class AdminPreguntaComponent implements OnInit {
                                   if (power.mora == true && dataItem.bloquea_mora == true) {
                                     return;
                                   }
+                                  console.log('apoderado listo', power.inmueble)
                                   const opcionss = new RespAbierta();
                                   opcionss.index = opcions.index;
                                   opcionss.opcion = opcions.opcion;
@@ -565,7 +566,7 @@ export class AdminPreguntaComponent implements OnInit {
               );
             });
 
-            await this.delay(2500);
+            await this.delay(60000);
             this.apoderadosArray = [];
 
 
@@ -615,7 +616,7 @@ export class AdminPreguntaComponent implements OnInit {
           });
 
         });
-        await this.delay(2500);
+        await this.delay(60000);
         this.excelService.exportAsExcelFile(this.respAbiertas, 'Resumen de respuestas abiertas');
       }, error => {
         console.log('Error trayendo pregunta multiple');
